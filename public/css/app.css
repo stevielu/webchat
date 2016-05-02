@@ -1,0 +1,30 @@
+html, body {
+  height: 100%;
+}
+
+
+#chat-room {
+  border: 1px solid #ccc;
+  height: 20rem;
+  padding: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+
+#send-message {
+  margin-top: -1px;
+
+  .input-group-addon {
+    border-top-left-radius: 0;
+  }
+
+  .input-group-btn > .btn {
+    border-top-right-radius: 0;
+  }
+}
