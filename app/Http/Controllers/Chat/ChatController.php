@@ -10,7 +10,7 @@ use App\Http\Requests;
 
 class ChatController extends Controller
 {
-    public function index()
+    	public function index()
 	{
 	    srand(time()); // 亂數種子
 	    $username = sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
@@ -19,9 +19,9 @@ class ChatController extends Controller
 
 	public function sendMessage(Request $request)
 	{
-	    $username = $request->get('username');
-	    $message = $request->get('message');
-	    event(new messageCreate($username, $message));
+	   $username = $request->get('username');
+	   $message = $request->get('message');
+	   event(new messageCreate($username, $message));
 	    return 'message sent';
 	    //return view('welcome');
 	}

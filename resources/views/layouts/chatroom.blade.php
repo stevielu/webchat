@@ -39,7 +39,7 @@
         </div>
     </div>
 </div>
-<script src="{{ asset("../bower_components/socket.io-client/socket.io.js") }}"></script>
+<script src="{{ asset("bower_component/socket.io-client/socket.io.js")}}"></script>
 <script src="{{ asset("js/jquery.js") }}"></script>
 <script src="{{ asset("js/app.js") }}"></script>
 
