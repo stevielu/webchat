@@ -6,11 +6,14 @@ use App\Events\messageCreate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\ChatHistory;
 
 
 class ChatController extends Controller
 {
-    	public function index()
+	use ChatHistory;
+
+	public function index()
 	{
 	    srand(time()); // 亂數種子
 	    $username = sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
@@ -21,8 +24,10 @@ class ChatController extends Controller
 	{
 	   $username = $request->get('username');
 	   $message = $request->get('message');
-	   event(new messageCreate($username, $message));
-	    return 'message sent';
+	   $channel = new messageCreate($username, $message);
+	   event($channel);
+	   $ret = $this->setChatInfo($message,'chat-channel');
+	   return $ret;
 	    //return view('welcome');
 	}
 }
