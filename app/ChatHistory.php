@@ -16,20 +16,30 @@ trait ChatHistory
     {
        
     }
-
+    private function _getFileNameDB($chatroomID,$filename){
+        //get contents
+        $filename = ChatHistoryRecoder::select('contents')
+                                        ->where('room_id',$chatroomID)
+                                        ->where('contents',$filename)
+                                        ->first();
+        return $filename;
+    }
     public function getChatInfoNow($chatroomID,$channel){
 
         //get today file name 
         $path = config('filepath.chat.textrecoder');
         $latestedLog = $path.date('Y-m-d').'-'.$channel.'.txt';
+        //$yestodayLog = $path.date('d.m.Y',strtotime("-1 days")).'-'.$channel.'.txt';
         $contents ='';
 
-        //get today's contents
-        $filename = ChatHistoryRecoder::select('contents')
-                                        ->where('room_id',$chatroomID)
-                                        ->where('contents',$latestedLog)
-                                        ->first();
-        $filename = $filename->contents;
+        $filename = $this->_getFileNameDB($chatroomID,$latestedLog);
+        if($filename!=null){
+            $filename = $filename->contents;
+        }
+        else{
+            return 'no message history today';
+        }
+
         //read content from specfic file                     
         if($this->_currentHistoryFileExist($filename)){
             $contents = Storage::get($filename);
@@ -48,6 +58,7 @@ trait ChatHistory
         $path = config('filepath.chat.textrecoder');
         $filename = $path.$fileDate.'-'.$channel.'.txt';
         $contents ='';
+
 
         //get previous contents
         if($this->_currentHistoryFileExist($filename)){

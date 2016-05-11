@@ -13,15 +13,18 @@ class messageCreate extends Event implements ShouldBroadcast
     private $username;
 
     private $message;
+
+    private $ch;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($username, $message)
+    public function __construct($username, $message,$channel)
     {
         $this->username = $username;
         $this->message= $message;
+        $this->ch = $channel;
     }
 
     /**
@@ -39,6 +42,6 @@ class messageCreate extends Event implements ShouldBroadcast
     
     public function broadcastOn()
     {
-        return ['chat-channel'];
+        return [$this->ch];
     }
 }

@@ -13,7 +13,7 @@ class CreateChatRecoderTable extends Migration
     public function up()
     {
         Schema::create('chat_recoder', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+            $table->increments('channel_id')->unsigned();
             $table->integer('room_id')->unsigned();
             $table->string('channel');
             $table->string('contents');

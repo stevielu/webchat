@@ -12,4 +12,8 @@ class Chat extends Model{
 	public function SubClass(){
 		return $this->hasMany('App\Models\ChatHistoryRecoder');
 	}
+
+	public function Channels(){
+		return $this->hasMany('App\Models\Channels');
+	}
 }
