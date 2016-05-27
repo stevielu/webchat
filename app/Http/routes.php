@@ -15,3 +15,4 @@ Route::get('chat/content/{channel}', 'Chat\ChatController@getChannelContents');
 //Route::get('/', 'Chat\ChatController@index');
 //Route::post('/{id}', 'Chat\ChatController@show');
 Route::post('/send-message', 'Chat\ChatController@sendMessage');
+Route::post('/create-channel', 'Chat\ChatController@createChannel');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Chat;
 
 use App\Events\messageCreate;
+use App\Events\ChannelOperation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
@@ -79,5 +80,49 @@ class ChatController extends Controller
 	   	return 'send fail';
 	   }
 	    //return view('welcome');
+	}
+
+	public function createChannel(Request $request)
+	{
+	   $chdetials['channelName'] = $request->get('channelName');
+	   $chdetials['channelPassword'] = $request->get('channelPassword');
+	   $chdetials['channelType'] = $request->get('channelType');
+	   $chdetials['id'] = $request->get('id');
+
+	   //wirte to DB
+	   if($chdetials['id']== null){
+	   		return false;
+	   }
+	   else{
+		   	if($chdetials['channelType']=='Private'){
+		   		$ch_type = 'private';
+		   	}
+		   	else {
+		   		$ch_type = 'public';
+		   	}
+		   
+	   		$exist = Channels::where('room_id', $chdetials['id'])
+              ->where('channel_name', $chdetials['channelName'])->exists();
+            if($exist){
+            	$ret = 'The Name was Existed, Please Change Another Name';
+            	return $ret;
+            }
+            else{
+            	Channels::create(array(
+	          	'room_id' => $chdetials['id'],
+	          	'channel_name' => $chdetials['channelName'],
+	          	'ch_pwd' => $chdetials['channelPassword'],
+	          	'channel_type' => $ch_type
+        		));
+            }
+		   		
+		   	
+	   }
+
+	   $op = new ChannelOperation($chdetials,'create');
+	   $ret = event($op);
+
+	   return $ret;
+	   
 	}
 }
