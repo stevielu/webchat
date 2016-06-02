@@ -375,6 +375,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
      */
     protected function hasValidCredentials($user, $credentials)
     {
+        
         return ! is_null($user) && $this->provider->validateCredentials($user, $credentials);
     }
 

@@ -36,6 +36,7 @@ class ChannelOperation extends Event implements ShouldBroadcast
             case 'create':
                 return [
                     'channelname' => $this->data['channelName'],
+                    'channeltype' => $this->data['channelType'],
                     'command' => $this->command,
                     'result' => 'Done',
                 ];

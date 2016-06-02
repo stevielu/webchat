@@ -167,12 +167,20 @@ input.empty {
   
   padding-right: 25px;
 }
-.channel_review{
+.channel-lists .channel_review{
   height: 50px;
 }
-.channel_review p{
+#chat-room .channel_review{
+ height:initial;
+}
+.channel-lists .channel_review p{
   margin: 0;
   padding: 10px;
+}
+#chat-room .channel_review p{
+  margin: 0;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 #chat-room {
@@ -226,6 +234,8 @@ input.empty {
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   background-color:rgba(255,235,59,0.5); 
+  max-width: 500px;
+  word-wrap: break-word;
 }
 
 
@@ -275,15 +285,15 @@ input.empty {
     cursor: pointer;
    
 }
-#cont-badge {
+.cont-badge {
     box-shadow: 0 0 0 2px #434444;
     font-weight: 700;
 }
-#cont-badge.noti-visible {
+.cont-badge.noti-visible {
     opacity: 1;
     transform: scale(1.0);
 }
-#cont-badge{
+.cont-badge{
   display: block;
     border-radius: 20px;
     background: #CA483F;
@@ -307,4 +317,60 @@ input.empty {
   text-align: left;
   padding: 15px;
   margin: 0;
+}
+.login-fail
+{
+  display: none;
+}
+#login-channel{
+  display: none;
+}
+.reminderinfo-sm{
+  display: none;
+  font-size: 10px;
+  color: #d0d0d0;
+  text-align: center;
+}
+.reminderinfo-icon{
+  display: none;
+  width: 100%;
+  font-size: 10px;
+  color: #d0d0d0;
+  text-align: center;
+}
+.margin-bottom{
+  margin-bottom: 10px !important;
+}
+#animate-loading-history{
+  display: none;
+}
+#animate-loading-history img{
+  margin: auto;
+}
+.btn-success[disabled]{
+  background: #9E9E9E;
+  border-color:#9E9E9E;
+}
+.date{
+  /*font-family: 'Poiret One', cursive;*/
+  font-family: 'Raleway', sans-serif;
+  font-size: 10px;
+  color: #d0d0d0;
+  text-align: center;
+}
+hr{
+  color: #d0d0d0;
+  border-top: 1px dashed !important;
+  font: normal normal normal 14px/1 FontAwesome;
+}
+hr:after{
+  content: "\f1da" !important;;
+  display: inline-block !important;; 
+  position: relative !important;; 
+  top: -8px; 
+  left: 50px; 
+  padding: 0 3px; 
+  background: #f0f0f0; 
+  color: #d0d0d0; 
+  font-size: 10px; 
 }

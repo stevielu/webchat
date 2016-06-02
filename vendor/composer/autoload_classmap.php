@@ -6,6 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddVotesToUsersTable' => $baseDir . '/database/migrations/2016_05_06_071454_add_votes_to_users_table.php',
+    'CreateChannelsTable' => $baseDir . '/database/migrations/2016_05_06_071634_create_channels_table.php',
+    'CreateChatRecoderTable' => $baseDir . '/database/migrations/2016_05_04_024807_create_chat_recoder_table.php',
+    'CreateChatRoomTable' => $baseDir . '/database/migrations/2016_05_04_024801_create_chat_room_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
@@ -514,4 +518,6 @@ return array(
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'chatchannelsTableSeeder' => $baseDir . '/database/seeds/chatchannelsTableSeeder.php',
+    'chatroomTableSeeder' => $baseDir . '/database/seeds/chatroomTableSeeder.php',
 );

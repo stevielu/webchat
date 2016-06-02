@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Chat;
-
+use Hash;
 use App\Events\messageCreate;
 use App\Events\ChannelOperation;
 use Illuminate\Http\Request;
@@ -11,15 +11,25 @@ use App\Models\Chat;
 use App\Models\ChatHistoryRecoder;
 use App\Models\Channels;
 use App\ChatHistory;
+/*Auth*/
+use App\User;
+use Validator;
+use Auth;
 
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use Illuminate\Database\Eloquent\Model;
 
 class ChatController extends Controller
 {
 	use ChatHistory;
+	use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
 	protected $chatroom;
+	protected $auth;
+
 	public function Index()
 	{
 	    srand(time()); // 亂數種子
@@ -42,15 +52,104 @@ class ChatController extends Controller
         //return view('layouts/chatroom', compact('channels'));        
     }
 
+
+	
     public function getChannelContents(Request $request, $channel)
     {
     	$roomid = $request->session()->get('room_id');
 
     	$contents = $this->getChatInfoNow($roomid,$channel);
-    	
+    	if($contents==null){
+    		if(!$this->ChannelRecoderExist($roomid,$channel)){
+    			$empty =  'null recordes';
+    		}
+    		else{
+    			$empty = 'true';
+    		}
+    		
+    	}
+    	else{
+    		$empty = 'false';
+    	}
+
      	srand(time()); // 亂數種子
 	    $username = sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
-	    return ['username'=>$username,'contents'=>$contents];
+	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty];
+	    // //get chat room from database
+	    // $chatroom = Chat::with('SubClass')->get();
+	    // $this->chatroom = $chatroom;
+	    
+	    // $contents = $this->getChatInfoNow('1','chat-channel');
+	    // return;        
+    }
+
+    public function getChannelHistory(Request $request, $channel, $date)
+    {
+    	$roomid = $request->session()->get('room_id');
+
+    	$contents = $this->getChatInfoPrev($roomid,$channel,$date);
+
+    	if($contents==null){
+    		if(!$this->ChannelRecoderExist($roomid,$channel)){
+    			$empty =  'null recordes';
+    		}
+    		else{
+    			$empty = 'true';
+    		}
+    		
+    	}
+    	else{
+    		$empty = 'false';
+    	}
+
+     	srand(time()); // 亂數種子
+	    $username = sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
+
+
+	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty];
+	    
+    }
+
+    public function loginPrivateChannel(Request $request)
+    {
+    	$roomid = $request->session()->get('room_id');
+
+    	$credentials = $request->only('p-chn', 'loginPass');
+
+		      
+        if (auth()->guard('privateChannel')->attempt(['channel_name' => $credentials['p-chn'], 'password' => $credentials['loginPass']])) {
+
+            $login = 'success';
+            $contents = $this->getChatInfoNow($roomid,$credentials['p-chn']);
+            if($contents==null){
+	    		if(!$this->ChannelRecoderExist($roomid,$credentials['p-chn'])){
+	    			$empty =  'null recordes';
+	    		}
+	    		else{
+		    			$empty = 'true';
+		    		}
+		    		
+		    	}
+	    	else{
+	    		$empty = 'false';
+	    	}
+           // $data = response()->json(['redirect' => '/']);
+        }
+        else{
+        	$empty = 'null recordes';
+            $login = 'fail';
+            $contents = $credentials;//'Password Wrong, Try Again...';
+            
+        }
+  
+
+
+    	
+
+
+     	//srand(time()); // 亂數種子
+	    //$username = sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
+	    return ['ch_login'=>$login,'channel'=>$credentials['p-chn'],'contents'=>$contents,'empty'=>$empty];
 	    // //get chat room from database
 	    // $chatroom = Chat::with('SubClass')->get();
 	    // $this->chatroom = $chatroom;
@@ -94,7 +193,8 @@ class ChatController extends Controller
 	   		return false;
 	   }
 	   else{
-		   	if($chdetials['channelType']=='Private'){
+		   	if($chdetials['channelType']=='private'){
+		   		$chdetials['channelPassword'] = Hash::make($chdetials['channelPassword']);
 		   		$ch_type = 'private';
 		   	}
 		   	else {
@@ -111,7 +211,7 @@ class ChatController extends Controller
             	Channels::create(array(
 	          	'room_id' => $chdetials['id'],
 	          	'channel_name' => $chdetials['channelName'],
-	          	'ch_pwd' => $chdetials['channelPassword'],
+	          	'password' => $chdetials['channelPassword'],
 	          	'channel_type' => $ch_type
         		));
             }

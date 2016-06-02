@@ -24,6 +24,16 @@ trait ChatHistory
                                         ->first();
         return $filename;
     }
+
+    public function ChannelRecoderExist($chatroomID,$channel){
+        //get contents
+        $exists = ChatHistoryRecoder::select('channel')
+                                        ->where('room_id',$chatroomID)
+                                        ->where('channel',$channel)
+                                        ->first();
+        return $exists;
+    }
+
     public function getChatInfoNow($chatroomID,$channel){
 
         //get today file name 
@@ -37,33 +47,47 @@ trait ChatHistory
             $filename = $filename->contents;
         }
         else{
-            return 'no message history today';
+            return null;//'no message history today'
         }
 
-        //read content from specfic file                     
+        //read content from specify file                     
         if($this->_currentHistoryFileExist($filename)){
             $contents = Storage::get($filename);
         }
         else
         {
-            return 'no message history today';
+            return null;//'no message history today';
         }
 
         return $contents;
     }
 
-    public function getChatInfoPrev($channel,$fileDate){
+    public function getChatInfoPrev($chatroomID,$channel,$fileDate){
 
         //get file name 
         $path = config('filepath.chat.textrecoder');
         $filename = $path.$fileDate.'-'.$channel.'.txt';
         $contents ='';
 
+        
+        $filename = $this->_getFileNameDB($chatroomID,$filename);
+
+        if($filename!=null){
+            $filename = $filename->contents;
+        }
+        else{
+            return null;//'no message history today'
+        }
 
         //get previous contents
         if($this->_currentHistoryFileExist($filename)){
-            $contents = Storage::get($this->filename);
+            $contents = Storage::get($filename);
         }
+        else
+        {
+            return null;//'no message history today';
+        }
+
         
         return $contents;
     }

@@ -45,6 +45,11 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'privateChannel' => [
+            'driver'   => 'session',
+            'provider' => 'privateChannel'
+        ]
     ],
 
     /*
@@ -69,6 +74,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+        'privateChannel' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Channels::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
@@ -98,6 +107,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'email' => 'auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'privateChannel' => [
+            'provider' => 'privateChannel',
             'email' => 'auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,

@@ -38,7 +38,7 @@
 											      <input type="password" disabled class="form-control" id="chpwd" name="channelPassword" placeholder="Password">
 											    </div>
 										  	</div>
-										 <input type="checkbox" id='swRoomType' name='channelType' data-toggle="toggle" data-on="Private" data-off="Public" data-size="mini" value="Private" data-onstyle="b2"> 	
+										 <input type="checkbox" id='swRoomType' name='channelType' data-toggle="toggle" data-on="private" data-off="Public" data-size="mini" value="private" data-onstyle="b2"> 	
 							      	</div>
 							      	<div class="modal-footer" style="background-color: #434444">
 							        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -69,12 +69,16 @@
 			      	</div>
 			      	<form class="form-horizontal" method="post" action="login-pch"  id="login-chn">
 			      		{!! csrf_field() !!}
-			      		<input type="hidden" id='privatech-roomid' name="id" />
+			      		<input type="hidden" id='privatech-roomid' name="p-id" />
+			      		<input type="hidden" id='privatech-chn' name="p-chn" />
 				      	<div class="modal-body">
+					      	<div class="login-fail alert alert-danger">
+						    	<strong>Password Wrong!</strong> Please try again...
+						  	</div>
 						  	<div class="form-group">
 							    <label for="chpwd" class="col-sm-3 control-label"><p style="color: #F44336">Password</p></label>
 							    <div class="col-sm-6">
-							      <input type="password" class="form-control" id="pwd" name="channelPassword" placeholder="Password">
+							      <input type="password" class="form-control" id="pwd" name="loginPass" placeholder="Password">
 							    </div>
 						  	</div>	
 				      	</div>
@@ -90,6 +94,13 @@
 	</div>
 </div>
 <script>
+
+	$('.proom').on('shown.bs.modal','.channel_review', function (e) {
+  		var $invoker = $(e.relatedTarget);
+  		$('#privatech-chn').val($invoker.attr('channel-name'));
+    	$('#privatech-roomid').val($("[name = 'chatroom-id']").val());
+  		 
+	})
   $(function() {
     $('#swRoomType').change(function() {
     	if($('#chpwd').attr('disabled')){

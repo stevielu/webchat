@@ -2,10 +2,24 @@
 var $chatRoom = $('#chat-room');
 var $sendMessage = $('#send-message');
 var $createChannel = $('#sub-chn');
+var $loginPrivateChannel = $('#login-chn');
 var $messageInput = $('#message');//$sendMessage.find('input[name=message]');
 var io = window.io;
 var socket = io.connect('localhost:3000/');
 var chList = [];
+var localhref = window.location.protocol + "//" + window.location.host;
+
+var defaultPage  =    '<div id="animate-loading-history" >'+
+                        '<img class="" src="'+localhref+'/public/hourglass-2.svg">'+
+                      '</div>';
+    defaultPage  +=   '<div class="fa fa-angle-double-up reminderinfo-icon" aria-hidden="true"></div>'+
+                      '<div class="reminderinfo-sm"><p>No Messages Today</p></div>';
+    defaultPage  +=   '<div id= "content-loading" class="loading col-md-12">';
+    defaultPage  +=   '<img class="img-responsive" src="'+localhref+"/public/balls-1.svg"+'">';
+    defaultPage  +=   '</div>';
+    defaultPage  +=   '<div id = "login-channel"><h1 style="text-align: center;color: #D0D0D0;padding-top: 100px;">Please Login, This is Private Channel</h1></div>';
+    defaultPage  +=   '<div id = "content-box"></div>';
+
 
 function bindSocket(ch){
      socket.on(ch+':App\\Events\\messageCreate', function (payload) {
@@ -33,16 +47,18 @@ function bindSocket(ch){
                     $chatRoom.animate({scrollTop: $chatRoom[0].scrollHeight}, 1000);
             }
             else{
-                var count = parseInt($('#cont-badge').html(),10)+1;
+                var obj = currentCh.find('.cont-badge');
+                console.log(obj);
+                var count = parseInt(obj.html(),10)+1;
                 if(count>99){
-                    $('#cont-badge').html('99+');
+                   obj.html('99+');
                 }
                 else{
-                        $('#cont-badge').html(count);
+                        obj.html(count);
                         
                     }
 
-                $('#cont-badge').addClass('noti-visible');
+                obj.addClass('noti-visible');
             }
                    
         });
@@ -61,10 +77,88 @@ function pollCh(){
 }
 window.setTimeout(pollCh(),500);
 
+function loadingContents(data,history){
+     //console.log(data['contents']);
+    var $date = $.cookie("current-date");
+    $date = $.format.date($date, "dd-MM-yyyy"); 
+
+    if(data['empty']=='true'){
+        $('.reminderinfo-sm').fadeIn();
+        $('.reminderinfo-icon').fadeIn();
+        $('#content-box').prepend('<div id="'+$date+'"></div>');
+        $('.reminderinfo-sm').html('<p class="date">No Messages in </br>'+$date+'</p>');
+        $(window).trigger("visit");
+
+    }
+    else if(data['empty'] == 'null recordes'){
+        $('.reminderinfo-sm').fadeIn();
+        $('.reminderinfo-icon').fadeOut();
+        $('.reminderinfo-sm').html('<p class="date">No Recordes</p>');
+        $(window).unbind('mousewheel');
+    }
+    else{
+        $('.reminderinfo-sm').fadeOut();
+        $('.reminderinfo-icon').fadeIn();
+        data = data['contents'].split("\n");
+
+        $('#content-box').prepend('<div id="'+$date+'"><hr class="style1"><p class="date">'+$date+'</p></div>');
+        data.forEach(function(data){
+            //console.log(data);
+            // obj['channels'].forEach(function(name){
+                var html = '<div class="media channel_review"><div class="media-left ">';
+                
+                html += '<a><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+window.location.origin+'/public/no-thumb.png" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+                html += '</div>';
+                html += '<div class="media-body media-middle msg-container">';
+                html += '<p class="msg-box">';
+                html += data+'</p>';
+                //html += '<p style="color:#B5B1B1">user312312:test</p>';
+                html += '</div>';
+                var $message = $(html);
+            // });
+            $('#'+$date).append($message);
+            //$chatRoom.animate({scrollTop: $chatRoom[0].scrollHeight}, 1000);
+        });
+
+        var old_height = $.cookie("oldheight");
+        if(old_height == '0'){//first loading
+            old_height = $('#content-box').height();
+        }
+        $.cookie("oldheight",$('#content-box').height());
+        $('#chat-room').scrollTop($('#content-box').height() - old_height); 
+        
+
+        $(window).trigger("visit");
+    }
+
+}
+
+function getContents(ch){
+  $.get('chat/content/'+ch,function(data){
+        $('#content-loading').css('display','none');
+        $('#chat-room').html(defaultPage);
+        $('[name = "current-channel"]').val(ch);
+        loadingContents(data,false);
+        });
+}
+
+function getHistory(ch,date){
+  $.get('chat/content/'+ch+'/'+date,function(data){
+        
+        //$('#chat-room').html(defaultPage);
+        $('[name = "current-channel"]').val(ch);
+        loadingContents(data,true);
+        }
+    ).always(function() {
+        $("#animate-loading-history").css('display','none');
+        $('#content-loading').css('display','none');
+    });
+}
 
 $sendMessage.on('submit', function () {
     $.post(this.action, $sendMessage.serialize());
     //console.log($sendMessage.serialize());
+    $('.reminderinfo-sm').html('<p></p>');
     $messageInput.val('');
     return false;
 });
@@ -77,6 +171,33 @@ $createChannel.on("submit",function(){
 });
 
 
+$loginPrivateChannel.on("submit",function(){
+    
+    $.post(this.action, $loginPrivateChannel.serialize(),function(data){
+         if(data.ch_login!='success'){
+                $('.login-fail').fadeIn("slow");
+            }
+        else{   
+                    $('.proom').modal('hide');
+                    $('.login-fail').fadeOut( "slow");
+                    $('#content-loading').css('display','none');
+                    $('#send-message').fadeIn();
+                    var currentCh = $('[channel-name = "'+data['channel']+'"]');
+                    currentCh.find('.cont-badge').removeClass('noti-visible');
+                    currentCh.find('.cont-badge').html('0');
+
+                    $('#chat-room').html(defaultPage);
+                    $('[name = "current-channel"]').val(data['channel']);
+                    //getContents(data,data['channel'])
+                    loadingContents(data,false);
+                    
+            }
+            // $('li').removeClass("channel-actived");
+            // $(this).addClass("channel-actived");
+    });
+    //console.log($sendMessage.serialize());
+    return false;
+});
 
 $('.chat_btn').one("click",function(){
     //console.log();
@@ -100,7 +221,7 @@ $('.chat_btn').one("click",function(){
                 html += '<i class=" fa fa-users"></i>'+obj['channel_name'];
                 html += '<sapn class="pull-right">';
                 html += '<span id="noti-cont" class="noti-visible">';
-                html += '<span id="cont-badge" class="">0</span>'
+                html += '<span class="cont-badge">0</span>'
                 html += '</span>';
                 html += '</span></p>';
                 //html += '<p style="color:#B5B1B1">user312312:test</p>';
@@ -116,42 +237,28 @@ $('.chat_btn').one("click",function(){
         });
         $('.channel_review').on('click',function(){
             if($(this).hasClass('channel-actived')!=true){
-                if(($(this).attr('channel-type'))=="Private"){
+                $.cookie("current-date", new Date());
+                $.cookie("oldheight",'0');
 
+                if(($(this).attr('channel-type'))=="private"){
+                    $('#privatech-chn').val($(this).attr('channel-name'));
+                    $('#privatech-roomid').val($("[name = 'chatroom-id']").val());
+                    $('#chat-room').html(defaultPage);
+                    $('#login-channel').fadeIn();
+                    $('#send-message').fadeOut('slow');
+                    $('li').removeClass("channel-actived");
+                    $(this).addClass("channel-actived");
+                    $(window).unbind('mousewheel');
+                    return;
                 }
-
+                $('#send-message').fadeIn('slow');
                 $('#content-loading').css('display','flex');
-                $('#cont-badge').removeClass('noti-visible');
-                $('#cont-badge').html('0');
+                $(this).find('.cont-badge').removeClass('noti-visible');
+                $(this).find('.cont-badge').html('0');
 
                 var $ch = $(this).attr('channel-name');
-                $.get('chat/content/'+$ch,function(data){
-                    //console.log(data['contents']);
-                    $('#content-loading').css('display','none');
-                    $('#chat-room').html('');
-                    $('[name = "current-channel"]').val($ch);
-                    data = data['contents'].split("\n");
-                    data.forEach(function(data){
-                        console.log(data);
-                        // obj['channels'].forEach(function(name){
-                            var html = '<div class="media channel_review"><div class="media-left ">';
-                            
-                            html += '<a><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+window.location.origin+'/public/no-thumb.png" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
-                            html += '</div>';
-                            html += '<div class="media-body media-middle msg-container">';
-                            html += '<p class="msg-box">';
-                            html += data+'</p>';
-                            //html += '<p style="color:#B5B1B1">user312312:test</p>';
-                            html += '</div>';
-                            
-                            var $message = $(html);
-                            $('#chat-room').append($message);
-                        // });
-                        
-                    });
-
-                });
-
+                getContents($ch);
+                
                
                 $('li').removeClass("channel-actived");
                 $(this).addClass("channel-actived");
@@ -164,13 +271,25 @@ socket.on('controller-channel'+':App\\Events\\ChannelOperation', function (paylo
     console.log(payload);
     if(payload.result == 'Done'){
         if(payload.command == 'create'){
-            var html = '<li class="media channel_review" channel-name="'+payload['channelname']+'"><a href="#"><div class="media-left">';
+            var html = '<li class="media channel_review" channel-type = "'+payload['channeltype']+'"channel-name="'+payload['channelname']+'"';
+            
+            if(payload['channeltype']=="private"){
+                html += 'data-toggle = "modal"';
+                html += 'data-target = ".proom"';
+                } 
+
+            html += '><a href="#"><div class="media-left">';
                 
             //html += '<img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+window.location.origin+'/public/no-thumb.png" data-holder-rendered="true" style="width: 54px; height: 54px;">';
             html += '</div>';
             html += '<div class="media-body">';
             html += '<p class="media-heading" aria-hidden="true">';
-            html += '<i class=" fa fa-users"></i>'+payload['channelname']+'</p>';
+            html += '<i class=" fa fa-users"></i>'+payload['channelname'];
+            html += '<sapn class="pull-right">';
+            html += '<span id="noti-cont" class="noti-visible">';
+            html += '<span class="cont-badge">0</span>'
+            html += '</span>';
+            html += '</span></p>';
             //html += '<p style="color:#B5B1B1">user312312:test</p>';
             html += '</div></a></li>';
             
@@ -182,51 +301,27 @@ socket.on('controller-channel'+':App\\Events\\ChannelOperation', function (paylo
             
             $('[channel-name= "'+$newch+'"]').on('click',function(){
             if($(this).hasClass('channel-actived')!=true){
+                $.cookie("current-date", new Date());
+                $.cookie("oldheight",'0');
                 var $ch = $(this).attr('channel-name');
-                $.get('chat/content/'+$ch,function(data){
-                    //console.log(data['contents']);
-                    $('#chat-room').html('');
-                    $('[name = "current-channel"]').val($ch);
-                    data = data['contents'].split("\n");
-                    data.forEach(function(data){
-                        console.log(data);
-                        // obj['channels'].forEach(function(name){
-                            var html = '<div class="media channel_review"><div class="media-left ">';
-                            
-                            html += '<a><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+window.location.origin+'/public/no-thumb.png" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
-                            html += '</div>';
-                            html += '<div class="media-body media-middle msg-container">';
-                            html += '<p class="msg-box">';
-                            html += data+'</p>';
-                            //html += '<p style="color:#B5B1B1">user312312:test</p>';
-                            html += '</div>';
-                            
-                            var $history = $(html);
-                            $('#chat-room').append($history);
-                        // });
-                        
-                    });
 
-                });
+                if(($(this).attr('channel-type'))=="private"){
+                    $('#privatech-chn').val($(this).attr('channel-name'));
+                    $('#privatech-roomid').val($("[name = 'chatroom-id']").val());
+                    $('#chat-room').html(defaultPage);
+                    $('#login-channel').fadeIn();
+                    $('#send-message').fadeOut('slow');
+                    $(window).unbind('mousewheel');
+                }
+                else{
+                    $('#send-message').fadeIn('slow');
+                    $('#content-loading').css('display','flex');
+                    $(this).find('.cont-badge').removeClass('noti-visible');
+                    $(this).find('.cont-badge').html('0');
+                    getContents($ch);
+                    
+                }
 
-                // socket.on($ch+':App\\Events\\messageCreate', function (payload) {
-                //     var html = '<div class="media channel_review"><div class="media-left ">';
-                                            
-                //     html += '<a><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+window.location.origin+'/public/no-thumb.png" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
-                //     html += '</div>';
-                //     html += '<div class="media-body media-middle msg-container">';
-                //     html += '<p class="msg-box">';
-                //     html += payload.message+'</p>';
-                //     html += '</div>';
-                //     //html += payload.username + ': ';
-                //     // html += payload.message;
-                //     // html += '</div>';
-
-                //     var $new = $(html);
-                //     $chatRoom.append($new);
-                //     $new.fadeIn('fast');
-                //     $chatRoom.animate({scrollTop: $chatRoom[0].scrollHeight}, 1000);
-                // });
                 $('li').removeClass("channel-actived");
                 $(this).addClass("channel-actived");
             }//endif

@@ -2,6 +2,7 @@
 
 namespace Illuminate\Auth;
 
+use Hash;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
@@ -114,7 +115,6 @@ class EloquentUserProvider implements UserProvider
     public function validateCredentials(UserContract $user, array $credentials)
     {
         $plain = $credentials['password'];
-
         return $this->hasher->check($plain, $user->getAuthPassword());
     }
 
