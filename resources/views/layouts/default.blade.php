@@ -8,6 +8,9 @@
     <link href='https://fonts.googleapis.com/css?family=Raleway:200' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}" type="text/css"/>
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:100,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:100">
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway+Dots' rel='stylesheet' type='text/css'>
      <!-- Compiled and minified CSS -->
     
 
@@ -30,6 +33,7 @@
 <body>
         <div class="container-fluid">
             <div class="row">
+                @if($layout == 'two-columnleft')
                 <div class="col-md-4 leftbar">
                         @include('layouts.navsidebar')
                         
@@ -37,6 +41,13 @@
                 <div class="col-md-8 rightbox">
                     @yield('rightboxbody')
                 </div>
+                @endif
+
+                @if($layout == 'one-column')
+                    
+                    @yield('mainboxbody')
+                    
+                @endif
             </div>
             
         </div>

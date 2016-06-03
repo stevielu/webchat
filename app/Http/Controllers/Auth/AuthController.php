@@ -4,7 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Auth;
+use Hash;
+
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -22,7 +27,8 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-
+    protected $auth;
+    protected $login;
     /**
      * Where to redirect users after login / registration.
      *
@@ -35,11 +41,26 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Guard $auth)
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->auth = $auth;
+        $this->login ='unlogin';
     }
 
+    public function index()
+    {
+        //$status = "unlogin";
+        if ($this->auth->check()){
+            $status = "logined";
+            //return redirect()->back();
+            // return view('layouts.login',['loginStauts'=>$status]);
+        }
+        else{
+            $status = "unlogin";
+        }
+        return view('layouts.login',['loginStauts'=>$status]);
+    }
     /**
      * Get a validator for an incoming registration request.
      *
@@ -55,6 +76,20 @@ class AuthController extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $credentials = $request->only('name', 'password');
+        if (Auth::attempt($credentials, $request->has('remember'))){
+            $this->login = 'logined';
+            return redirect()->back()->with(['loginStauts'=>$this->login]);
+            //return view('layouts.index',['loginStauts'=>$this->login]);
+        }
+        else{
+            $this->login = 'fail';
+            return view('layouts.login',['loginStauts'=>$this->login]);
+        }
+        
+    }
     /**
      * Create a new user instance after a valid registration.
      *

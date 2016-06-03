@@ -11,6 +11,7 @@
 |
 */
 Route::resource('/chat', 'Chat\ChatController');
+Route::resource('/', 'Auth\AuthController');
 Route::get('chat/content/{channel}', 'Chat\ChatController@getChannelContents');
 Route::get('chat/content/{channel}/{date}', 'Chat\ChatController@getChannelHistory');
 //Route::get('/', 'Chat\ChatController@index');

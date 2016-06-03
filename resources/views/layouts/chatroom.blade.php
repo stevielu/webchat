@@ -1,9 +1,8 @@
-@extends('layouts.default',['room'=>$chatroom])
+@extends('layouts.default',['room'=>$chatroom,'layout'=>'two-columnleft'])
 @section('header')
 <link rel="stylesheet" href="{{asset('css/app.css')}}"/>
 <link rel="stylesheet" href="{{asset('bower_component/bootstrap-toggle/css/bootstrap-toggle.min.css')}}"/>
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:100">
-<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+
 <script type="text/javascript" src="{{asset('bower_component/bootstrap-toggle/js/bootstrap-toggle.min.js')}}"/></script> 
 @endsection
 @section('rightboxbody')
@@ -72,7 +71,7 @@
         $(window).bind('visit', function(){
             $(window).bind('mousewheel', function(e) {
                 if ($('#chat-room').scrollTop() == 0) {
-                    if(e.originalEvent.wheelDelta / 12 > 20) {
+                    if(e.originalEvent.wheelDelta / 12 > 10) {
                        //$("#animate-loading-history").fadeIn();
                        
                        $ch = $('[name = "current-channel"]').val();
@@ -112,10 +111,10 @@
 
         function unlock(){
             $lock = 1;
-            setTimeout(unlock,2000);
+            setTimeout(unlock,1000);
         }
 
-        window.setTimeout(unlock,2000);
+        window.setTimeout(unlock,1000);
     
 // });
 </script>
