@@ -16,7 +16,7 @@ body .container-fluid, .row {
 }
 
 .banner-box{
-	width: 500px;
+	width: 520px;
 	word-wrap: break-word;
 	color: #9E9E9E;
 	font-size: 12px;
@@ -26,6 +26,24 @@ body .container-fluid, .row {
 }
 .banner-box p{
 	margin-left: 150px;
+	line-height: 20px;
+}
+.banner-box a{
+	color: #EF5044;
+}
+.banner-box button{
+	margin-top: 25px;
+	font-size: 16px;
+	font-family: 'Raleway Dots', cursive;
+    border: 0;
+    margin-left: 150px;
+    display: block;
+    width: 200px;
+    padding: 15px;
+    color: #fff;
+    background: #EF5044;
+    display: inline-block !important; 
+    border-radius: 15px;
 }
 .login-container .visitor{
 	height: 100%;
