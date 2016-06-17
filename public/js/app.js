@@ -7,7 +7,7 @@ var $messageInput = $('#message');//$sendMessage.find('input[name=message]');
 var io = window.io;
 var socket = io.connect('localhost:3000/');
 var chList = [];
-var localhref = window.location.protocol + "//" + window.location.host;
+
 
 var defaultPage  =    '<div id="animate-loading-history" >'+
                         '<img class="" src="'+localhref+'/public/hourglass-2.svg">'+
@@ -201,70 +201,72 @@ $loginPrivateChannel.on("submit",function(){
 
 $('.chat_btn').one("click",function(){
     //console.log();
-    $("[name = 'chatroom-id']").val($(this).attr('room-id'));
-    $.get('chat/'+$(this).attr('room-id'),function(data){
-        data.forEach(function(obj){
-            // obj['channels'].forEach(function(name){
-                
-                var html = '<li class="media channel_review" channel-type = "'+obj['channel_type']+'" channel-name="'+obj['channel_name']+'"';
+        $('#send-message').hide();
+        $("[name = 'chatroom-id']").val($(this).attr('room-id'));
+        $.get('chat/'+$(this).attr('room-id'),function(data){
+            data.forEach(function(obj){
+                // obj['channels'].forEach(function(name){
+                    
+                    var html = '<li class="media channel_review" channel-type = "'+obj['channel_type']+'" channel-name="'+obj['channel_name']+'"';
 
-                if(obj['channel_type']=="private"){
-                    html += 'data-toggle = "modal"';
-                    html += 'data-target = ".proom"';
-                } 
-                html += '><a href="#"><div class="media-left">';
-                //html += '<img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+window.location.origin+'/public/no-thumb.png" data-holder-rendered="true" style="width: 54px; height: 54px;">';
+                    if(obj['channel_type']=="private"){
+                        html += 'data-toggle = "modal"';
+                        html += 'data-target = ".proom"';
+                    } 
+                    html += '><a href="#"><div class="media-left">';
+                    //html += '<img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+window.location.origin+'/public/no-thumb.png" data-holder-rendered="true" style="width: 54px; height: 54px;">';
+                    
+                    html += '</div>';
+                    html += '<div class="media-body">';
+                    html += '<p class="media-heading" aria-hidden="true">';
+                    html += '<i class=" fa fa-users"></i>'+obj['channel_name'];
+                    html += '<sapn class="pull-right">';
+                    html += '<span id="noti-cont" class="noti-visible">';
+                    html += '<span class="cont-badge">0</span>'
+                    html += '</span>';
+                    html += '</span></p>';
+                    //html += '<p style="color:#B5B1B1">user312312:test</p>';
+                   
+                    html += '</div></a>';  
+                    html += '</li>';
+                    
+                    var $message = $(html);
+                    $('.channel-lists').append($message);
+                    chList.push(obj['channel_name']);
+                // });
                 
-                html += '</div>';
-                html += '<div class="media-body">';
-                html += '<p class="media-heading" aria-hidden="true">';
-                html += '<i class=" fa fa-users"></i>'+obj['channel_name'];
-                html += '<sapn class="pull-right">';
-                html += '<span id="noti-cont" class="noti-visible">';
-                html += '<span class="cont-badge">0</span>'
-                html += '</span>';
-                html += '</span></p>';
-                //html += '<p style="color:#B5B1B1">user312312:test</p>';
-               
-                html += '</div></a>';  
-                html += '</li>';
-                
-                var $message = $(html);
-                $('.channel-lists').append($message);
-                chList.push(obj['channel_name']);
-            // });
-            
-        });
-        $('.channel_review').on('click',function(){
-            if($(this).hasClass('channel-actived')!=true){
-                $.cookie("current-date", new Date());
-                $.cookie("oldheight",'0');
+            });
+            $('.channel_review').on('click',function(){
+                if($(this).hasClass('channel-actived')!=true){
+                    $.cookie("current-date", new Date());
+                    $.cookie("oldheight",'0');
 
-                if(($(this).attr('channel-type'))=="private"){
-                    $('#privatech-chn').val($(this).attr('channel-name'));
-                    $('#privatech-roomid').val($("[name = 'chatroom-id']").val());
-                    $('#chat-room').html(defaultPage);
-                    $('#login-channel').fadeIn();
-                    $('#send-message').fadeOut('slow');
+                    if(($(this).attr('channel-type'))=="private"){
+                        $('#privatech-chn').val($(this).attr('channel-name'));
+                        $('#privatech-roomid').val($("[name = 'chatroom-id']").val());
+                        $('#chat-room').html(defaultPage);
+                        $('#login-channel').fadeIn();
+                        $('#send-message').fadeOut('slow');
+                        $('li').removeClass("channel-actived");
+                        $(this).addClass("channel-actived");
+                        $(window).unbind('mousewheel');
+                        return;
+                    }
+                    $('#send-message').fadeIn('slow');
+                    $('#content-loading').css('display','flex');
+                    $(this).find('.cont-badge').removeClass('noti-visible');
+                    $(this).find('.cont-badge').html('0');
+
+                    var $ch = $(this).attr('channel-name');
+                    getContents($ch);
+                    
+                   
                     $('li').removeClass("channel-actived");
                     $(this).addClass("channel-actived");
-                    $(window).unbind('mousewheel');
-                    return;
-                }
-                $('#send-message').fadeIn('slow');
-                $('#content-loading').css('display','flex');
-                $(this).find('.cont-badge').removeClass('noti-visible');
-                $(this).find('.cont-badge').html('0');
-
-                var $ch = $(this).attr('channel-name');
-                getContents($ch);
-                
-               
-                $('li').removeClass("channel-actived");
-                $(this).addClass("channel-actived");
-            }//endif
-        });//end channel review
-    });//end get roomid  
+                }//endif
+            });//end channel review
+        });//end get roomid
+      
 });//end btn click
 
 socket.on('controller-channel'+':App\\Events\\ChannelOperation', function (payload) {

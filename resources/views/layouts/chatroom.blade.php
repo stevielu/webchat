@@ -4,13 +4,18 @@
 <link rel="stylesheet" href="{{asset('bower_component/bootstrap-toggle/css/bootstrap-toggle.min.css')}}"/>
 
 <script type="text/javascript" src="{{asset('bower_component/bootstrap-toggle/js/bootstrap-toggle.min.js')}}"/></script> 
+<script src="{{ asset("js/jquery.cookie.js") }}"></script>
+<script type="text/javascript">
+    var localhref = window.location.protocol + "//" + window.location.host;
+</script>
 @endsection
 @section('rightboxbody')
-               
-
-                <!-- 訊息列表框 -->
 
 
+@if($currentfocus == 'sidebar_userdashboard')
+    @include('layouts.user')
+    
+@else
                 <div id="chat-room" current-channel='' class="row">
                     
                     <div id= 'content-loading' class="loading col-md-12">
@@ -37,14 +42,15 @@
                         </span>
                     </div>
                 </form>
+<script src="{{ asset("bower_component/socket.io-client/socket.io.js")}}"></script>
+<script src="{{ asset("js/app.js") }}"></script>
                 
-
+@endif
                  
             
 
-<script src="{{ asset("bower_component/socket.io-client/socket.io.js")}}"></script>
-<script src="{{ asset("js/app.js") }}"></script>
-<script src="{{ asset("js/jquery.cookie.js") }}"></script>
+
+
 <script src="{{ asset("js/jquery-dateFormat.js") }}"></script>
 <script type="text/javascript">
     
@@ -111,7 +117,7 @@
 
         function unlock(){
             $lock = 1;
-            setTimeout(unlock,1000);
+            setTimeout(unlock,2000);
         }
 
         window.setTimeout(unlock,1000);

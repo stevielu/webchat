@@ -6,7 +6,7 @@ use App\User;
 use Validator;
 use Auth;
 use Hash;
-
+use Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
@@ -29,37 +29,40 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
     protected $auth;
     protected $login;
+    protected $registerStauts;
+    protected $loginStauts;
+    protected $users;
     /**
      * Where to redirect users after login / registration.
      *
      * @var string
      */
-    protected $redirectTo = '/';
-
+    protected $redirectTo = '/chat';
+    //protected $redirectLogin= '/chat';
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct(Guard $auth)
+    public function __construct(Guard $auth,User $users)
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        // $this->middleware('guest', ['except' => 'getLogout']);
         $this->auth = $auth;
         $this->login ='unlogin';
+        $this->registerStauts = null;
+        $this->users = $users;
     }
 
     public function index()
     {
-        //$status = "unlogin";
+    
         if ($this->auth->check()){
-            $status = "logined";
+            // $status = null;
             //return redirect()->back();
-            // return view('layouts.login',['loginStauts'=>$status]);
+            return redirect('/chat');
         }
-        else{
-            $status = "unlogin";
-        }
-        return view('layouts.login',['loginStauts'=>$status]);
+        return view('layouts.login',['registerStauts'=>$this->registerStauts]);
+        //return;
     }
     /**
      * Get a validator for an incoming registration request.
@@ -70,7 +73,6 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -78,15 +80,18 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        $credentials = $request->only('name', 'password');
-        if (Auth::attempt($credentials, $request->has('remember'))){
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt(['email'=> $credentials['email'], 'password' =>  $credentials['password']], $request->has('remember'))){
             $this->login = 'logined';
-            return redirect()->back()->with(['loginStauts'=>$this->login]);
+            Session::forget('loginInfo');
+            Session::put('loginInfo',$credentials);
+            return redirect('/chat');
             //return view('layouts.index',['loginStauts'=>$this->login]);
         }
         else{
-            $this->login = 'fail';
-            return view('layouts.login',['loginStauts'=>$this->login]);
+            $loginStauts = 'fail';
+            return redirect('/')->with('loginStauts',$loginStauts);
+            // return view('layouts.login',['loginStauts'=>$this->loginStauts]);
         }
         
     }
@@ -96,12 +101,36 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+
+    public function getLogout()
     {
-        return User::create([
+        Auth::logout();
+        return redirect('/');
+    }
+
+    protected function create(Request $data)
+    {
+        $rules = array(
+          'name' => 'required|max:255|unique:users',
+          'email' => 'required|email|max:255|unique:users',
+          'password' => 'required|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9,}$/'
+        );
+        $validator = Validator::make($data->all(), $rules);
+        if($validator->fails()){
+            return view('layouts.login',['registerStauts'=>$validator->errors()]);
+          // ->withErrors($validator)
+          // ->withInput();
+        }
+        Auth::login($this->users->create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+            'password' => bcrypt($data['password'])
+        ]));
+        
+        Session::put('loginInfo.email',$data['email']);
+        return redirect('/chat');
+        
     }
+
+
 }

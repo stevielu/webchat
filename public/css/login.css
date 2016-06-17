@@ -4,6 +4,10 @@ html, body {
 body .container-fluid, .row {
     height: 100%;
 }
+input:focus {
+    outline:none !important;
+ 
+}
 .login-container{
 	height: 100%;
 	
@@ -23,6 +27,7 @@ body .container-fluid, .row {
 	/*font-family: 'Raleway', sans-serif;*/
 	position: absolute;
 	top: 45%;
+	height: 140px;
 }
 .banner-box p{
 	margin-left: 150px;
@@ -32,18 +37,21 @@ body .container-fluid, .row {
 	color: #EF5044;
 }
 .banner-box button{
-	margin-top: 25px;
-	font-size: 16px;
+	margin-top: 5px;
+	font-size: 15px;
 	font-family: 'Raleway Dots', cursive;
     border: 0;
     margin-left: 150px;
     display: block;
-    width: 200px;
-    padding: 15px;
+    width: 140px;
+    padding: 5px;
     color: #fff;
-    background: #EF5044;
+    background: #EF6359;
     display: inline-block !important; 
-    border-radius: 15px;
+    border-radius: 25px;
+}
+.banner-box button:hover{
+	background-color: #F4511E;
 }
 .login-container .visitor{
 	height: 100%;
@@ -59,6 +67,17 @@ body .container-fluid, .row {
 	/* -webkit-filter: grayscale(100%);  Chrome, Safari, Opera 
     filter: grayscale(100%);*/
 }
+.register{
+	display: none;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: -41.66666667%;
+	z-index: 100;
+	background-color: #FF8A65;
+
+}
+
 .img-mask1
 {
 	width: 100%;
@@ -69,6 +88,9 @@ body .container-fluid, .row {
 	opacity: 0.89;
 	background: #26262E;
     padding: 0;
+}
+.register .img-mask1{
+	opacity: 0.29;
 }
 .login-title{
 	color: #fff;
@@ -88,24 +110,27 @@ body .container-fluid, .row {
     line-height: 30px;
 }
 .login-box{
-	position: relative;
-	padding-top: 55%;
+	position: absolute;
+	top: 45%;
 	margin: auto;
+	height: 140px;
 }
 .login-box input{
 	font-size: 13px;
 	font-family: 'Raleway Dots', cursive;
     border: 0;
     margin-left: 150px;
-    display: block;
     width: 300px;
     margin-bottom: 20px;
     background: transparent;
     border-bottom: solid 1px #9E9E9E;
+    color: #fff
 }
 
 .login-box button{
-	margin-top: 25px;
+	position: relative;
+	bottom: 0;
+	margin-top: 15px;
 	font-size: 16px;
 	font-family: 'Raleway Dots', cursive;
     border: 0;
@@ -114,8 +139,11 @@ body .container-fluid, .row {
     width: 100px;
     color: #fff;
     background: #9E9E9E;
-    display: inline-block !important; 
+    /*display: inline-block !important; */
     border-radius: 15px;
+}
+.login-box button:hover{
+	background: #4C4B4B;
 }
 .login-box a{
 	margin-top: 25px;
@@ -123,26 +151,50 @@ body .container-fluid, .row {
 	font-family: 'Raleway', sans-serif;
     display: inline-block !important; 
     color: #9E9E9E;
-    padding-left: 20px;
+    /*padding-left: 20px;*/
+    margin-left: 150px;
    
     
 }
 
 
-
-input[type=text], textarea {
-  -webkit-transition: all 0.30s ease-in-out;
-  -moz-transition: all 0.30s ease-in-out;
-  -ms-transition: all 0.30s ease-in-out;
-  -o-transition: all 0.30s ease-in-out;
-  outline: none;
-  padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
-  border: 1px solid #DDDDDD;
+.register .login-box input{
+	color: #fff;
+	border-bottom: solid 1px #fff;
 }
- input[type=text]:focus, textarea:focus {
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-  padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
-  border: 1px solid rgba(81, 203, 238, 1);
+.register .login-box input::-webkit-input-placeholder{
+	color:    #fff;
+}
+.register a{
+	color: #fff;
+}
+
+.fa-times{
+	display: none;
+}
+.fa-check{
+	display: none;
+}
+.button_strength{
+	margin:0 !important;
+	margin-left: 150px !important;
+	padding: 0 !important; 
+}
+.strength_meter{
+	margin-left: 150px;
+	color: #795548;
+}
+.register p{
+	margin-left: 150px !important;
+	color: #26262E;
+	font-size: 20px;
+	font-family: 'Raleway', sans-serif;
+}
+.login-box .error_info{
+	margin-left: 150px;
+}
+.error_info{
+	font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    color: #F44336;
 }

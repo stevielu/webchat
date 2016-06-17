@@ -10,15 +10,27 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::resource('/chat', 'Chat\ChatController');
+
 Route::resource('/', 'Auth\AuthController');
-Route::get('chat/content/{channel}', 'Chat\ChatController@getChannelContents');
-Route::get('chat/content/{channel}/{date}', 'Chat\ChatController@getChannelHistory');
-//Route::get('/', 'Chat\ChatController@index');
-//Route::post('/{id}', 'Chat\ChatController@show');
-Route::post('/send-message', 'Chat\ChatController@sendMessage');
-Route::post('/login-pch', 'Chat\ChatController@loginPrivateChannel');
-Route::post('/create-channel', 'Chat\ChatController@createChannel');
-Route::auth();
+Route::get('/logout', 'Auth\AuthController@getLogout');
+Route::group(['middleware' => 'auth'], function(){
+	Route::resource('/chat', 'Chat\ChatController');
+	Route::group(['prefix' => 'user'], function(){
+		Route::resource('/account', 'UserController');
+		Route::get('/back', 'UserController@back');
+		Route::get('/profile', 'UserController@getProfile');
+		Route::get('/profile/{user}/edit', 'UserController@editProfile');
+	});
+	
+	//Route::get('/user/myprofile', 'UserController@back');
+	//Route::get('public/user/back', 'UserController@back');
+	Route::get('chat/content/{channel}', 'Chat\ChatController@getChannelContents');
+	Route::get('chat/content/{channel}/{date}', 'Chat\ChatController@getChannelHistory');
+	//Route::get('/', 'Chat\ChatController@index');
+	//Route::post('/{id}', 'Chat\ChatController@show');
+	Route::post('/send-message', 'Chat\ChatController@sendMessage');
+	Route::post('/login-pch', 'Chat\ChatController@loginPrivateChannel');
+	Route::post('/create-channel', 'Chat\ChatController@createChannel');
+});
 
 Route::get('/home', 'HomeController@index');

@@ -43,6 +43,14 @@ i{
   text-align: center;
   padding-bottom: 15px;
   padding-top: 15px;
+  background-color: #2D2F31;
+}
+.sidebar_btn:active{
+  background-color: #434444
+}
+
+.btn_acctived{
+  background-color: #434444
 }
 .sidebar_btn:hover{
   text-decoration: none;
@@ -396,3 +404,10 @@ hr:after{
   color: #d0d0d0; 
   font-size: 10px; 
 }
+.logout_btn{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: #FFB74D;
+}
+.userdashboard{}

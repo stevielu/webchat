@@ -14,7 +14,7 @@ trait ChatHistory
 
     public function __construct()
     {
-       
+       date_default_timezone_set('Pacific/Auckland');
     }
     private function _getFileNameDB($chatroomID,$filename){
         //get contents

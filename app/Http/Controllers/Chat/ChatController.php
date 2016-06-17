@@ -12,10 +12,11 @@ use App\Models\ChatHistoryRecoder;
 use App\Models\Channels;
 use App\ChatHistory;
 /*Auth*/
+use Illuminate\Contracts\Auth\Registrar;
 use App\User;
 use Validator;
 use Auth;
-
+use Session;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -32,15 +33,19 @@ class ChatController extends Controller
 
 	public function Index()
 	{
-	    srand(time()); // 亂數種子
-	    $username = sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
+	   
+	    $user = Session::get('loginInfo');
+	    $username = User::select('name')->where('email',$user['email'])->first();
+	    $user = Session::put('loginInfo.name',$username['name']);
+	    $username = $username['name'];
 	    
 	    //get chat room from database
 	    $chatroom = Chat::with('SubClass')->get();
 	    $this->chatroom = $chatroom;
-	    
+
+	    $currentfocus = 'sidebar_chat';
 	    //$contents = $this->getChatInfoNow('1','chat-channel');
-	    return view('layouts/chatroom', compact('username','chatroom'));
+	    return view('layouts/chatroom', compact('username','chatroom','currentfocus'));
 	}
 
 	public function show($id, Request $request)
@@ -72,8 +77,10 @@ class ChatController extends Controller
     		$empty = 'false';
     	}
 
-     	srand(time()); // 亂數種子
-	    $username = sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
+     	//srand(time()); // 亂數種子
+	    //$username = sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
+	    $user = Session::get('loginInfo');
+	    $username = $user['name'];
 	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty];
 	    // //get chat room from database
 	    // $chatroom = Chat::with('SubClass')->get();
@@ -102,8 +109,9 @@ class ChatController extends Controller
     		$empty = 'false';
     	}
 
-     	srand(time()); // 亂數種子
-	    $username = sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
+     	//srand(time()); // 亂數種子
+     	$user = Session::get('loginInfo');
+	    $username = $user['name'];//sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
 
 
 	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty];

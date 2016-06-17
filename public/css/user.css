@@ -1,0 +1,88 @@
+textarea {
+   resize: none;
+   min-height: 150px !important;
+   color: #3d3d3d !important;
+}
+.intro {
+	position: relative;
+}
+.character-counter{
+	position: absolute;
+	color: #9E9E9E;
+    margin: 0;
+    bottom: 5px;
+    right: 30px;
+    z-index: 99;
+}
+.user-container{
+	height: 100%;
+	overflow: hidden;
+}
+.userpannel-lists{
+	margin: 0;
+	padding: 0;
+}
+.userpannel-lists li{
+	border-bottom: 1px solid #d3d3d3;
+	padding: 10px;
+	height: 50px;
+}
+.userpannel-lists p{
+	width: 100px;
+	line-height: 29px;
+	margin: auto;
+	color: white;
+	font-family: 'Raleway', sans-serif;
+	padding-right: 5px;
+	text-align: left;
+}
+.userpannel-lists span{
+	padding-right: 5px;
+	color: #9E9E9E;
+}
+.userpannel-lists li:hover{
+	background: #34475A;
+}
+.account-wrap{
+	height: 100%;
+	padding: 30px;
+}
+.wrap-title{
+	font-family: 'Raleway', sans-serif;
+	color: #434343;
+	font-size: 25px;
+	height: 10%;
+	
+	border-bottom: 1px solid #E0E0E0;
+	line-height: 10%;
+}
+.extra-space-lg{
+	height: 200px;
+}
+.extra-space-mid{
+	height: 100px;
+}
+.account-box{
+	box-shadow: none !important;
+	height: 90%;
+	font-size: 15px;
+	font-family: 'Raleway', sans-serif !important;
+}
+.account-box button{
+	border-radius: 5px !important;
+}
+.account-box .back-button{
+	margin-top: 100px;
+}
+.back-button a{
+	background: #FFB74D;
+	color: white;
+}
+.avtar-upload{
+	height: 150px;
+	width: 180px;
+}
+.btn-upload{
+	width: 100%;
+	margin-top:15px;
+}
