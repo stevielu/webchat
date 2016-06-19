@@ -26,7 +26,7 @@
                 </div>
                
                 <!-- 輸入訊息的表單 -->
-               
+               @include('layouts.viewprofile')
                 <form id="send-message" method="post" action="send-message">
                     {!! csrf_field() !!}
                     

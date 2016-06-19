@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Requests;
 /*model*/
 use App\Models\Chat;
+use App\Models\Profiles;
 /*Auth*/
 use App\User;
 use Validator;
 use Auth;
 use Session;
+use Storage;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -90,6 +92,62 @@ class UserController extends Controller
     {
         //
     }
+
+
+    public function editProfile(Request $profile){
+        $file = $profile->file('avatar');
+        $user = Profiles::where('user_id',$this->accountinfo['id'])->exists();
+        $data = array(
+                'user_id' => $this->accountinfo['id'],
+                'user_intro' => $profile['intro'],
+                'address_city' => $profile['city'],
+                'address_suburb' => $profile['suburb'],
+                'user_age' => $profile['age'],
+                'user_gender' => $profile['gender'],
+                );
+       
+
+        if($user == false){
+            Profiles::create($data);
+        }
+        else{
+            Profiles::where('user_id',$this->accountinfo['id'])->update($data);
+        }
+
+
+        if ($file) {
+            $rules = array(
+              'avatar' => 'mimes:jpeg,jpg,png,gif|max:10000'
+            );
+            $validator = Validator::make($profile->all(), $rules);
+
+            if ($validator->fails())
+            {
+                $this->section = 'errorpage';
+                return redirect()->back()->with('errorinfo',$validator->errors());
+            }
+            else{
+                $filename  = $this->username['name'].'.'.$file->getClientOriginalExtension();
+                $path = config('filepath.user.profile').$filename;
+                $background = Image::canvas(150, 150);
+                $img = Image::make($file)->resize(150, null, function ($c) {
+                                                        $c->aspectRatio();
+                                                        $c->upsize();
+                                                    });
+                $background->insert($img, 'top');
+                Storage::put($path, $background->stream());
+
+                User::where('id',$this->accountinfo['id'])->update(
+                ['my_avatar' => $path]);
+            }
+
+        }
+        return redirect('/user/profile')->with('update_status','Update Success');
+        
+        
+        //$profile->file('photo')->move($destinationPath, $fileName);
+    }
+
     public function getProfile(){
         $this->section = 'profile';
         $username = $this->username['name'];
@@ -97,10 +155,13 @@ class UserController extends Controller
         $currentfocus = $this->currentfocus;
         $section = $this->section;
         $accountinfo = $this->accountinfo;
-        if($accountinfo['my_avatar']==NUll){
-            $accountinfo['my_avatar'] = 'no-thumb.png';
+
+        $profile = Profiles::where('user_id',$this->accountinfo['id'])->first();
+        //$new = (object) array_merge((array) $this->accountinfo, (array) $profile);
+        if($this->accountinfo['my_avatar']==NUll){
+            $accountinfo['my_avatar'] = 'user-avatar/no-thumb.png';
         }
-        return view('layouts/chatroom', compact('username','chatroom','currentfocus','accountinfo','section'));
+        return view('layouts/chatroom', compact('username','chatroom','currentfocus','accountinfo','section','profile'));
     }
     /**
      * Show the form for editing the specified resource.

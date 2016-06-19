@@ -81,8 +81,20 @@ textarea {
 .avtar-upload{
 	height: 150px;
 	width: 180px;
+
+}
+.btn-upload::-webkit-file-upload-button{
+	visibility: hidden;
 }
 .btn-upload{
+
 	width: 100%;
 	margin-top:15px;
+}
+.avatar-container{
+	height: 150px;
+	overflow: hidden;
+}
+.account-wrap .alert{
+	margin-top: 20px;
 }

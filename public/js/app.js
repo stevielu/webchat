@@ -20,26 +20,63 @@ var defaultPage  =    '<div id="animate-loading-history" >'+
     defaultPage  +=   '<div id = "login-channel"><h1 style="text-align: center;color: #D0D0D0;padding-top: 100px;">Please Login, This is Private Channel</h1></div>';
     defaultPage  +=   '<div id = "content-box"></div>';
 
+//var avatar_url = window.location.origin+'/public/storage/user-avatar/'+name+'.jpg';
+//var avatar_url = window.location.origin+'/public/no-thumb.png';
+function imageExists(name){
+    var avatar_url;
+     $.ajax(
+        {type:"GET",
+        url:window.location.origin+'/public/storage/user-avatar/'+name+'.jpg',
+        async:false
+        }).done(function() { 
+            avatar_url = window.location.origin+'/public/storage/user-avatar/'+name+'.jpg';
+        }).fail(function() { 
+            avatar_url = window.location.origin+'/public/no-thumb.png';
+        });
+    return avatar_url;
+}                
 
 function bindSocket(ch){
      socket.on(ch+':App\\Events\\messageCreate', function (payload) {
             var currentCh = $('[channel-name = "'+ch+'"]');
             if(currentCh.hasClass('channel-actived')==true){   
 
-               
-
-                var html = '<div class="media channel_review"><div class="media-left ">';
-                                            
-                    html += '<a><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+window.location.origin+'/public/no-thumb.png" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
-                    html += '</div>';
+                var name = payload.username;
+                var userattr = payload.userAttribute;
+                //var name = str.substring(0,str.indexOf(':')); 
+                //var avatar_url = window.location.origin+'/public/storage/user-avatar/'+name+'.jpg';
+                var path = imageExists(name);
+                //console.log(path);
+                if(userattr['avatar']!=null){
+                   path =  window.location.origin+'/public/storage/'+userattr['avatar'];
+                }
+                else{
+                   path = window.location.origin+'/public/no-thumb.png';
+                }
+                 
+                 
+                    var html = '<div class="media channel_review">';
                     html += '<div class="media-body media-middle msg-container">';
-                    html += '<p class="msg-box">';
+                    html += '<p class="msg-box-right pull-right">';
                     html += payload.message+'</p>';
                     html += '</div>';
+                    html += '<div class="media-right ">';
+                
+                    html += '<a href ="viewprofile/'+name+'"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+                    html += '</div></div>';
+               
+                // var html = '<div class="media channel_review"><div class="media-left ">';
+                //     //html += '<?php echo //file_exists(realpath("/public/storage/user-avatar/'+name+'.jpg"));?>';                  
+                //     html += '<a href="'+name+'"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+                //     html += '</div>';
+                //     html += '<div class="media-body media-middle msg-container">';
+                //     html += '<p class="msg-box">';
+                //     html += payload.message+'</p>';
+                //     html += '</div>';
                     //html += payload.username + ': ';
                     // html += payload.message;
                     // html += '</div>';
-            
+                   
                     var $message = $(html);
 
                     $chatRoom.append($message);
@@ -99,25 +136,59 @@ function loadingContents(data,history){
     else{
         $('.reminderinfo-sm').fadeOut();
         $('.reminderinfo-icon').fadeIn();
+        var myname = data['username'];
         data = data['contents'].split("\n");
 
         $('#content-box').prepend('<div id="'+$date+'"><hr class="style1"><p class="date">'+$date+'</p></div>');
         data.forEach(function(data){
+
             //console.log(data);
             // obj['channels'].forEach(function(name){
-                var html = '<div class="media channel_review"><div class="media-left ">';
+                var str = data;
+                var path = window.location.origin+'/public/no-thumb.png';
+                var name = str.substring(str.indexOf('*')+1,str.indexOf(':')); 
+
+                var userattr = str.substring(0,str.indexOf('*'));
+
+                var correctOlderfile =  str.substring(0,str.indexOf(':'));
+                //var path = imageExists(name);
+                data = str.substring(str.indexOf(':')+1);
+
+                if(userattr != ''){
+                    path =  window.location.origin+'/public/storage/'+userattr;
+                }
+                if(myname == name){ 
+                    var html = '<div class="media channel_review">';
+                    html += '<div class="media-body media-middle msg-container">';
+                    html += '<p class="msg-box-right pull-right">';
+                    html += data+'</p>';
+                    html += '</div>';
+                    html += '<div class="media-right ">';
                 
-                html += '<a><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+window.location.origin+'/public/no-thumb.png" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
-                html += '</div>';
-                html += '<div class="media-body media-middle msg-container">';
-                html += '<p class="msg-box">';
-                html += data+'</p>';
-                //html += '<p style="color:#B5B1B1">user312312:test</p>';
-                html += '</div>';
+                    html += '<a class="viewprofile" link="viewprofile/'+name+'" href ="#" data-toggle="modal" data-target="#viewprofile"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+                    html += '</div></div>';
+                }
+                else{
+                    var html = '<div class="media channel_review"><div class="media-left ">';
+                
+                    html += '<a class="viewprofile" link="viewprofile/'+name+'" href ="#" data-toggle="modal" data-target="#viewprofile"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+                    html += '</div>';
+                    html += '<div class="media-body media-middle msg-container">';
+                    html += '<p class="msg-box">';
+                    html += data+'</p>';
+                    //html += '<p style="color:#B5B1B1">user312312:test</p>';
+                    html += '</div>'; 
+                }
+                
+               
                 var $message = $(html);
             // });
             $('#'+$date).append($message);
             //$chatRoom.animate({scrollTop: $chatRoom[0].scrollHeight}, 1000);
+        });
+        $('.viewprofile').click(function(){
+            // body...
+            var $link = $(this).attr('link');
         });
 
         var old_height = $.cookie("oldheight");

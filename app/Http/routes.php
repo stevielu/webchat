@@ -19,7 +19,7 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::resource('/account', 'UserController');
 		Route::get('/back', 'UserController@back');
 		Route::get('/profile', 'UserController@getProfile');
-		Route::get('/profile/{user}/edit', 'UserController@editProfile');
+		Route::post('/profile/{user}/edit', 'UserController@editProfile');
 	});
 	
 	//Route::get('/user/myprofile', 'UserController@back');

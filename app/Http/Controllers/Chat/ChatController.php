@@ -30,15 +30,23 @@ class ChatController extends Controller
 
 	protected $chatroom;
 	protected $auth;
+	protected $user;
+
+	public function __construct()
+    {
+        // $this->middleware('guest', ['except' => 'getLogout']);
+       	$user = Session::get('loginInfo');
+	    //$username = User::select('name')->where('email',$user['email'])->first();
+	    $this->user = User::where('email',$user['email'])->first();
+	    //var_dump($test['my_avatar']);
+	    $user = Session::put('loginInfo.name',$this->user['name']);
+    }
 
 	public function Index()
 	{
 	   
-	    $user = Session::get('loginInfo');
-	    $username = User::select('name')->where('email',$user['email'])->first();
-	    $user = Session::put('loginInfo.name',$username['name']);
-	    $username = $username['name'];
-	    
+	   
+	    $username = $this->user['name'];
 	    //get chat room from database
 	    $chatroom = Chat::with('SubClass')->get();
 	    $this->chatroom = $chatroom;
@@ -171,11 +179,17 @@ class ChatController extends Controller
 	   $username = $request->get('username');
 	   $message = $request->get('message');
 	   $ch = $request->get('current-channel');
-	   $channel = new messageCreate($username, $message,$ch);
+	   $channel = new messageCreate($username, $message,$ch,$this->user);
 	   event($channel);
 
 	   //recorde contents
-	   $contents = $username.':'.$message;
+	   if($this->user['my_avatar']!=null){
+	   		$contents = $this->user['my_avatar'].'*'.$username.':'.$message;
+	   }
+	   else{
+	   		$contents = $username.':'.$message;
+	   }
+	   
 	   $ret = $this->setChatInfo($contents,$ch,$request->get('chatroom-id'));
 
 
