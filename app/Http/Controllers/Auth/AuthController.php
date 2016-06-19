@@ -111,7 +111,7 @@ class AuthController extends Controller
     protected function create(Request $data)
     {
         $rules = array(
-          'name' => 'required|max:255|unique:users',
+          'name' => 'required|max:25|unique:users',
           'email' => 'required|email|max:255|unique:users',
           'password' => 'required|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9,}$/'
         );

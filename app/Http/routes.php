@@ -21,7 +21,10 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::get('/profile', 'UserController@getProfile');
 		Route::post('/profile/{user}/edit', 'UserController@editProfile');
 	});
-	
+	Route::resource('/viewprofile', 'ViewProfileController');
+	//Route::group(['prefix' => 'viewprofile'], function(){
+		
+	//});
 	//Route::get('/user/myprofile', 'UserController@back');
 	//Route::get('public/user/back', 'UserController@back');
 	Route::get('chat/content/{channel}', 'Chat\ChatController@getChannelContents');

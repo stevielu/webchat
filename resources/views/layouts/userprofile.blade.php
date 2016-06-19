@@ -4,9 +4,9 @@
 	<div class="form-group">
 	    <label for="inputIntro" class="col-sm-2 control-label">What's up</label>
 	    <div class="col-sm-6 intro">
-	      <textarea type="text" row='5' maxlength="140" class="form-control" name = 'intro' id="inputIntro" placeholder="Introduce yourself"><?php echo($profile['user_intro'])?>
+	      <textarea type="text" row='10' class="form-control" name = 'intro' id="inputIntro" placeholder="Introduce yourself"><?php echo($profile['user_intro'])?>
 	      </textarea>
-	      <p class="character-counter">140</p>
+	      <p class="character-counter">200</p>
 	    </div>
 	    <div class="col-sm-3 intro avtar-upload">
 		    <div class = 'avatar-container'>
@@ -68,14 +68,14 @@
     	console.log(this.value);
     	if(this.value!=''){
 	    	var words = this.value.match(/\S+/g).length;
-	        if (words > 140) {
+	        if (words > 200) {
 	            // Split the string on first 200 words and rejoin on spaces
-	            var trimmed = $(this).val().split(/\s+/, 140).join(" ");
+	            var trimmed = $(this).val().split(/\s+/, 200).join(" ");
 	            // Add a space at the end to keep new typing making new words
 	            $(this).val(trimmed + " ");
 	        }
 	        else {
-	            $('.character-counter').text(140-words);
+	            $('.character-counter').text(200-words);
 	        }	
     	}    
     });

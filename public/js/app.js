@@ -35,6 +35,38 @@ function imageExists(name){
         });
     return avatar_url;
 }                
+function getProfile(link){
+    $.get(link,function(data){
+        if(data['user'].my_avatar!=''){
+            var path = window.location.origin+'/public/storage/'+data['user'].my_avatar;
+        }
+        else{
+            var path = window.location.origin+'/public/no-thumb.png';
+        }
+        $('#avatar').attr('src',path);
+        $('#profile-name').html(data['user'].name);
+        $('#profile-gender').removeClass();
+        switch(data['profile'].user_gender){
+            case 'male':
+                    $('#profile-gender').addClass('fa fa-mars gender_blue');
+                break;
+            case 'female':
+                 $('#profile-gender').addClass('fa fa-venus gender_red');
+                break;
+            default:
+                 $('#profile-gender').addClass('fa fa-question-circle-o gender_grey');
+                 break;
+        }
+        $('#profile-email').html(data['user'].email);
+        $('#profile-intro').html(data['profile'].user_intro);
+        $('#profile-age').html(data['profile'].user_age);
+        $('#profile-city').html(data['profile'].address_city);
+        $('#profile-suburb').html(data['profile'].address_suburb+',');
+        $('#profile-phone').html(data['user'].phone);
+        
+
+    });
+}
 
 function bindSocket(ch){
      socket.on(ch+':App\\Events\\messageCreate', function (payload) {
@@ -55,15 +87,15 @@ function bindSocket(ch){
                 }
                  
                  
-                    var html = '<div class="media channel_review">';
-                    html += '<div class="media-body media-middle msg-container">';
-                    html += '<p class="msg-box-right pull-right">';
-                    html += payload.message+'</p>';
-                    html += '</div>';
-                    html += '<div class="media-right ">';
-                
-                    html += '<a href ="viewprofile/'+name+'"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
-                    html += '</div></div>';
+                var html = '<div class="media channel_review">';
+                html += '<div class="media-body media-middle msg-container">';
+                html += '<p class="msg-box-right pull-right">';
+                html += payload.message+'</p>';
+                html += '</div>';
+                html += '<div class="media-right ">';
+            
+                html += '<a class="viewprofile" link="viewprofile/'+name+'" href ="#" data-toggle="modal" data-target="#viewprofile"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+                html += '</div></div>';
                
                 // var html = '<div class="media channel_review"><div class="media-left ">';
                 //     //html += '<?php echo //file_exists(realpath("/public/storage/user-avatar/'+name+'.jpg"));?>';                  
@@ -80,8 +112,18 @@ function bindSocket(ch){
                     var $message = $(html);
 
                     $chatRoom.append($message);
+
+                    $('.viewprofile').click(function(){
+                        // body...
+                        var $link = $(this).attr('link');
+                        $('#avatar').attr('src',window.location.origin+'/public/default.gif');
+                        getProfile($link);
+                    });
+
                     $message.fadeIn('fast');
                     $chatRoom.animate({scrollTop: $chatRoom[0].scrollHeight}, 1000);
+
+
             }
             else{
                 var obj = currentCh.find('.cont-badge');
@@ -189,6 +231,8 @@ function loadingContents(data,history){
         $('.viewprofile').click(function(){
             // body...
             var $link = $(this).attr('link');
+            $('#avatar').attr('src',window.location.origin+'/public/default.gif');
+            getProfile($link);
         });
 
         var old_height = $.cookie("oldheight");

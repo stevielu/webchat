@@ -427,12 +427,12 @@ input.empty {
   color: #d0d0d0;
   text-align: center;
 }
-hr{
+.content-box hr{
   color: #d0d0d0;
   border-top: 1px dashed !important;
   font: normal normal normal 14px/1 FontAwesome;
 }
-hr:after{
+.content-box hr:after{
   content: "\f1da" !important;;
   display: inline-block !important;; 
   position: relative !important;; 
@@ -449,4 +449,74 @@ hr:after{
   bottom: 0;
   background: #FFB74D;
 }
+.profile-header h4{
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+}
+.profile-top{
+  height: 100px;
+}
+.profile-avtar{
+  padding: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.modal-mid{
+  width: 500px;
+}
+.profile-account{
+  padding-left: 15px;
+  margin-top: 10px;
+}
+.profile-top {
+  font-family: 'Slabo 27px', serif;
+}
+.profile-account h4,p{
+  
+  padding-left: 15px;
+  display: inline;
+}
+.modal-body hr{
+  color: #d0d0d0;
+  border-top: 1px dashed !important;
+}
+.modal-footer .btn{
+  border-radius: 4px !important;
+}
 .userdashboard{}
+
+.gender_blue{
+  color: #03A9F4;
+}
+.gender_red{
+  color: #f06292;
+}
+.gender_grey{
+  color:#9e9e9e;
+}
+.profile-email{
+  margin-top: 15px;
+}
+.profile-email p{
+  color: #9e9e9e;
+}
+.profile-body {
+  margin-top: 15px;
+  min-height: 100px;
+}
+.profile-body span{
+  font-size: 15px;
+   font-family: 'Slabo 27px', serif;
+  color: #616161;
+}
+.profile-footer{
+  margin-top: 15px;
+
+}
+.profile-footer span{
+    font-size: 14px;
+   font-family: 'Slabo 27px', serif;
+  color: #9e9e9e;
+}

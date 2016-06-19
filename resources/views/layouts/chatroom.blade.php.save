@@ -4,6 +4,7 @@
 <title>Laravel</title>
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:100">
+<link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="{{asset('css/app.css')}}"/>
 <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}" type="text/css"/>
 <style type="text/css">

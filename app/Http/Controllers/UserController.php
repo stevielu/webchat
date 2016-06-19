@@ -97,6 +97,7 @@ class UserController extends Controller
     public function editProfile(Request $profile){
         $file = $profile->file('avatar');
         $user = Profiles::where('user_id',$this->accountinfo['id'])->exists();
+
         $data = array(
                 'user_id' => $this->accountinfo['id'],
                 'user_intro' => $profile['intro'],
@@ -105,7 +106,20 @@ class UserController extends Controller
                 'user_age' => $profile['age'],
                 'user_gender' => $profile['gender'],
                 );
-       
+
+        $rules = array(
+          'age' => 'numeric|max:200',
+          'city' => 'max:10',
+          'suburb' => 'max:20'
+        );
+
+        $validator = Validator::make($profile->all(), $rules);
+
+        if ($validator->fails())
+        {
+            $this->section = 'errorpage';
+            return redirect()->back()->with('errorinfo',$validator->errors());
+        }
 
         if($user == false){
             Profiles::create($data);

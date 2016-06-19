@@ -16,6 +16,10 @@
 			<p>{{$error->first('password')}}</p>
 			<p>{{$error->first('phone')}}</p>
 			<p>{{$error->first('avatar')}}</p>
+			<p>{{$error->first('city')}}</p>
+			<p>{{$error->first('suburb')}}</p>
+			<p>{{$error->first('age')}}</p>
+
 			<p> 
 				<div class=" col-sm-10 back-button" >
 				     <a href="{{URL::to('/user/back')}}" class="btn btn-default">Back</a>
