@@ -148,7 +148,7 @@ class UserController extends Controller
                                                         $c->aspectRatio();
                                                         $c->upsize();
                                                     });
-                $background->insert($img, 'top');
+                $background->insert($img, 'top')->save($path);
                 Storage::put($path, $background->stream());
 
                 User::where('id',$this->accountinfo['id'])->update(
