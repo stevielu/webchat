@@ -42,7 +42,7 @@ input, select, textarea{
 .banner-box button{
 	margin-top: 5px;
 	font-size: 15px;
-	font-family: 'Raleway Dots', cursive;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     border: 0;
     margin-left: 150px;
     display: block;
@@ -96,12 +96,12 @@ input, select, textarea{
 	opacity: 0.29;
 }
 .login-title{
-	color: #fff;
+	color: #ABA9A9;
 	width: 100%;
 	top:35%;
 	line-height: 20px;
 	position: absolute;
-	font-family: 'Raleway Dots', cursive;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	text-align: left;
 	margin-bottom: 20px;
 }
@@ -120,7 +120,7 @@ input, select, textarea{
 }
 .login-box input{
 	font-size: 13px;
-	font-family: 'Raleway Dots', cursive;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     border: 0;
     margin-left: 150px;
     width: 300px;
@@ -135,7 +135,7 @@ input, select, textarea{
 	bottom: 0;
 	margin-top: 15px;
 	font-size: 16px;
-	font-family: 'Raleway Dots', cursive;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     border: 0;
     margin-left: 150px;
     display: block;
