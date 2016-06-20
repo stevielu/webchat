@@ -202,6 +202,7 @@ class UserController extends Controller
         }
 
          array_push($rules ,['password' => 'min:9|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9,}$/']);
+         var_dump($rules);
 
         $validator = Validator::make($user->all(), $rules);
         if($validator->fails()){
