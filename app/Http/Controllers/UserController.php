@@ -96,7 +96,7 @@ class UserController extends Controller
 
     public function editProfile(Request $profile){
         $file = $profile->file('avatar');
-        return;
+
         $user = Profiles::where('user_id',$this->accountinfo['id'])->exists();
 
         $data = array(
@@ -145,6 +145,7 @@ class UserController extends Controller
                 $filename  = $this->username['name'].'.'.$file->getClientOriginalExtension();
                 $path = config('filepath.user.profile').$filename;
                 $background = Image::canvas(150, 150);
+                return;
                 $img = Image::make($file)->resize(150, null, function ($c) {
                                                         $c->aspectRatio();
                                                         $c->upsize();
