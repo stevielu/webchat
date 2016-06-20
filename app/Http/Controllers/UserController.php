@@ -132,7 +132,7 @@ class UserController extends Controller
 
         if ($file) {
             $rules = array(
-              'avatar' => 'mimes:jpeg,jpg,png,gif|siz:1000'
+              'avatar' => 'mimes:jpeg,jpg,png,gif|max:1500'
             );
             $validator = Validator::make($profile->all(), $rules);
 
@@ -150,12 +150,13 @@ class UserController extends Controller
                                                         $c->aspectRatio();
                                                         $c->upsize();
                                                     });
-                return;
+                
                 $background->insert($img, 'top');
                 Storage::put($path, $background->stream());
 
                 User::where('id',$this->accountinfo['id'])->update(
                 ['my_avatar' => $path]);
+                return;
             }
 
         }
