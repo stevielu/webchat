@@ -9,23 +9,19 @@
 </div>
 <ul class="userpannel-lists">	
 	<li >
-		<div>
-			<a href="/public/user/account">
-				<p  aria-hidden="true">
-					<span class="fa fa-angle-double-right" >
-					</span>Account
-				</p>
-			</a>
-		</div>
+		<a href="/public/user/account">
+			<p  aria-hidden="true">
+				<span class="fa fa-angle-double-right" >
+				</span>Account
+			</p>
+		</a>
 	</li>
 	<li >
-		<div>
 		<a href="/public/user/profile">
 			<p  aria-hidden="true">
 				<span class="fa fa-angle-double-right" >
 				</span>My Profile
 			</p>
 		</a>
-		</div>
 	</li>
 </ul>
