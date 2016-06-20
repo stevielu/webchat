@@ -5,7 +5,7 @@ var $createChannel = $('#sub-chn');
 var $loginPrivateChannel = $('#login-chn');
 var $messageInput = $('#message');//$sendMessage.find('input[name=message]');
 var io = window.io;
-var socket = io.connect('localhost:3000/');
+var socket = io.connect('ec2-54-213-119-114.us-west-2.compute.amazonaws.com:3000/');
 var chList = [];
 
 

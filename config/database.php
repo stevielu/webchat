@@ -54,11 +54,11 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => 'localhost',
+            'host'      => 'ec2-54-213-119-114.us-west-2.compute.amazonaws.com',
             'database'  => 'chatroom',
             'username'  => 'root',
-            'unix_socket'   => '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
-            'password'  => '',
+            'unix_socket'   => '/var/run/mysqld/mysqld.sock',
+            'password'  => 'kiki8621',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
