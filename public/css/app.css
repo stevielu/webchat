@@ -15,6 +15,9 @@ li{
   list-style-type: none;
   text-decoration: none;
 }
+input, select, textarea{
+  font-family: 'Slabo 27px', serif;
+}
 i{
   padding-right: 5px;
 }

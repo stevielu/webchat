@@ -3,6 +3,9 @@ textarea {
    min-height: 150px !important;
    color: #3d3d3d !important;
 }
+input, select, textarea{
+	font-family: 'Slabo 27px', serif;
+}
 .intro {
 	position: relative;
 }
