@@ -216,7 +216,7 @@ class UserController extends Controller
         ]);
         Session::put('loginInfo.email',$user['email']); 
         
-        return redirect('/user/account');
+        return redirect('/user/account')->with('update_status','Update Success');
     }
 
     /**
