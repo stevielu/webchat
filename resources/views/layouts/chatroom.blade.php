@@ -77,7 +77,7 @@
         $(window).bind('visit', function(){
             $(window).bind('mousewheel', function(e) {
                 if ($('#chat-room').scrollTop() == 0) {
-                    if(e.originalEvent.wheelDelta / 12 > 10) {
+                    if(e.originalEvent.wheelDelta / 12 > 5) {
                        //$("#animate-loading-history").fadeIn();
                        
                        $ch = $('[name = "current-channel"]').val();
