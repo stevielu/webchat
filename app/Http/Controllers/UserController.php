@@ -145,11 +145,12 @@ class UserController extends Controller
                 $filename  = $this->username['name'].'.'.$file->getClientOriginalExtension();
                 $path = config('filepath.user.profile').$filename;
                 $background = Image::canvas(150, 150);
-                return;
+
                 $img = Image::make($file)->resize(150, null, function ($c) {
                                                         $c->aspectRatio();
                                                         $c->upsize();
                                                     });
+                return;
                 $background->insert($img, 'top');
                 Storage::put($path, $background->stream());
 
