@@ -192,17 +192,16 @@ class UserController extends Controller
         $rules = array();
 
         if($user['name']!=$this->username['name']){
-          array_push($rules , ['name' => 'required|max:255|unique:users,name']);
+          $rules['name'] = 'required|max:255|unique:users,name';
         }
         if($user['email']!=$this->user['email']){
-          array_push($rules ,['email' => 'required|email|max:255|unique:users,email']);
+          $rules['email'] = 'required|email|max:255|unique:users,email';
         }
         if($user['phone']!=''){
-          array_push($rules , ['phone' => 'required|numeric|min:10']);
+          $rules['phone'] = 'required|numeric|min:10';
         }
 
-         array_push($rules ,['password' => 'min:9|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9,}$/']);
-         var_dump($rules);
+        $rules['password'] =  'min:9|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9,}$/';
 
         $validator = Validator::make($user->all(), $rules);
         if($validator->fails()){
