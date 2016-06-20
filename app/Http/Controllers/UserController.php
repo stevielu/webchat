@@ -192,7 +192,7 @@ class UserController extends Controller
 
         $rules = array(
           'name' => 'required|max:255|unique:users,name',
-          'email' => 'required|email|max:255|unique:users.email',
+          'email' => 'required|email|max:255|unique:users,email',
           'password' => 'min:9|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9,}$/',
           'phone' => 'required|numeric|min:10'
         );
