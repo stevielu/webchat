@@ -192,13 +192,13 @@ class UserController extends Controller
         $rules = array();
 
         if($user['name']!=$this->username['name']){
-          $rules['name' => 'required|max:255|unique:users,name'];
+          $rules = ['name' => 'required|max:255|unique:users,name'];
         }
         if($user['email']!=$this->user['email']){
-          $rules['email' => 'required|email|max:255|unique:users,email'];
+          $rules = ['email' => 'required|email|max:255|unique:users,email'];
         }
         if($user['phone']!=''){
-          $rules['phone' => 'required|numeric|min:10'];
+          $rules = ['phone' => 'required|numeric|min:10'];
         }
 
         $rules = [
