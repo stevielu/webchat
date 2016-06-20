@@ -87,16 +87,39 @@ function bindSocket(ch){
                 }
                  
                  
-                var html = '<div class="media channel_review">';
-                html += '<div class="media-body media-middle msg-container">';
-                html += '<p class="msg-box-right pull-right">';
-                html += payload.message+'</p>';
-                html += '</div>';
-                html += '<div class="media-right ">';
+                // var html = '<div class="media channel_review">';
+                // html += '<div class="media-body media-middle msg-container">';
+                // html += '<p class="msg-box-right pull-right">';
+                // html += payload.message+'</p>';
+                // html += '</div>';
+                // html += '<div class="media-right ">';
             
-                html += '<a class="viewprofile" link="viewprofile/'+name+'" href ="#" data-toggle="modal" data-target="#viewprofile"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
-                html += '</div></div>';
-               
+                // html += '<a class="viewprofile" link="viewprofile/'+name+'" href ="#" data-toggle="modal" data-target="#viewprofile"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+                // html += '</div></div>';
+                var myname = $('#myname').html();
+                console.log(myname);
+                if(myname == name){ 
+                    var html = '<div class="media channel_review">';
+                    html += '<div class="media-body media-middle msg-container">';
+                    html += '<p class="msg-box-right pull-right">';
+                    html += payload.message+'</p>';
+                    html += '</div>';
+                    html += '<div class="media-right ">';
+                
+                    html += '<a class="viewprofile" link="viewprofile/'+name+'" href ="#" data-toggle="modal" data-target="#viewprofile"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+                    html += '</div></div>';
+                }
+                else{
+                    var html = '<div class="media channel_review"><div class="media-left ">';
+                
+                    html += '<a class="viewprofile" link="viewprofile/'+name+'" href ="#" data-toggle="modal" data-target="#viewprofile"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+                    html += '</div>';
+                    html += '<div class="media-body media-middle msg-container">';
+                    html += '<p class="msg-box">';
+                    html += payload.message+'</p>';
+                    //html += '<p style="color:#B5B1B1">user312312:test</p>';
+                    html += '</div>'; 
+                }
                 // var html = '<div class="media channel_review"><div class="media-left ">';
                 //     //html += '<?php echo //file_exists(realpath("/public/storage/user-avatar/'+name+'.jpg"));?>';                  
                 //     html += '<a href="'+name+'"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
