@@ -29,7 +29,7 @@
 				  </div>
 				  <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10">
-				      <button type="submit" id='edit-save'class="btn btn-default">Save</button>
+				      <button type="submit" id='edit-save'class="btn btn-primary">Save</button>
 				    </div>
 				  </div>
 			</form>
