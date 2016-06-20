@@ -4,7 +4,7 @@
 	<div class="form-group">
 	    <label for="inputIntro" class="col-sm-2 control-label">What's up</label>
 	    <div class="col-sm-6 intro">
-	      <textarea type="text" row='10' class="form-control" name = 'intro' id="inputIntro" placeholder="Introduce yourself"><?php echo($profile['user_intro'])?>
+	      <textarea type="text" row='20' class="form-control" name = 'intro' id="inputIntro" placeholder="Introduce yourself"><?php echo($profile['user_intro'])?>
 	      </textarea>
 	      <p class="character-counter">200</p>
 	    </div>
