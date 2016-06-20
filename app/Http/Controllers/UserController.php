@@ -132,7 +132,8 @@ class UserController extends Controller
 
         if ($file) {
             $rules = array(
-              'avatar' => 'mimes:jpeg,jpg,png,gif|max:1500'
+              'avatar' => 'mimes:jpeg,jpg,png,gif',
+              'file' => 'max:1500',
             );
             $validator = Validator::make($profile->all(), $rules);
 
