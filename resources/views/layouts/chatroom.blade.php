@@ -34,7 +34,7 @@
                     <input type="hidden" name="current-channel" />
                     <input type="hidden" name="username" value="{{ $username }}" />
                     <div class="input-group">
-                        <label class="input-group-addon">{{ $username }}</label>
+                        <label id='myname' class="input-group-addon">{{ $username }}</label>
                         <input id="message" name="message" type="text" value="" class="form-control" />
                         <span class="input-group-btn">
                             <button class="btn btn-success" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
