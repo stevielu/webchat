@@ -157,7 +157,6 @@ class UserController extends Controller
 
                 User::where('id',$this->accountinfo['id'])->update(
                 ['my_avatar' => $path]);
-                return;
             }
 
         }
