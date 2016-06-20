@@ -3,13 +3,13 @@
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 				    <div class="col-sm-6">
-				      <input type="email" class="form-control" name = 'email' id="inputEmail3" placeholder="Email" value = "<?php echo($accountinfo['email'])?>">
+				      <input disabled type="email" class="form-control" name = 'email' id="inputEmail3" placeholder="Email" value = "<?php echo($accountinfo['email'])?>">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">User Name</label>
 				    <div class="col-sm-6">
-				      <input type="test" class="form-control" name = 'name' id="inputEmail3" placeholder="Name" value = "<?php echo($accountinfo['name'])?>">
+				      <input disabled type="test" class="form-control" name = 'name' id="inputEmail3" placeholder="Name" value = "<?php echo($accountinfo['name'])?>">
 				    </div>
 				  </div>
 				  <div class="form-group pass">

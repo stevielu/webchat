@@ -191,12 +191,12 @@ class UserController extends Controller
     {
         $rules = array();
 
-        if($user['name']!=$this->username['name']){
-          $rules['name'] = 'required|max:255|unique:users,name';
-        }
-        if($user['email']!=$this->user['email']){
-          $rules['email'] = 'required|email|max:255|unique:users,email';
-        }
+        // if($user['name']!=$this->username['name']){
+        //   $rules['name'] = 'required|max:255|unique:users,name';
+        // }
+        // if($user['email']!=$this->user['email']){
+        //   $rules['email'] = 'required|email|max:255|unique:users,email';
+        // }
         if($user['phone']!=''){
           $rules['phone'] = 'required|numeric|min:10';
         }
@@ -217,8 +217,8 @@ class UserController extends Controller
         }
 
         User::where('name',$this->username['name'])->update([
-            'name' => $user['name'],
-            'email' => $user['email'],
+            // 'name' => $user['name'],
+            // 'email' => $user['email'],
             'phone' => $user['phone']
         ]);
         Session::put('loginInfo.email',$user['email']); 
