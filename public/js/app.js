@@ -61,7 +61,9 @@ function getProfile(link){
         $('#profile-intro').html(data['profile'].user_intro);
         $('#profile-age').html(data['profile'].user_age);
         $('#profile-city').html(data['profile'].address_city);
-        $('#profile-suburb').html(data['profile'].address_suburb+',');
+        if(data['profile'].address_suburb!=''){
+            $('#profile-suburb').html(data['profile'].address_suburb+',');
+        }
         $('#profile-phone').html(data['user'].phone);
         
 
@@ -97,7 +99,7 @@ function bindSocket(ch){
                 // html += '<a class="viewprofile" link="viewprofile/'+name+'" href ="#" data-toggle="modal" data-target="#viewprofile"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
                 // html += '</div></div>';
                 var myname = $('#myname').html();
-        
+
                 if(myname == name){ 
                     var html = '<div class="media channel_review">';
                     html += '<div class="media-body media-middle msg-container">';
