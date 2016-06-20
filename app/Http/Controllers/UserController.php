@@ -96,6 +96,7 @@ class UserController extends Controller
 
     public function editProfile(Request $profile){
         $file = $profile->file('avatar');
+        return;
         $user = Profiles::where('user_id',$this->accountinfo['id'])->exists();
 
         $data = array(
@@ -131,7 +132,7 @@ class UserController extends Controller
 
         if ($file) {
             $rules = array(
-              'avatar' => 'mimes:jpeg,jpg,png,gif|siz:1500'
+              'avatar' => 'mimes:jpeg,jpg,png,gif|siz:1000'
             );
             $validator = Validator::make($profile->all(), $rules);
 
@@ -148,7 +149,7 @@ class UserController extends Controller
                                                         $c->aspectRatio();
                                                         $c->upsize();
                                                     });
-                $background->insert($img, 'top')->save($path)->save($path);
+                $background->insert($img, 'top');
                 Storage::put($path, $background->stream());
 
                 User::where('id',$this->accountinfo['id'])->update(
