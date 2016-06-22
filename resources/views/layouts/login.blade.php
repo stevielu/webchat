@@ -14,7 +14,7 @@
 		<div class="banner-box">
 			<p>Hi, I am Stevie. This is my personal portflio. It's a Chatroom which was built by Laravel 5.2 & Nodejs. If you enjoy it. You can visit the source code in my github:&nbsp<a target="_BLANK" href="https://github.com/stevielu/webchat">https://github.com/stevielu/webchat</a></p>
 			<p>No Accouts? </p>
-			<p style="color:cadetblue"><strong>Dmeo Account:visitor</stong></p>
+			<p style="color:cadetblue"><strong>Dmeo Account:visitor@demo.com</stong></p>
 			<p style="color:cadetblue"><strong>Password:visitor123</strong></p>
 			<button type="button" id='create-page'>Create Account</button>
 		</div>
