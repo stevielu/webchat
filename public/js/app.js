@@ -26,10 +26,15 @@ function imageExists(name){
     var avatar_url;
      $.ajax(
         {type:"GET",
-        url:window.location.origin+'/public/storage/user-avatar/'+name+'.jpg',
+        url:'viewprofile/'+name,
         async:false
-        }).done(function() { 
-            avatar_url = window.location.origin+'/public/storage/user-avatar/'+name+'.jpg';
+        }).done(function(data) { 
+            if(data['user'].my_avatar!=''){
+                avatar_url = window.location.origin+'/public/storage/'+data['user'].my_avatar;
+            }
+            else{
+               avatar_url = window.location.origin+'/public/no-thumb.png';
+            }
         }).fail(function() { 
             avatar_url = window.location.origin+'/public/no-thumb.png';
         });
@@ -79,7 +84,7 @@ function bindSocket(ch){
                 var userattr = payload.userAttribute;
                 //var name = str.substring(0,str.indexOf(':')); 
                 //var avatar_url = window.location.origin+'/public/storage/user-avatar/'+name+'.jpg';
-                var path = imageExists(name);
+                //var path = imageExists(userattr['avatar']);
                 //console.log(path);
                 if(userattr['avatar']!=null){
                    path =  window.location.origin+'/public/storage/'+userattr['avatar'];
@@ -220,7 +225,7 @@ function loadingContents(data,history){
                 var correctOlderfile =  str.substring(0,str.indexOf(':'));
                 //var path = imageExists(name);
                 data = str.substring(str.indexOf(':')+1);
-
+                console.log(imageExists(name));
                 if(userattr != ''){
                     path =  window.location.origin+'/public/storage/'+userattr;
                 }
