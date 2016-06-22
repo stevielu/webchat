@@ -8,7 +8,7 @@ var io = window.io;
 var socket = io.connect('ec2-54-213-119-114.us-west-2.compute.amazonaws.com:3000/');
 var chList = [];
 
-
+var contentsUserlist = [];
 var defaultPage  =    '<div id="animate-loading-history" >'+
                         '<img class="" src="'+localhref+'/public/hourglass-2.svg">'+
                       '</div>';
@@ -24,21 +24,23 @@ var defaultPage  =    '<div id="animate-loading-history" >'+
 //var avatar_url = window.location.origin+'/public/no-thumb.png';
 function imageExists(name){
     var avatar_url;
-     $.ajax(
-        {type:"GET",
-        url:'viewprofile/'+name,
-        async:false
-        }).done(function(data) { 
-            if(data['user'].my_avatar!=''){
-                avatar_url = window.location.origin+'/public/storage/'+data['user'].my_avatar;
-            }
-            else{
-               avatar_url = window.location.origin+'/public/no-thumb.png';
-            }
-        }).fail(function() { 
-            avatar_url = window.location.origin+'/public/no-thumb.png';
-        });
-    return avatar_url;
+
+    if(!contentsUserlist.hasOwnProperty(name)){//add new user
+        $.ajax(
+            {type:"GET",
+            url:'viewprofile/'+name,
+            async:false
+            }).done(function(data) { 
+                if(data['user'].my_avatar!=''){
+                    avatar_url = window.location.origin+'/public/storage/'+data['user'].my_avatar;
+                }
+                else{
+                   avatar_url = window.location.origin+'/public/no-thumb.png';
+                }
+                contentsUserlist[name] =avatar_url;
+            });
+    }
+    return contentsUserlist[name];
 }                
 function getProfile(link){
     $.get(link,function(data){
@@ -227,7 +229,7 @@ function loadingContents(data,history){
                 data = str.substring(str.indexOf(':')+1);
                 console.log(imageExists(name));
                 //if(userattr != ''){
-                    path = imageExists(name);// window.location.origin+'/public/storage/'+userattr;
+                path = imageExists(name);// window.location.origin+'/public/storage/'+userattr;
                 //}
                 if(myname == name){ 
                     var html = '<div class="media channel_review">';
