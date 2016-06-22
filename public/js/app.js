@@ -89,10 +89,10 @@ function bindSocket(ch){
                 //var path = imageExists(userattr['avatar']);
                 //console.log(path);
                 if(userattr['avatar']!=null){
-                   path =  window.location.origin+'/public/storage/'+userattr['avatar'];
+                   var path =  window.location.origin+'/public/storage/'+userattr['avatar'];
                 }
                 else{
-                   path = window.location.origin+'/public/no-thumb.png';
+                   var path = window.location.origin+'/public/no-thumb.png';
                 }
                  
                  
