@@ -226,9 +226,9 @@ function loadingContents(data,history){
                 //var path = imageExists(name);
                 data = str.substring(str.indexOf(':')+1);
                 console.log(imageExists(name));
-                if(userattr != ''){
-                    path =  window.location.origin+'/public/storage/'+userattr;
-                }
+                //if(userattr != ''){
+                    path = imageExists(name);// window.location.origin+'/public/storage/'+userattr;
+                //}
                 if(myname == name){ 
                     var html = '<div class="media channel_review">';
                     html += '<div class="media-body media-middle msg-container">';
