@@ -53,6 +53,9 @@ class ChatController extends Controller
 
 	    $currentfocus = 'sidebar_chat';
 	    //$contents = $this->getChatInfoNow('1','chat-channel');
+	    $now = new DateTime();
+$now->setTimezone(new DateTimeZone('America/Los_Angeles'));
+var_dump($now->format('g:i A'));
 	    return view('layouts/chatroom', compact('username','chatroom','currentfocus'));
 	}
 
