@@ -6,11 +6,11 @@
 @section('mainboxbody')
 <div class="error-container">
     <div class='col-md-12'>
-        <h1>Error</h1>
+        <h1>Opps! Page Error</h1>
         @if(Session::has('csrf_error'))
                 <?php $token_error = Session::get('csrf_error')?>
                
-                <h2 class="error_info">{{$token_error}}</h2>
+                <h3 class="error_info">{{$token_error}}</h3>
 
         @endif
     </div>
