@@ -3,3 +3,8 @@
 	text-align: center;
 	color: #D85F63;
 }
+.error-container a{
+	color: #D85F63;
+	width: 100%;
+	margin: auto;
+}
