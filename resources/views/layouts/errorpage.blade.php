@@ -11,7 +11,7 @@
                 <?php $token_error = Session::get('csrf_error')?>
                
                 <h3 class="error_info">{{$token_error}}</h3>
-                <a href='/'>Go back</a>
+                <a href="javascript:history.back()">Go Back</a>
         @endif
     </div>
 </div>
