@@ -7,7 +7,12 @@
 <div class="error-container">
     <div class='col-md-12'>
         <h1>Error</h1>
-        <p>{{ $csrf_error }}</p>
+        @if(Session::has('csrf_error'))
+                <?php $token_error = Session::get('csrf_error')?>
+               
+                <h2 class="error_info">{{$token_error}}</h2>
+
+        @endif
     </div>
 </div>
 
