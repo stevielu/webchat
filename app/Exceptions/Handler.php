@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        var_dump($e);
+       
         if ($e instanceof TokenMismatchException){
             //redirect to a form. Here is an example of how I handle mine
             return redirect('/error')->with('csrf_error',"Opps! Seems you couldn't submit form for a longtime. Please try again");
