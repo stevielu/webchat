@@ -13,6 +13,7 @@
 
 Route::resource('/', 'Auth\AuthController');
 Route::get('/logout', 'Auth\AuthController@getLogout');
+Route::get('/error', 'ErrorController@index');
 Route::group(['middleware' => 'auth'], function(){
 	Route::resource('/chat', 'Chat\ChatController');
 	Route::group(['prefix' => 'user'], function(){
