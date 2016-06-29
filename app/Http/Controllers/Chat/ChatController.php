@@ -121,7 +121,7 @@ class ChatController extends Controller
     	// }
     	$date =$this->_getdateLastUpdate();
     	if($date='2016-05-04'){
-    		echo($date);
+    		echo('ssss');
     	}
     	
     	$contents = $this->getChatInfoPrev($roomid,$channel,$date);
