@@ -92,37 +92,59 @@ class ChatController extends Controller
 	   
     }
 
-    private function _getdateLastUpdate(){
-    	$lastRecode = ChatHistoryRecoder::select('created_at')
+    private function _getLastDay($channel){
+    	$lastDay = ChatHistoryRecoder::select('created_at')
+    			->where('channel',$channel)
                 ->orderBy('created_at', 'asc')
-                ->first();
-        //$lastRecode = Carbon::createFromFormat('Y-m-d H:i:s',$lastRecode)->format('d-m-Y');
-    	return $lastRecode->created_at->format('Y-m-d');
+                ->first()->created_at->format('Y-m-d');
+        
+    	return $lastDay;
+    }
+
+    private function _getPrevDay($channel,$date){
+    	$earlyDay = ChatHistoryRecoder::select('created_at')
+    			->where('channel',$channel)
+                ->orderBy('created_at', 'desc')
+                ->where('created_at','<',$date)
+                ->first()->created_at->format('Y-m-d');
+        
+    	return $earlyDay;
     }
 
     public function getChannelHistory(Request $request, $channel, $date)
     {
     	$roomid = $request->session()->get('room_id');
     	$contents = null;
+    	$nextdate = '';
     	// while ( $contents != null) {
-    	// 	$contents = $this->getChatInfoPrev($roomid,$channel,$date);
+    	// 	$nextdate =
+    	// 	$contents = $this->getChatInfoPrev($roomid,$channel,$nextdate);
     	// 	if($contents==null){
-	    // 		if(!$this->ChannelRecoderExist($roomid,$channel)){
-	    // 			$empty =  'null recordes';
+	    // 		if($date == $this->_getLastDay()){
+	    // 			break;//last day
 	    // 		}
-	    // 		else{
-	    // 			$empty = 'true';
+	    // 		else
+	    // 		{
+	    // 			if(!$this->ChannelRecoderExist($roomid,$channel)){
+	    // 				$empty =  'null recordes';
+	    // 				break;
+		   //  		}
+		   //  		else{
+		   //  			$empty = 'true';
+		   //  		}
 	    // 		}
-	    		
 	    // 	}
 	    // 	else{
 	    // 		$empty = 'false';
+	    // 		break;
 	    // 	}
+
+
     	// }
-    	$date =$this->_getdateLastUpdate();
-    	if($date='2016-05-04'){
-    		echo('ssss');
-    	}
+    	$nextdate = $this->_getPrevDay($channel,$date);
+    	// if($date='2016-05-04'){
+    		echo($nextdate);
+    	// }
     	
     	$contents = $this->getChatInfoPrev($roomid,$channel,$date);
     		if($contents==null){
