@@ -120,7 +120,7 @@ class ChatController extends Controller
 	    // 	}
     	// }
     	$date =$this->_getdateLastUpdate();
-    	var_dump($date);
+    	echo($date);
     	$contents = $this->getChatInfoPrev($roomid,$channel,$date);
     		if($contents==null){
 	    		if(!$this->ChannelRecoderExist($roomid,$channel)){
