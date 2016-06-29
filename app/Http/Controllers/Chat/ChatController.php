@@ -96,7 +96,7 @@ class ChatController extends Controller
     	$lastRecode = ChatHistoryRecoder::select('created_at')
                 ->orderBy('created_at', 'asc')
                 ->first();
-        $lastRecode = Carbon::parse($lastRecode)->format('d-m-Y');
+        $lastRecode = Carbon::createFromFormat('Y-m-d H:i:s',$lastRecode)->format('d-m-Y');
     	return $lastRecode;
     }
 
