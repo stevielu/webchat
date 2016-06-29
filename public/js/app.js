@@ -214,7 +214,7 @@ function loadingContents(data,history){
             $('.reminderinfo-icon').fadeOut();
             $('.reminderinfo-sm').html('<p class="date">Last Recordes</p>');
             $("#animate-loading-history").css('display','none');
-            $(window).unbind('mousewheel');
+            $(window).unbind('visit');
         }
         else{
             $('.reminderinfo-sm').fadeOut();
