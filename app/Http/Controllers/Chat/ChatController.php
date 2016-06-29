@@ -85,17 +85,10 @@ class ChatController extends Controller
     		$empty = 'false';
     	}
 
-     	//srand(time()); 
-	    //$username = sprintf('user%06d', rand(1, 100000)); 
 	    $user = Session::get('loginInfo');
 	    $username = $user['name'];
 	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty];
-	    // //get chat room from database
-	    // $chatroom = Chat::with('SubClass')->get();
-	    // $this->chatroom = $chatroom;
-	    
-	    // $contents = $this->getChatInfoNow('1','chat-channel');
-	    // return;        
+	   
     }
 
     public function getChannelHistory(Request $request, $channel, $date)
