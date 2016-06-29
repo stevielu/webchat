@@ -210,11 +210,12 @@ function loadingContents(data,history){
     }
     else{
         if(data['empty'] == 'last recordes'){
+            $(window).unbind('mousewheel');
             $('.reminderinfo-sm').fadeIn();
             $('.reminderinfo-icon').fadeOut();
             $('.reminderinfo-sm').html('<p class="date">Last Recordes</p>');
             $("#animate-loading-history").css('display','none');
-            $(window).unbind('mousewheel');
+            
         }
         else{
             $('.reminderinfo-sm').fadeOut();

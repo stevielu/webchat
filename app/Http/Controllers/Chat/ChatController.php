@@ -106,11 +106,9 @@ class ChatController extends Controller
     			->where('channel',$channel)
                 ->orderBy('created_at', 'desc')
                 ->where('created_at','<',$date)
-                ->first();
-        if(is_null($earlyDay)){
-        	return null;
-        }
-    	return $earlyDay->created_at->format('Y-m-d');
+                ->first()->created_at->format('Y-m-d');
+        
+    	return $earlyDay;
     }
 
     public function getChannelHistory(Request $request, $channel, $date)
@@ -120,10 +118,8 @@ class ChatController extends Controller
     	$nextdate = '';
 
 		$nextdate = $this->_getPrevDay($channel,$date);
-		if($nextdate!=null){
-			$contents = $this->getChatInfoPrev($roomid,$channel,$nextdate);
-		}
-		
+		$contents = $this->getChatInfoPrev($roomid,$channel,$nextdate);
+
 		if($nextdate == $this->_getLastDay($channel)){
     		$empty =  'last recordes';
     	}
