@@ -116,10 +116,10 @@
 
         function unlock(){
             $lock = 1;
-            setTimeout(unlock,1000);
+            setTimeout(unlock,1500);
         }
 
-        window.setTimeout(unlock,1000);
+        window.setTimeout(unlock,1500);
     
 // });
 </script>
