@@ -107,9 +107,9 @@ class ChatController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->where('created_at','<',$date)
                 ->first();
-  		var_dump($earlyDay);
-   
-        
+        if(is_null($earlyDay)){
+        	return null;
+        }
     	return $earlyDay->created_at->format('Y-m-d');
     }
 
@@ -120,8 +120,10 @@ class ChatController extends Controller
     	$nextdate = '';
 
 		$nextdate = $this->_getPrevDay($channel,$date);
-		$contents = $this->getChatInfoPrev($roomid,$channel,$nextdate);
-
+		if($nextdate!=null){
+			$contents = $this->getChatInfoPrev($roomid,$channel,$nextdate);
+		}
+		
 		if($nextdate == $this->_getLastDay($channel)){
     		$empty =  'last recordes';
     	}
