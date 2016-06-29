@@ -190,6 +190,7 @@ window.setTimeout(pollCh(),500);
 
 function loadingContents(data,history){
      //console.log(data['contents']);
+    $.cookie("current-date",data['date']);
     var $date = $.cookie("current-date");
     $date = $.format.date($date, "dd-MM-yyyy"); 
 
@@ -208,8 +209,17 @@ function loadingContents(data,history){
         $(window).unbind('mousewheel');
     }
     else{
-        $('.reminderinfo-sm').fadeOut();
-        $('.reminderinfo-icon').fadeIn();
+        if(data['empty'] == 'last recordes'){
+            $('.reminderinfo-sm').fadeIn();
+            $('.reminderinfo-icon').fadeOut();
+            $('.reminderinfo-sm').html('<p class="date">Last Recordes</p>');
+            $(window).unbind('mousewheel');
+        }
+        else{
+            $('.reminderinfo-sm').fadeOut();
+            $('.reminderinfo-icon').fadeIn();
+        }
+
         var myname = data['username'];
         data = data['contents'].split("\n");
 

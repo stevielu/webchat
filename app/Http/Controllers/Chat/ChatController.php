@@ -116,49 +116,35 @@ class ChatController extends Controller
     	$roomid = $request->session()->get('room_id');
     	$contents = null;
     	$nextdate = '';
-    	// while ( $contents != null) {
-    	// 	$nextdate =
-    	// 	$contents = $this->getChatInfoPrev($roomid,$channel,$nextdate);
+
+		$nextdate = $this->_getPrevDay($channel,$date);
+		$contents = $this->getChatInfoPrev($roomid,$channel,$nextdate);
+
+		if($nextdate == $this->_getLastDay($channel)){
+    		$empty =  'last recordes';
+    	}
+    	else{
+    		$empty = 'false';
+    	}
+
+
+
+    	
+
+    	
+    	// $contents = $this->getChatInfoPrev($roomid,$channel,$date);
     	// 	if($contents==null){
-	    // 		if($date == $this->_getLastDay()){
-	    // 			break;//last day
+	    // 		if(!$this->ChannelRecoderExist($roomid,$channel)){
+	    // 			$empty =  'null recordes';
 	    // 		}
-	    // 		else
-	    // 		{
-	    // 			if(!$this->ChannelRecoderExist($roomid,$channel)){
-	    // 				$empty =  'null recordes';
-	    // 				break;
-		   //  		}
-		   //  		else{
-		   //  			$empty = 'true';
-		   //  		}
+	    // 		else{
+	    // 			$empty = 'true';
 	    // 		}
+	    		
 	    // 	}
 	    // 	else{
 	    // 		$empty = 'false';
-	    // 		break;
 	    // 	}
-
-
-    	// }
-    	$nextdate = $this->_getPrevDay($channel,$date);
-    	// if($date='2016-05-04'){
-    		echo($nextdate);
-    	// }
-    	
-    	$contents = $this->getChatInfoPrev($roomid,$channel,$date);
-    		if($contents==null){
-	    		if(!$this->ChannelRecoderExist($roomid,$channel)){
-	    			$empty =  'null recordes';
-	    		}
-	    		else{
-	    			$empty = 'true';
-	    		}
-	    		
-	    	}
-	    	else{
-	    		$empty = 'false';
-	    	}
 
     	
 
@@ -167,7 +153,7 @@ class ChatController extends Controller
 	    $username = $user['name'];//sprintf('user%06d', rand(1, 100000));
 
 
-	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty];
+	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty,'date'=>$nextdate];
 	    
     }
 
@@ -187,10 +173,10 @@ class ChatController extends Controller
 	    			$empty =  'null recordes';
 	    		}
 	    		else{
-		    			$empty = 'true';
-		    		}
-		    		
+		    		$empty = 'true';
 		    	}
+		    		
+	    	}
 	    	else{
 	    		$empty = 'false';
 	    	}

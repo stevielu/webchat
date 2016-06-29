@@ -85,19 +85,18 @@
                             $(".reminderinfo-icon").fadeOut();
                             $("#animate-loading-history").css("display", "flex").fadeIn();
                             $date = new Date($.cookie("current-date"));
-                            // $yesterday = new Date($today);
-                            $yesterday = new Date($date);
-                            // console.log($.cookie("current-date"));
-                            // console.log($yesterday);
 
-                            $yesterday.setDate($date.getDate() - 1);
+                            // $yesterday = new Date($date);
+
+
+                            // $yesterday.setDate($date.getDate() - 1);
                            
-                            $.cookie("current-date",$yesterday);
+                            // $.cookie("current-date",$yesterday);
                             
 
-                            var $dd = $yesterday.getDate();
-                            var $mm = $yesterday.getMonth()+1; //January is 0!
-                            var $yyyy = $yesterday.getFullYear();
+                            var $dd = $date.getDate();
+                            var $mm = $date.getMonth()+1; //January is 0!
+                            var $yyyy = $date.getFullYear();
 
                             if($dd<10){$dd='0'+$dd} 
                             if($mm<10){$mm='0'+$mm} 
