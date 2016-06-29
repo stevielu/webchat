@@ -91,24 +91,50 @@ class ChatController extends Controller
 	   
     }
 
+    private function _getdateLastUpdate(){
+    	$lastRecode = DB::table('chat_recoder')
+    			->select('created_at')
+                ->orderBy('created_at', 'asc')
+                ->first()->format('Y-m-d');
+    	return $lastRecode;
+    }
+
     public function getChannelHistory(Request $request, $channel, $date)
     {
     	$roomid = $request->session()->get('room_id');
-
+    	$contents = null;
+    	// while ( $contents != null) {
+    	// 	$contents = $this->getChatInfoPrev($roomid,$channel,$date);
+    	// 	if($contents==null){
+	    // 		if(!$this->ChannelRecoderExist($roomid,$channel)){
+	    // 			$empty =  'null recordes';
+	    // 		}
+	    // 		else{
+	    // 			$empty = 'true';
+	    // 		}
+	    		
+	    // 	}
+	    // 	else{
+	    // 		$empty = 'false';
+	    // 	}
+    	// }
+    	$date =_getdateLastUpdate();
+    	var_dump($date);
     	$contents = $this->getChatInfoPrev($roomid,$channel,$date);
+    		if($contents==null){
+	    		if(!$this->ChannelRecoderExist($roomid,$channel)){
+	    			$empty =  'null recordes';
+	    		}
+	    		else{
+	    			$empty = 'true';
+	    		}
+	    		
+	    	}
+	    	else{
+	    		$empty = 'false';
+	    	}
 
-    	if($contents==null){
-    		if(!$this->ChannelRecoderExist($roomid,$channel)){
-    			$empty =  'null recordes';
-    		}
-    		else{
-    			$empty = 'true';
-    		}
-    		
-    	}
-    	else{
-    		$empty = 'false';
-    	}
+    	
 
      	
      	$user = Session::get('loginInfo');
