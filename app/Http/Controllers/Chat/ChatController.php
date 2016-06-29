@@ -118,7 +118,7 @@ class ChatController extends Controller
 	    // 		$empty = 'false';
 	    // 	}
     	// }
-    	$date =_getdateLastUpdate();
+    	$date =$this->_getdateLastUpdate();
     	var_dump($date);
     	$contents = $this->getChatInfoPrev($roomid,$channel,$date);
     		if($contents==null){
