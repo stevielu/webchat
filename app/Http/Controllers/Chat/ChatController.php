@@ -17,6 +17,7 @@ use App\User;
 use Validator;
 use Auth;
 use Session;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -94,7 +95,8 @@ class ChatController extends Controller
     private function _getdateLastUpdate(){
     	$lastRecode = ChatHistoryRecoder::select('created_at')
                 ->orderBy('created_at', 'asc')
-                ->get()->format('Y-m-d');
+                ->first();
+        $lastRecode = Carbon::parse($lastRecode)->format('d-m-Y');
     	return $lastRecode;
     }
 
