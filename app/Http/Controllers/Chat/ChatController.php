@@ -85,8 +85,8 @@ class ChatController extends Controller
     		$empty = 'false';
     	}
 
-     	//srand(time()); // 亂數種子
-	    //$username = sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
+     	//srand(time()); 
+	    //$username = sprintf('user%06d', rand(1, 100000)); 
 	    $user = Session::get('loginInfo');
 	    $username = $user['name'];
 	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty];
@@ -117,9 +117,9 @@ class ChatController extends Controller
     		$empty = 'false';
     	}
 
-     	//srand(time()); // 亂數種子
+     	
      	$user = Session::get('loginInfo');
-	    $username = $user['name'];//sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
+	    $username = $user['name'];//sprintf('user%06d', rand(1, 100000));
 
 
 	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty];
