@@ -92,7 +92,7 @@ class ChatController extends Controller
     }
 
     private function _getdateLastUpdate(){
-    	$lastRecode = DB::table('chat_recoder')
+    	$lastRecode = ChatHistoryRecoder::
     			->select('created_at')
                 ->orderBy('created_at', 'asc')
                 ->first()->format('Y-m-d');
