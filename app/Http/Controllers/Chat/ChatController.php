@@ -97,7 +97,7 @@ class ChatController extends Controller
                 ->orderBy('created_at', 'asc')
                 ->first();
         //$lastRecode = Carbon::createFromFormat('Y-m-d H:i:s',$lastRecode)->format('d-m-Y');
-    	return $lastRecode['created_at'];
+    	return $lastRecode->created_at->format('Y-m-d');
     }
 
     public function getChannelHistory(Request $request, $channel, $date)
