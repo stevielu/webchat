@@ -108,9 +108,9 @@ class ChatController extends Controller
                 ->where('created_at','<',$date)
                 ->first();
   		var_dump($earlyDay);
-        $earlyDay = $earlyDay->created_at->format('Y-m-d');
+   
         
-    	return $earlyDay;
+    	return $earlyDay->created_at->format('Y-m-d');
     }
 
     public function getChannelHistory(Request $request, $channel, $date)
