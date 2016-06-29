@@ -106,7 +106,9 @@ class ChatController extends Controller
     			->where('channel',$channel)
                 ->orderBy('created_at', 'desc')
                 ->where('created_at','<',$date)
-                ->first()->created_at->format('Y-m-d');
+                ->first();
+  		var_dump($earlyDay);
+        $earlyDay = $earlyDay->created_at->format('Y-m-d');
         
     	return $earlyDay;
     }
