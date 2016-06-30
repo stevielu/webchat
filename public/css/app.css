@@ -169,7 +169,8 @@ input.empty {
 .rightbox{
   background-color: rgb(246, 246, 252);
   height: 100%;
-  overflow: scroll;
+/*  overflow: scroll;
+  overflow-x: hidden;*/
 }
 #chat-room .media-body{
   

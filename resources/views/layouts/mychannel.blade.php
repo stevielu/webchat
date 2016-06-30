@@ -2,8 +2,10 @@
 	 <div class="ch-headding">
 	 	<div class="col-md-6 pull-left" style="height: 100%"><p>My Channel</p></div>
 	 	<div class="col-md-2 button pull-right" style="height: 100%;display: flex;align-items: center;">
+	 		<div data-toggle="tooltip" data-placement="bottom" title="Add Channel">
 		 	<a class="btn btn-b1 fa fa-plus" data-toggle="modal" data-target=".addch">
 			</a>
+			</div>
 		 	<div class="modal fade addch" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		  		<div class="modal-dialog">
 				    <div class="modal-content">
