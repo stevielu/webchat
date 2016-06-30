@@ -210,8 +210,8 @@ function loadingContents(data,history){
     }
     else{
         if(data['empty'] == 'last recordes'){
-            var $ret = $(window).unbind('mousewheel');
-            console.log($ret);
+            $(window).off('mousewheel');
+            //console.log($ret);
             $('.reminderinfo-sm').fadeIn();
             $('.reminderinfo-icon').fadeOut();
             $('.reminderinfo-sm').html('<p class="date">Last Recordes</p>');
