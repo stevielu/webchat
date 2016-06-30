@@ -188,6 +188,7 @@ function pollCh(){
 }
 window.setTimeout(pollCh(),500);
 
+
 function loadingContents(data,history){
      //console.log(data['contents']);
     $.cookie("current-date",data['date']);
