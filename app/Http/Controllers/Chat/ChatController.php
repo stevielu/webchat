@@ -70,12 +70,17 @@ class ChatController extends Controller
     public function getChannelUserList($channel,$username){
 
     	$lastVistCh = Session::get('userPointer');
+    	//remove user from last visited channel
     	if($lastVistCh){
     		$lastUserList = Cache::rememberForever($lastVistCh,function(){
     			return [''];
     		});
     		unset( $lastUserList[$username]);
     		Cache::forever($lastVistCh,$lastUserList);
+
+    		//brocast user leave current channel
+    		$op = new ChannelOperation($username,'leavech');
+	   		$ret = event($op);
     	}
 		$currentVistList = Cache::get($channel, ['default']);
     	
@@ -107,8 +112,12 @@ class ChatController extends Controller
 	    $user = Session::get('loginInfo');
 	    $username = $user['name'];
 
-	    var_dump($this->getChannelUserList($channel,$username));
-	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty];
+	    $visitorList = $this->getChannelUserList($channel,$username);
+	    //brocast new user join to current channel
+	    $op = new ChannelOperation($username,'joinch');
+	   	$ret = event($op);
+
+	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty,'visitorlist'=>$visitorList];
 	   
     }
 

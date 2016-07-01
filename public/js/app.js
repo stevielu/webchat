@@ -191,6 +191,14 @@ window.setTimeout(pollCh(),500);
 
 function loadingContents(data,history){
      //console.log(data['contents']);
+
+    //loading visit list in current channel
+    // data['visitorlist'].forEach(function(data){
+
+    // });
+    console.log(data['visitorlist']);
+
+    //set history date
     $.cookie("current-date",data['date']);
     var $date = $.cookie("current-date");
     $date = $.format.date($date, "dd-MM-yyyy"); 
@@ -433,6 +441,16 @@ $('.chat_btn').one("click",function(){
 socket.on('controller-channel'+':App\\Events\\ChannelOperation', function (payload) {
     console.log(payload);
     if(payload.result == 'Done'){
+        if(payload.command == 'joinch'){
+            if(payload.user != $('#myname').html()){
+                console.log(payload.user);
+            }
+        }
+        if(payload.command == 'leavech'){
+            if(payload.user != $('#myname').html()){
+                console.log(payload.user);
+            }
+        }
         if(payload.command == 'create'){
             var html = '<li class="media channel_review" channel-type = "'+payload['channeltype']+'"channel-name="'+payload['channelname']+'"';
             

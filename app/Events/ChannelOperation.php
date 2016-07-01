@@ -41,7 +41,20 @@ class ChannelOperation extends Event implements ShouldBroadcast
                     'result' => 'Done',
                 ];
                 break;
-            
+            case 'joinch':
+                return [
+                    'user' => $this->data,
+                    'command' => $this->command,
+                    'result' => 'Done',
+                ];
+                break;
+            case 'leavech':
+                return [
+                    'user' => $this->data,
+                    'command' => $this->command,
+                    'result' => 'Done',
+                ];
+                break;
             default:
                 # code...
                 break;
