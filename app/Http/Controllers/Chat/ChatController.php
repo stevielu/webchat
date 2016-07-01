@@ -17,6 +17,7 @@ use App\User;
 use Validator;
 use Auth;
 use Session;
+use Cache;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Contracts\Auth\Guard;
@@ -66,7 +67,14 @@ class ChatController extends Controller
         //return view('layouts/chatroom', compact('channels'));        
     }
 
+    public function getChannelUserList($channel,$username){
+    	// if(Cache::tags($username)->get('Anne')){
 
+    	// }
+    	// Cache::tags($username)->forget();
+    	// Cache::tags([$username, $channel])->forever($username);
+    	var_dump(Cache::tags($username)->get());
+    }
 	
     public function getChannelContents(Request $request, $channel)
     {
@@ -88,6 +96,8 @@ class ChatController extends Controller
 
 	    $user = Session::get('loginInfo');
 	    $username = $user['name'];
+
+	    $this->getChannelUserList($channel,$username);
 	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty];
 	   
     }
@@ -127,26 +137,6 @@ class ChatController extends Controller
     		$empty = 'false';
     	}
 
-
-
-    	
-
-    	
-    	// $contents = $this->getChatInfoPrev($roomid,$channel,$date);
-    	// 	if($contents==null){
-	    // 		if(!$this->ChannelRecoderExist($roomid,$channel)){
-	    // 			$empty =  'null recordes';
-	    // 		}
-	    // 		else{
-	    // 			$empty = 'true';
-	    // 		}
-	    		
-	    // 	}
-	    // 	else{
-	    // 		$empty = 'false';
-	    // 	}
-
-    	
 
      	
      	$user = Session::get('loginInfo');
