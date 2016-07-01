@@ -73,7 +73,7 @@ class ChatController extends Controller
     	// }
     	// Cache::tags($username)->forget();
     	// Cache::tags([$username, $channel])->forever($username);
-    	var_dump(Cache::tags($username)->get());
+    	var_dump(Cache::tags($username)->get($username));
     }
 	
     public function getChannelContents(Request $request, $channel)
