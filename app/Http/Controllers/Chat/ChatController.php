@@ -79,7 +79,7 @@ class ChatController extends Controller
     		Cache::forever($lastVistCh,$lastUserList);
 
     		//brocast user leave current channel
-    		$op = new messageCreate($username, $message,$ch,$this->user,'leavech');
+    		$op = new userAction($username,'leavech',$channel);
 	   		$ret = event($op);
     	}
 		$currentVistList = Cache::get($channel, ['default']);
@@ -114,7 +114,7 @@ class ChatController extends Controller
 
 	    $visitorList = $this->getChannelUserList($channel,$username);
 	    //brocast new user join to current channel
-	    $op = new messageCreate($username, $message,$ch,$this->user,'joinch');
+	    $op = new userAction($username,'joinch',$channel);
 	   	$ret = event($op);
 
 	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty,'visitorlist'=>$visitorList];

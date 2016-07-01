@@ -78,19 +78,20 @@ function getProfile(link){
 }
 
 function bindSocket(ch){
+     socket.on(ch+':App\\Events\\userAction', function (payload) {
+        if(payload['action'] == 'joinch'){
+            if(payload.username != $('#myname').html()){
+                console.log(payload.username);
+            }
+        }
+        if(payload['action'] == 'leavech'){
+            if(payload.username != $('#myname').html()){
+                console.log(payload.username);
+            }
+        }
+     }
      socket.on(ch+':App\\Events\\messageCreate', function (payload) {
             var currentCh = $('[channel-name = "'+ch+'"]');
-
-            if(payload['action'] == 'joinch'){
-                if(payload.username != $('#myname').html()){
-                    console.log(payload.username);
-                }
-            }
-            if(payload['action'] == 'leavech'){
-                if(payload.username != $('#myname').html()){
-                    console.log(payload.username);
-                }
-            }
 
             if(currentCh.hasClass('channel-actived')==true){   
 
