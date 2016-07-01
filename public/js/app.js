@@ -80,10 +80,24 @@ function getProfile(link){
 function bindSocket(ch){
      socket.on(ch+':App\\Events\\messageCreate', function (payload) {
             var currentCh = $('[channel-name = "'+ch+'"]');
+
+            if(payload['action'] == 'joinch'){
+                if(payload.username != $('#myname').html()){
+                    console.log(payload.username);
+                }
+            }
+            if(payload['action'] == 'leavech'){
+                if(payload.username != $('#myname').html()){
+                    console.log(payload.username);
+                }
+            }
+
             if(currentCh.hasClass('channel-actived')==true){   
 
                 var name = payload.username;
                 var userattr = payload.userAttribute;
+
+
                 //var name = str.substring(0,str.indexOf(':')); 
                 //var avatar_url = window.location.origin+'/public/storage/user-avatar/'+name+'.jpg';
                 //var path = imageExists(userattr['avatar']);
@@ -437,16 +451,6 @@ $('.chat_btn').one("click",function(){
 
 socket.on('controller-channel'+':App\\Events\\ChannelOperation', function (payload) {
     if(payload.result == 'Done'){
-        if(payload.command == 'joinch'){
-            if(payload.user != $('#myname').html()){
-                console.log(payload.user);
-            }
-        }
-        if(payload.command == 'leavech'){
-            if(payload.user != $('#myname').html()){
-                console.log(payload.user);
-            }
-        }
         if(payload.command == 'create'){
             var html = '<li class="media channel_review" channel-type = "'+payload['channeltype']+'"channel-name="'+payload['channelname']+'"';
             

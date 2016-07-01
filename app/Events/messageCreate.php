@@ -17,17 +17,20 @@ class messageCreate extends Event implements ShouldBroadcast
     private $ch;
 
     private $user;
+
+    private $userstatus;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($username, $message,$channel,$user)
+    public function __construct($username, $message,$channel,$user,$userstatus)
     {
         $this->username = $username;
         $this->message= $message;
         $this->ch = $channel;
         $this->user = $user;
+        $this->userstatus = $userstatus;
     }
 
     /**
@@ -38,11 +41,30 @@ class messageCreate extends Event implements ShouldBroadcast
     public function broadcastWith()
     {
         $attrbuite['avatar'] = $this->user['my_avatar'];
-        return [
-            'username' => $this->username,
-            'message' => $this->message,
-            'userAttribute' => $attrbuite,
-        ];
+
+        switch ($this->userstatus) {
+            case 'joinch':
+                return [
+                    'username' => $this->username,
+                    'action' => 'joinch',
+                ];
+                break;
+            case 'leavech':
+                return [
+                    'username' => $this->username,
+                    'action' => 'leavech',
+                ];
+                break;
+            
+            default:
+                return [
+                    'username' => $this->username,
+                    'message' => $this->message,
+                    'userAttribute' => $attrbuite,
+                ];
+                break;
+        }
+        
     }
     
     public function broadcastOn()
