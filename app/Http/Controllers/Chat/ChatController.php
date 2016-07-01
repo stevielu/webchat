@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Chat;
 use Hash;
 use App\Events\messageCreate;
+use App\Events\userAction;
 use App\Events\ChannelOperation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
