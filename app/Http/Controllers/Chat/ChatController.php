@@ -80,7 +80,7 @@ class ChatController extends Controller
     		Cache::forever($lastVistCh,$lastUserList);
 
     		//brocast user leave current channel
-    		$op = new userAction($username,'leavech',$channel);
+    		$op = new userAction($username,'leavech',$lastVistCh);
 	   		$ret = event($op);
     	}
 		$currentVistList = Cache::get($channel, ['default']);
