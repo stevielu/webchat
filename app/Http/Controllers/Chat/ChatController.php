@@ -76,14 +76,12 @@ class ChatController extends Controller
     		});
     		unset( $lastUserList[$username]);	
     	}
-
-    	$currentVistList = Cache::rememberForever($channel,function(){
-    		return [''];
-		});
+		$currentVistList = Cache::get($channel, 'default');
+    	
 
 		$currentVistList[$username]= $username;
 		Cache::forever($channel,$currentVistList);
-    
+    	Session::put('userPointer',$channel);
     	return $currentVistList;
     }
 	
