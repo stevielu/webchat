@@ -89,7 +89,7 @@ function bindSocket(ch){
                 console.log(payload.username);
             }
         }
-     }
+     });
      socket.on(ch+':App\\Events\\messageCreate', function (payload) {
             var currentCh = $('[channel-name = "'+ch+'"]');
 
