@@ -193,10 +193,7 @@ function loadingContents(data,history){
      //console.log(data['contents']);
 
     //loading visit list in current channel
-    data['visitorlist'].forEach(function(data){
-         console.log(data);
-    });
-   
+    console.log(data['visitorlist']);
 
     //set history date
     $.cookie("current-date",data['date']);
