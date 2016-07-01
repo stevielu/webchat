@@ -76,7 +76,7 @@ class ChatController extends Controller
     		});
     		unset( $lastUserList[$username]);	
     	}
-		$currentVistList = Cache::get($channel, 'default');
+		$currentVistList = Cache::get($channel, ['default']);
     	
 
 		$currentVistList[$username]= $username;
