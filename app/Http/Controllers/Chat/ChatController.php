@@ -68,12 +68,23 @@ class ChatController extends Controller
     }
 
     public function getChannelUserList($channel,$username){
-    	// if(Cache::tags($username)->get('Anne')){
 
-    	// }
-    	// Cache::tags($username)->forget();
-    	// Cache::tags([$username, $channel])->forever($username);
-    	var_dump(Cache::tags($username)->get($username));
+    	$lastVistCh = Session::get('userPointer');
+    	if($lastVistCh){
+    		$lastUserList = Cache::rememberForever($lastVistCh,function(){
+    			return [''];
+    		});
+    		unset( $lastUserList[$username]);	
+    	}
+
+    	$currentVistList = Cache::rememberForever($channel,function(){
+    		return [''];
+		});
+
+		$currentVistList[$username]= $username;
+		Cache::forever($channel,$currentVistList);
+    
+    	return $currentVistList;
     }
 	
     public function getChannelContents(Request $request, $channel)
@@ -97,7 +108,7 @@ class ChatController extends Controller
 	    $user = Session::get('loginInfo');
 	    $username = $user['name'];
 
-	    $this->getChannelUserList($channel,$username);
+	    var_dump($this->getChannelUserList($channel,$username));
 	    return ['username'=>$username,'contents'=>$contents,'empty'=>$empty];
 	   
     }
