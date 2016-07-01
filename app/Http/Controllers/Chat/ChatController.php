@@ -69,19 +69,19 @@ class ChatController extends Controller
 
     public function getChannelUserList($channel,$username){
 
-    	// $lastVistCh = Session::get('userPointer');
-    	// if($lastVistCh){
-    	// 	$lastUserList = Cache::rememberForever($lastVistCh,function(){
-    	// 		return [''];
-    	// 	});
-    	// 	unset( $lastUserList[$username]);	
-    	// }
+    	$lastVistCh = Session::get('userPointer');
+    	if($lastVistCh){
+    		$lastUserList = Cache::rememberForever($lastVistCh,function(){
+    			return [''];
+    		});
+    		unset( $lastUserList[$username]);
+    	}
 		$currentVistList = Cache::get($channel, ['default']);
     	
 
 		$currentVistList[$username]= $username;
 		Cache::forever($channel,$currentVistList);
-    	//Session::put('userPointer',$channel);
+    	Session::put('userPointer',$channel);
     	return $currentVistList;
     }
 	
