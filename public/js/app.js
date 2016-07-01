@@ -193,10 +193,10 @@ function loadingContents(data,history){
      //console.log(data['contents']);
 
     //loading visit list in current channel
-    // data['visitorlist'].forEach(function(data){
-
-    // });
-    console.log(data['visitorlist']);
+    data['visitorlist'].forEach(function(data){
+         console.log(data);
+    });
+   
 
     //set history date
     $.cookie("current-date",data['date']);
@@ -439,7 +439,6 @@ $('.chat_btn').one("click",function(){
 });//end btn click
 
 socket.on('controller-channel'+':App\\Events\\ChannelOperation', function (payload) {
-    console.log(payload);
     if(payload.result == 'Done'){
         if(payload.command == 'joinch'){
             if(payload.user != $('#myname').html()){
