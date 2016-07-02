@@ -528,11 +528,12 @@ input.empty {
   position: absolute;
     bottom: 50%;
     margin-bottom: -25px;
-    margin-left: -15px;
+    margin-left: 0px;
     z-index: 999;
+    display: inline-block;
 }
 .side-pull-wrap{
-  z-index: 9999;
+    z-index: 9999;
     height: 50px;
     width: 20px;
     background: rgba(234,234,234,1);
@@ -589,5 +590,8 @@ input.empty {
   transition: none;
 }
 .visitor-box{
-  height: 100%;
+  box-shadow: 0 0 1px 0px rgba(255,255,255,0.8) , 0 0px 0 1px rgba(0,0,0,0.298039);
+    height: 100%;
+    margin-left: -15px;
+    background-color: #EAEAEA;
 }
