@@ -7,7 +7,7 @@
 </div>
 <script>
 $('.side-pull-box').click(function () {
-	if($('..visitor-box').css("margin-left") == "-10%")
+	if($('.visitor-box').css("margin-left") == "-10%")
     {
         $('.visitor-box').animate({"margin-left": '0%'});
     }
