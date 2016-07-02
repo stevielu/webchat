@@ -7,8 +7,10 @@
 </div>
 <script>
 $('.side-pull-wrap').click(function () {
-	$('.visitor-box').animate({width: '10%'});
-	$('#sidepull-btn').toggleClass("fa-angle-double-right fa-angle-double-left");
+	$('.visitor-box').toggle('slide', {
+            direction: 'left'
+        }, 1000);
+	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
 });
 
 </script>

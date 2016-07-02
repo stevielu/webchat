@@ -594,4 +594,6 @@ input.empty {
     height: 100%;
     margin-left: -15px;
     background-color: #EAEAEA;
+    width: 10%;
+    display: none;
 }
