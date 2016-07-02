@@ -28,6 +28,8 @@ i{
   float: left;
   background-color: #2B2B2B;
   height:100%;
+  position: relative;
+  z-index: 99;
 }
 .side-navbar{
   height: 100%;
@@ -596,6 +598,4 @@ input.empty {
     background-color: #EAEAEA;
     width: 120px;
     float: left;
-    position: relative;
-    z-index: -1;
 }

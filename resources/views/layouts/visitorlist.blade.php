@@ -10,13 +10,11 @@ $('.side-pull-box').click(function () {
 	console.log($('.visitor-box').css("margin-left"));
 	if($('.visitor-box').css("margin-left") == "-120px")
     {
-    	$('.visitor-box').css('z-index','0');
         $('.visitor-box').animate({"margin-left": '0px'});
         
     }
     else
     {
-    	$('.visitor-box').css('z-index','-1');
         $('.visitor-box').animate({"margin-left": '-120px'});
 
         
