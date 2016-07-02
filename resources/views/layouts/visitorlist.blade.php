@@ -9,13 +9,13 @@
 $('.side-pull-wrap').click(function () {
 	if($(this).css("margin-left") == "0")
     {
-        $('.visitor-box').animate({"margin-left": '+=10%'});
-        $('.side-pull-wrap').animate({"margin-left": '+=10%'});
+        $('.visitor-box').animate({"margin-left": '0%'});
+        $('.side-pull-wrap').animate({"margin-left": '10%'});
     }
     else
     {
-        $('.visitor-box').animate({"margin-left": '-=10%'});
-        $('.side-pull-wrap').animate({"margin-left": '-=10%'});
+        $('.visitor-box').animate({"margin-left": '-10%'});
+        $('.side-pull-wrap').animate({"margin-left": '0%'});
     }
 	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
 });
