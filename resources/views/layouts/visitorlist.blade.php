@@ -7,9 +7,16 @@
 </div>
 <script>
 $('.side-pull-wrap').click(function () {
-	$('.visitor-box').toggle('slide', {
-            direction: 'left'
-        }, 1000);
+	if($(this).css("margin-left") == "0")
+    {
+        $('.visitor-box').animate({"margin-left": '+=10%'});
+        $('.side-pull-wrap').animate({"margin-left": '+=10%'});
+    }
+    else
+    {
+        $('.visitor-box').animate({"margin-left": '-=10%'});
+        $('.side-pull-wrap').animate({"margin-left": '-=10%'});
+    }
 	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
 });
 
