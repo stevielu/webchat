@@ -208,6 +208,9 @@ function loadingContents(data,history){
      //console.log(data['contents']);
 
     //loading visitor list in current channel
+    //flush list
+    $('#visitor-list').html('<li>Online Users</li>');
+    //loading list
     for (var key in data.visitorlist) {
         var path = imageExists(data.visitorlist[key]);
         var html = '<a class="viewprofile" link="viewprofile/'+data.visitorlist[key]+'" href="#" data-toggle="modal" data-target="#viewprofile">';
@@ -222,7 +225,7 @@ function loadingContents(data,history){
         $('#avatar').attr('src',window.location.origin+'/public/default.gif');
         getProfile($link);
     });
-    
+
     //set history date
     $.cookie("current-date",data['date']);
     var $date = $.cookie("current-date");

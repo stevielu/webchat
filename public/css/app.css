@@ -606,6 +606,7 @@ input.empty {
 #visitor-list li{
   text-align: center;
   padding: 15px;
+  color: #B14228;
 }
 #visitor-list p
 {
