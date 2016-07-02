@@ -16,8 +16,9 @@
     @include('layouts.user')
     
 @else
+            <div style="margin-left:-30px">
                 @include('layouts.visitorlist')
-                
+
                 <div id="chat-room" current-channel='' class="row">
                     
                     <div id= 'content-loading' class="loading col-md-12">
@@ -26,7 +27,7 @@
                     <div id = 'login-channel'><h1 style="text-align: center;color: #D0D0D0;padding-top: 100px;">Please Login, This is Private Channel</h1></div>
                     <div id = 'content-box'></div>
                 </div>
-               
+            </div>   
                 <!-- 輸入訊息的表單 -->
                @include('layouts.viewprofile')
                 <form id="send-message" method="post" action="send-message">
