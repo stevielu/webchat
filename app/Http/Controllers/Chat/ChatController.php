@@ -169,7 +169,7 @@ class ChatController extends Controller
 
     public function loginPrivateChannel(Request $request)
     {
-    	$roomid = $request->session()->get('room_id');
+    	//$roomid = $request->session()->get('room_id');
 
     	$credentials = $request->only('p-chn', 'loginPass');
 
@@ -177,19 +177,21 @@ class ChatController extends Controller
         if (auth()->guard('privateChannel')->attempt(['channel_name' => $credentials['p-chn'], 'password' => $credentials['loginPass']])) {
 
             $login = 'success';
-            $contents = $this->getChatInfoNow($roomid,$credentials['p-chn']);
-            if($contents==null){
-	    		if(!$this->ChannelRecoderExist($roomid,$credentials['p-chn'])){
-	    			$empty =  'null recordes';
-	    		}
-	    		else{
-		    		$empty = 'true';
-		    	}
+            $data = $this->getChannelContents($request,$credentials['p-chn']);
+            $contents = $data['contents'];//$this->getChatInfoNow($roomid,$credentials['p-chn']);
+            $empty = $data['empty'];
+      //       if($contents==null){
+	    	// 	if(!$this->ChannelRecoderExist($roomid,$credentials['p-chn'])){
+	    	// 		$empty =  'null recordes';
+	    	// 	}
+	    	// 	else{
+		    // 		$empty = 'true';
+		    // 	}
 		    		
-	    	}
-	    	else{
-	    		$empty = 'false';
-	    	}
+	    	// }
+	    	// else{
+	    	// 	$empty = 'false';
+	    	// }
            // $data = response()->json(['redirect' => '/']);
         }
         else{
@@ -206,7 +208,7 @@ class ChatController extends Controller
 
      	//srand(time()); // 亂數種子
 	    //$username = sprintf('user%06d', rand(1, 100000)); // 決定 user 名稱 (註)
-	    return ['ch_login'=>$login,'channel'=>$credentials['p-chn'],'contents'=>$contents,'empty'=>$empty];
+	    return ['ch_login'=>$login,'channel'=>$credentials['p-chn'],'contents'=>$contents,'empty'=>$empty,'visitorlist'=>$data['visitorlist']];
 	    // //get chat room from database
 	    // $chatroom = Chat::with('SubClass')->get();
 	    // $this->chatroom = $chatroom;
