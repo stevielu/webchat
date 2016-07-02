@@ -216,6 +216,13 @@ function loadingContents(data,history){
         $('#visitor-list').append('<li>'+html+'</li>');
     }
 
+    $('.viewprofile').click(function(){
+        // body...
+        var $link = $(this).attr('link');
+        $('#avatar').attr('src',window.location.origin+'/public/default.gif');
+        getProfile($link);
+    });
+    
     //set history date
     $.cookie("current-date",data['date']);
     var $date = $.cookie("current-date");
@@ -300,12 +307,7 @@ function loadingContents(data,history){
             $('#'+$date).append($message);
             //$chatRoom.animate({scrollTop: $chatRoom[0].scrollHeight}, 1000);
         });
-        $('.viewprofile').click(function(){
-            // body...
-            var $link = $(this).attr('link');
-            $('#avatar').attr('src',window.location.origin+'/public/default.gif');
-            getProfile($link);
-        });
+       
 
         var old_height = $.cookie("oldheight");
         if(old_height == '0'){//first loading
