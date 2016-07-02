@@ -524,3 +524,13 @@ input.empty {
    font-family: 'Slabo 27px', serif;
   color: #9e9e9e;
 }
+.side-pull-box{
+  position: relative;
+}
+.side-pull-wrap{
+  position: absolute;
+  z-index: 9999;
+  height: 50px;
+  width: 30px;
+  background-color: #F1F1F1;
+}
