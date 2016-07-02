@@ -74,7 +74,7 @@ class ChatController extends Controller
     	//remove user from last visited channel
     	if($lastVistCh){
     		$lastUserList = Cache::rememberForever($lastVistCh,function(){
-    			return [''];
+    			return [];
     		});
     		unset( $lastUserList[$username]);
     		Cache::forever($lastVistCh,$lastUserList);
@@ -83,7 +83,7 @@ class ChatController extends Controller
     		$op = new userAction($username,'leavech',$lastVistCh);
 	   		$ret = event($op);
     	}
-		$currentVistList = Cache::get($channel, ['default']);
+		$currentVistList = Cache::get($channel, []);
     	
 
 		$currentVistList[$username]= $username;
