@@ -607,3 +607,13 @@ input.empty {
   text-align: center;
   padding: 15px;
 }
+#visitor-list p
+{
+  display: block;
+    padding: 0;
+    margin: 0;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #A7A3A3;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
