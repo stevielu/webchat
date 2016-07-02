@@ -16,7 +16,7 @@
     @include('layouts.user')
     
 @else
-            <div style="margin-left:-30px">
+            <div style="margin-left:-15px;height:100%">
                 @include('layouts.visitorlist')
 
                 <div id="chat-room" current-channel='' class="row">

@@ -197,7 +197,7 @@ input.empty {
 }
 
 #chat-room {
-  
+  margin-left: 15px;
   height: 90%;
   padding: 1rem;
   overflow-x: hidden;
@@ -596,5 +596,6 @@ input.empty {
     background-color: #EAEAEA;
     width: 120px;
     float: left;
-    
+    position: relative;
+    z-index: -1;
 }
