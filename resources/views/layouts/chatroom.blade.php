@@ -16,6 +16,8 @@
     @include('layouts.user')
     
 @else
+                @include('layouts.visitorlist')
+                
                 <div id="chat-room" current-channel='' class="row">
                     
                     <div id= 'content-loading' class="loading col-md-12">

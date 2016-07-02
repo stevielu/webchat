@@ -22,7 +22,7 @@
 		@include('layouts.mychannel')
 	@endif
 		
-		@include('layouts.visitorlist')
+		
 
 	</div>
 </div>
