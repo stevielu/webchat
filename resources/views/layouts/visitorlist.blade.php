@@ -8,16 +8,15 @@
 <script>
 $('.side-pull-box').click(function () {
 	console.log($('.visitor-box').css("margin-left"));
-	if($('.visitor-box').css("margin-left") == "-135px")
+	if($('.visitor-box').css("margin-left") == "-120px")
     {
-        $('.visitor-box').animate({"margin-left": '-15px'});
-        $('.side-pull-box').animate({"margin-left": '0px'});
+        $('.visitor-box').animate({"margin-left": '0px'});
         
     }
     else
     {
-        $('.visitor-box').animate({"margin-left": '-135px'});
-        $('.side-pull-box').animate({"margin-left": '-15px'});
+        $('.visitor-box').animate({"margin-left": '-120px'});
+
         
     }
 	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
