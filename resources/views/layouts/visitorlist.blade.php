@@ -7,15 +7,13 @@
 </div>
 <script>
 $('.side-pull-box').click(function () {
-	if($(this).css("margin-left") == "0px")
+	if($('..visitor-box').css("margin-left") == "-10%")
     {
         $('.visitor-box').animate({"margin-left": '0%'});
-        $('.side-pull-box').animate({"margin-left": '10%'});
     }
     else
     {
         $('.visitor-box').animate({"margin-left": '-10%'});
-        $('.side-pull-box').animate({"margin-left": '0px'});
     }
 	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
 });

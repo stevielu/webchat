@@ -595,5 +595,5 @@ input.empty {
     margin-left: -10%;
     background-color: #EAEAEA;
     width: 10%;
-    
+    float: left;
 }
