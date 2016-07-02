@@ -16,7 +16,7 @@ $('.side-pull-box').click(function () {
     else
     {
         $('.visitor-box').animate({"margin-left": '-135px'});
-        $('.visitor-box').css({"display",'none'});
+        $('.visitor-box').css("display",'none');
     }
 	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
 });
