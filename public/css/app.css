@@ -528,7 +528,7 @@ input.empty {
   position: absolute;
     bottom: 50%;
     margin-bottom: -25px;
-    margin-left: 0px;
+    margin-left: -15px;
     z-index: 999;
     display: inline-block;
 }
@@ -592,8 +592,9 @@ input.empty {
 .visitor-box{
   box-shadow: 0 0 1px 0px rgba(255,255,255,0.8) , 0 0px 0 1px rgba(0,0,0,0.298039);
     height: 100%;
-    margin-left: -120px;
+    margin-left: -135px;
     background-color: #EAEAEA;
     width: 120px;
     float: left;
+    display: none;
 }

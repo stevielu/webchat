@@ -8,13 +8,15 @@
 <script>
 $('.side-pull-box').click(function () {
 	console.log($('.visitor-box').css("margin-left"));
-	if($('.visitor-box').css("margin-left") == "-120px")
+	if($('.visitor-box').css("margin-left") == "-135px")
     {
         $('.visitor-box').animate({"margin-left": '0'});
+        $('.visitor-box').animate({"display": 'inline-block'});
     }
     else
     {
-        $('.visitor-box').animate({"margin-left": '-120px'});
+        $('.visitor-box').animate({"margin-left": '-135px'});
+        $('.visitor-box').animate({"display": 'none'});
     }
 	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
 });
