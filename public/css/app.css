@@ -599,3 +599,11 @@ input.empty {
     width: 120px;
     float: left;
 }
+#visitor-list{
+  margin: 0;
+  padding: 0;
+}
+#visitor-list li{
+  text-align: center;
+  padding: 15px;
+}

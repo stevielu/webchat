@@ -208,10 +208,12 @@ function loadingContents(data,history){
      //console.log(data['contents']);
 
     //loading visitor list in current channel
-    console.log(data.visitorlist);
     for (var key in data.visitorlist) {
-        console.log("Value: " + data.visitorlist[key]);
-        $('#visitor-list').append('<li class="media channel_review">'+data.visitorlist[key]+'</li>');
+        var path = imageExists(data.visitorlist[key]);
+        var html = '<a class="viewprofile" link="viewprofile/'+data.visitorlist[key]+'" href="#" data-toggle="modal" data-target="#viewprofile">';
+        html += '<img class="media-object img-circle"  alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+        html += '<p>'+data.visitorlist[key]+'</p>';
+        $('#visitor-list').append('<li>'+html+'</li>');
     }
 
     //set history date
