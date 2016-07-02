@@ -8,13 +8,13 @@
 <script>
 $('.side-pull-box').click(function () {
 	console.log($('.visitor-box').css("margin-left"));
-	if($('.visitor-box').css("margin-left") == "0px")
+	if($('.visitor-box').css("margin-left") == "-120px")
     {
-        $('.visitor-box').animate({"margin-left": '0%'});
+        $('.visitor-box').animate({"margin-left": '0'});
     }
     else
     {
-        $('.visitor-box').animate({"margin-left": '-10%'});
+        $('.visitor-box').animate({"margin-left": '-120px'});
     }
 	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
 });
