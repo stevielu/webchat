@@ -592,8 +592,8 @@ input.empty {
 .visitor-box{
   box-shadow: 0 0 1px 0px rgba(255,255,255,0.8) , 0 0px 0 1px rgba(0,0,0,0.298039);
     height: 100%;
-    margin-left: -15px;
+    margin-left: -10%;
     background-color: #EAEAEA;
     width: 10%;
-
+    
 }
