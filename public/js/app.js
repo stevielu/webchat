@@ -207,8 +207,12 @@ window.setTimeout(pollCh(),500);
 function loadingContents(data,history){
      //console.log(data['contents']);
 
-    //loading visit list in current channel
-    console.log(data['visitorlist']);
+    //loading visitor list in current channel
+    console.log(data.visitorlist);
+    for (var key in data.visitorlist) {
+        console.log("Value: " + data.visitorlist[key]);
+        $('#visitor-list').append('<li class="media channel_review">'+data.visitorlist[key]+'</li>');
+    }
 
     //set history date
     $.cookie("current-date",data['date']);

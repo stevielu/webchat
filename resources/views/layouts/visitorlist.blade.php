@@ -1,4 +1,6 @@
 <div class='visitor-box'>
+	<ul id='visitor-list'>
+	</ul>
 </div>
 <div class='side-pull-box'>
 	<div class='side-pull-wrap'>
