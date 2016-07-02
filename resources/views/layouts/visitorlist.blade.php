@@ -11,12 +11,12 @@ $('.side-pull-box').click(function () {
 	if($('.visitor-box').css("margin-left") == "-135px")
     {
         $('.visitor-box').animate({"margin-left": '0'});
-        $('.visitor-box').animate({"display": 'inline-block'});
+        $('.visitor-box').css("display",'inline-block');
     }
     else
     {
         $('.visitor-box').animate({"margin-left": '-135px'});
-        $('.visitor-box').animate({"display": 'none'});
+        $('.visitor-box').css({"display",'none'});
     }
 	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
 });
