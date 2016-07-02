@@ -1,5 +1,6 @@
 <div class='visitor-box'>
 	<ul id='visitor-list'>
+		<li>Online Users</li>
 	</ul>
 </div>
 <div class='side-pull-box'>
