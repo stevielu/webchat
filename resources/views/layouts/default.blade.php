@@ -39,6 +39,7 @@
                         @include('layouts.navsidebar')
                         
                 </div>
+                @include('layouts.chloginmodal')
                 <div class="col-md-8 rightbox">
                     @yield('rightboxbody')
                 </div>
