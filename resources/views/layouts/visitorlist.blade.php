@@ -9,7 +9,7 @@
 $('.side-pull-wrap').click(function () {
 	$('.visitor-box').toggle('slide', {
             direction: 'left'
-        }, 1000);
+        }, 1000,function(){$(this).css('display','inline-block');});
 	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
 });
 
