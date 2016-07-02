@@ -11,11 +11,13 @@ $('.side-pull-box').click(function () {
 	if($('.visitor-box').css("margin-left") == "-135px")
     {
         $('.visitor-box').animate({"margin-left": '-15px'});
+        $('.side-pull-box').animate({"margin-left": '0px'});
         
     }
     else
     {
         $('.visitor-box').animate({"margin-left": '-135px'});
+        $('.side-pull-box').animate({"margin-left": '-15px'});
         
     }
 	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
