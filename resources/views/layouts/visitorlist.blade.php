@@ -10,7 +10,7 @@ $('.side-pull-box').click(function () {
 	console.log($('.visitor-box').css("margin-left"));
 	if($('.visitor-box').css("margin-left") == "-135px")
     {
-        $('.visitor-box').animate({"margin-left": '0'});
+        $('.visitor-box').animate({"margin-left": '-15px'});
         
     }
     else
