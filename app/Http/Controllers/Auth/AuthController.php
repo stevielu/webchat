@@ -106,7 +106,8 @@ class AuthController extends Controller
     {
         Auth::logout();
         //remove user from online lists;
-        ChatController::getChannelUserList('',Session::get('loginInfo.name'),true);
+        $logout = new ChatController();
+        $logout->getChannelUserList('',Session::get('loginInfo.name'),true);
         return redirect('/');
     }
 
