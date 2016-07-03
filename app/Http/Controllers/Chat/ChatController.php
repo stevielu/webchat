@@ -43,6 +43,7 @@ class ChatController extends Controller
 	    $this->user = User::where('email',$user['email'])->first();
 	    //var_dump($test['my_avatar']);
 	    $user = Session::put('loginInfo.name',$this->user['name']);
+
     }
 
 	public function Index()
@@ -53,7 +54,7 @@ class ChatController extends Controller
 	    //get chat room from database
 	    $chatroom = Chat::with('SubClass')->get();
 	    $this->chatroom = $chatroom;
-
+		Session::forget('userPointer');
 	    $currentfocus = 'sidebar_chat';
 	    //$contents = $this->getChatInfoNow('1','chat-channel');
 	    return view('layouts/chatroom', compact('username','chatroom','currentfocus'));
@@ -73,11 +74,12 @@ class ChatController extends Controller
     	$lastVistCh = Session::get('userPointer');
     	//remove user from last visited channel
     	if($lastVistCh){
-    		$lastUserList = Cache::rememberForever($lastVistCh,function(){
-    			return [];
-    		});
+    		$lastUserList = Cache::get($lastVistCh, []);
+    		// $lastUserList = Cache::rememberForever($lastVistCh,function(){
+    		// 	return [];
+    		// });
     		unset( $lastUserList[$username]);
-    		Cache::forever($lastVistCh,$lastUserList);
+    		Cache::put($lastVistCh,$lastUserList,'120');
 
     		//brocast user leave current channel
     		$op = new userAction($username,'leavech',$lastVistCh);
@@ -85,9 +87,8 @@ class ChatController extends Controller
     	}
 		$currentVistList = Cache::get($channel, []);
     	
-
 		$currentVistList[$username]= $username;
-		Cache::forever($channel,$currentVistList);
+		Cache::put($channel,$currentVistList,'120');
     	Session::put('userPointer',$channel);
     	return $currentVistList;
     }
