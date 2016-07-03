@@ -182,7 +182,7 @@ class ChatController extends Controller
         if (auth()->guard('privateChannel')->attempt(['channel_name' => $credentials['p-chn'], 'password' => $credentials['loginPass']])) {
 
             $login = 'success';
-            $data = $this->getChannelContents($request,$credentials['p-chn']);
+            $data = $this->getChannelContents($request,$credentials['p-chn'],false);
             $contents = $data['contents'];//$this->getChatInfoNow($roomid,$credentials['p-chn']);
             $empty = $data['empty'];
       //       if($contents==null){
