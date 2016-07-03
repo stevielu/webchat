@@ -85,7 +85,7 @@ function joinCh(username){
     $('#visitor-list').append('<li id="visitor-'+username+'">'+html+'</li>');
 }
 function leaveCh(username){
-    $('#visitor-'+$username).remove();
+    $('#visitor-'+username).remove();
 }
 
 function bindSocket(ch){
