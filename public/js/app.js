@@ -225,14 +225,12 @@ function loadingContents(data,history){
     //flush list
     $('#visitor-list').html('<li>Online Users</li>');
     //loading list
-    for (var key in data.visitorlist) {
-        // var path = imageExists(data.visitorlist[key]);
-        // var html = '<a class="viewprofile" link="viewprofile/'+data.visitorlist[key]+'" href="#" data-toggle="modal" data-target="#viewprofile">';
-        // html += '<img class="img-circle"  alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
-        // html += '<p>'+data.visitorlist[key]+'</p>';
-        // $('#visitor-list').append('<li>'+html+'</li>');
-        joinCh(data.visitorlist[key]);
+    if(!history){
+         for (var key in data.visitorlist) {
+                joinCh(data.visitorlist[key]);
+            }
     }
+   
 
     $('.viewprofile').click(function(){
         // body...
