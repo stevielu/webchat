@@ -98,8 +98,8 @@ function bindSocket(ch){
                 }     
             }
             if(payload['action'] == 'leavech'){
-                if($('#visitor-'+$username)!=null){
-                    leaveCh(username);
+                if($('#visitor-'+payload.username)!=null){
+                    leaveCh(payload.username);
                 }
             }
         }
