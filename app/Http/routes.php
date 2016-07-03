@@ -16,6 +16,7 @@ Route::get('/logout', 'Auth\AuthController@getLogout');
 Route::get('/error', 'ErrorController@index');
 Route::group(['middleware' => 'auth'], function(){
 	Route::resource('/chat', 'Chat\ChatController');
+	Route::resource('/chatto', 'Chat\p2pChatController');
 	Route::group(['prefix' => 'user'], function(){
 		Route::resource('/account', 'UserController');
 		Route::get('/back', 'UserController@back');

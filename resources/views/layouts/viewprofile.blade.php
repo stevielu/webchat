@@ -38,14 +38,18 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger chat-to" style="float: left;">Send Message</button>
        <!--  <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
-// $('#viewprofile').on('show.bs.modal', function (e) {
-//   // do something...
-// })
+$('.chat-to').click(function(){
+  // $.get('chatto/'+user,function(data){
+              
+  // }
+});
+
   
 </script>
