@@ -223,10 +223,11 @@ function loadingContents(data,history){
 
     //loading visitor list in current channel
     //flush list
-    $('#visitor-list').html('<li>Online Users</li>');
+   
     //loading list
-    if(!history){
-         for (var key in data.visitorlist) {
+    if(!history){ 
+        $('#visitor-list').html('<li>Online Users</li>');
+        for (var key in data.visitorlist) {
                 joinCh(data.visitorlist[key]);
             }
     }
