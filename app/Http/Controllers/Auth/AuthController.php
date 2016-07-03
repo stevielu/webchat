@@ -12,7 +12,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
+use App\Http\Controllers\Chat\ChatController;
 class AuthController extends Controller
 {
     /*
@@ -105,6 +105,8 @@ class AuthController extends Controller
     public function getLogout()
     {
         Auth::logout();
+        //remove user from online lists;
+        ChatController::getChannelUserList('',Session::get('loginInfo.name'),true);
         return redirect('/');
     }
 

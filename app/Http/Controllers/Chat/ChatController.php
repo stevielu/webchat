@@ -69,7 +69,7 @@ class ChatController extends Controller
         //return view('layouts/chatroom', compact('channels'));        
     }
 
-    public function getChannelUserList($channel,$username){
+    public function getChannelUserList($channel,$username,$logout){
 
     	$lastVistCh = Session::get('userPointer');
     	//remove user from last visited channel
@@ -84,7 +84,11 @@ class ChatController extends Controller
     		//brocast user leave current channel
     		$op = new userAction($username,'leavech',$lastVistCh);
 	   		$ret = event($op);
+
     	}
+    	if($logout){
+   			return;
+	   	}
 		$currentVistList = Cache::get($channel, []);
     	
 		$currentVistList[$username]= $username;
@@ -114,7 +118,7 @@ class ChatController extends Controller
 	    $user = Session::get('loginInfo');
 	    $username = $user['name'];
 
-	    $visitorList = $this->getChannelUserList($channel,$username);
+	    $visitorList = $this->getChannelUserList($channel,$username,false);
 	    //brocast new user join to current channel
 	    $op = new userAction($username,'joinch',$channel);
 	   	$ret = event($op);

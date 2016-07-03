@@ -77,16 +77,30 @@ function getProfile(link){
     });
 }
 
+function joinCh(username){
+    var path = imageExists(username);
+    var html = '<a class="viewprofile" link="viewprofile/'+username+'" href="#" data-toggle="modal" data-target="#viewprofile">';
+    html += '<img class="img-circle"  alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+    html += '<p>'+username+'</p>';
+    $('#visitor-list').append('<li id="visitor-'+username+'">'+html+'</li>');
+}
+function leaveCh(username){
+    $('#visitor-'+$username).remove();
+}
+
 function bindSocket(ch){
      socket.on(ch+':App\\Events\\userAction', function (payload) {
-        if(payload['action'] == 'joinch'){
-            if(payload.username != $('#myname').html()){
-                console.log(payload.username);
+        if(payload.username != $('#myname').html()){
+            if(payload['action'] == 'joinch'){
+                var currentCh = $('[channel-name = "'+ch+'"]');
+                if(currentCh.hasClass('channel-actived')==true){
+                    joinCh(payload.username);
+                }     
             }
-        }
-        if(payload['action'] == 'leavech'){
-            if(payload.username != $('#myname').html()){
-                console.log(payload.username);
+            if(payload['action'] == 'leavech'){
+                if($('#visitor-'+$username)!=null){
+                    leaveCh(username);
+                }
             }
         }
      });
