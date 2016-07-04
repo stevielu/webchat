@@ -298,7 +298,7 @@ function loadingContents(data,history){
                     html += '</div>';
                     html += '<div class="media-right ">';
                 
-                    html += '<a class="viewprofile" link="viewprofile/'+name+'" href ="#" data-toggle="modal" data-target="#viewprofile"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
+                    html += '<a class="viewprofile" id="view_'+name+'" link="viewprofile/'+name+'" href ="#" data-toggle="modal" data-target="#viewprofile"><img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
                     html += '</div></div>';
                 }
                 else{
@@ -311,14 +311,15 @@ function loadingContents(data,history){
                     html += data+'</p>';
                     //html += '<p style="color:#B5B1B1">user312312:test</p>';
                     html += '</div>'; 
-                }
-                
-               $('#view_'+name).click(function(){
+                    $('#view_'+name).click(function(){
                     // body...
                     var $link = $(this).attr('link');
                     $('#avatar').attr('src',window.location.origin+'/public/default.gif');
                     getProfile($link);
                 });
+                }
+                
+              
                 var $message = $(html);
             // });
             $('#'+$date).append($message);
