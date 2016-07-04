@@ -316,20 +316,20 @@ function loadingContents(data,history){
                 var $message = $(html);
             // });
             $('#'+$date).append($message);
-            $('#viewprofile').on('shown.bs.modal', function(e) {
+
+            // $('#view_'+name).click(function(){
+            
+            // });
+            //$chatRoom.animate({scrollTop: $chatRoom[0].scrollHeight}, 1000);
+        });
+ $('#viewprofile').on('show.bs.modal', function(e) {
               //     // body...
                 // var $link = $(this).attr('link');
                 var $invoker = $(e.relatedTarget);
                 var $link = $invoker.attr('link');
                 $('#avatar').attr('src',window.location.origin+'/public/default.gif');
                 getProfile($link);  
-            });
-            // $('#view_'+name).click(function(){
-            
-            // });
-            //$chatRoom.animate({scrollTop: $chatRoom[0].scrollHeight}, 1000);
-        });
-       
+});      
 
         var old_height = $.cookie("oldheight");
         if(old_height == '0'){//first loading
