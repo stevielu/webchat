@@ -217,12 +217,7 @@ function pollCh(){
 }
 window.setTimeout(pollCh(),500);
 
-$('.viewprofile').click(function(){
-        // body...
-        var $link = $(this).attr('link');
-        $('#avatar').attr('src',window.location.origin+'/public/default.gif');
-        getProfile($link);
-    });
+
 function loadingContents(data,history){
      //console.log(data['contents']);
 
@@ -318,7 +313,12 @@ function loadingContents(data,history){
                     html += '</div>'; 
                 }
                 
-               
+               $('.viewprofile').click(function(){
+                    // body...
+                    var $link = $(this).attr('link');
+                    $('#avatar').attr('src',window.location.origin+'/public/default.gif');
+                    getProfile($link);
+                });
                 var $message = $(html);
             // });
             $('#'+$date).append($message);
