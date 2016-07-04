@@ -316,13 +316,17 @@ function loadingContents(data,history){
                 var $message = $(html);
             // });
             $('#'+$date).append($message);
-
-            $('#view_'+name).click(function(){
-                // body...
-                var $link = $(this).attr('link');
+            $('#viewprofile').on('shown.bs.modal', function(e) {
+              //     // body...
+                // var $link = $(this).attr('link');
+                var $invoker = $(e.relatedTarget);
+                $link = $invoker.attr('link');
                 $('#avatar').attr('src',window.location.origin+'/public/default.gif');
-                getProfile($link);
+                getProfile($link);  
             });
+            // $('#view_'+name).click(function(){
+            
+            // });
             //$chatRoom.animate({scrollTop: $chatRoom[0].scrollHeight}, 1000);
         });
        
@@ -361,6 +365,8 @@ function getHistory(ch,date){
         $('#content-loading').css('display','none');
     });
 }
+
+
 
 $sendMessage.on('submit', function () {
     $.post(this.action, $sendMessage.serialize());
