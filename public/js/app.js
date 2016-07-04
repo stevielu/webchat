@@ -311,18 +311,18 @@ function loadingContents(data,history){
                     html += data+'</p>';
                     //html += '<p style="color:#B5B1B1">user312312:test</p>';
                     html += '</div>'; 
-                    $('#view_'+name).click(function(){
-                    // body...
-                    var $link = $(this).attr('link');
-                    $('#avatar').attr('src',window.location.origin+'/public/default.gif');
-                    getProfile($link);
-                });
                 }
-                
               
                 var $message = $(html);
             // });
             $('#'+$date).append($message);
+
+            $('#view_'+name).click(function(){
+                // body...
+                var $link = $(this).attr('link');
+                $('#avatar').attr('src',window.location.origin+'/public/default.gif');
+                getProfile($link);
+            });
             //$chatRoom.animate({scrollTop: $chatRoom[0].scrollHeight}, 1000);
         });
        
