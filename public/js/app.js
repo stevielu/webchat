@@ -320,7 +320,7 @@ function loadingContents(data,history){
               //     // body...
                 // var $link = $(this).attr('link');
                 var $invoker = $(e.relatedTarget);
-                $link = $invoker.attr('link');
+                var $link = $invoker.attr('link');
                 $('#avatar').attr('src',window.location.origin+'/public/default.gif');
                 getProfile($link);  
             });
