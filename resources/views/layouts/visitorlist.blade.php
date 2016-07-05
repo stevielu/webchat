@@ -5,7 +5,7 @@
 </div>
 <div class='side-pull-box'>
 	<div class='side-pull-wrap'>
-		<span id='sidepull-btn' class="fa fa-angle-double-right" aria-hidden="true"></span>
+		<span id='sidepull-btn' class="fa fa-angle-double-left" aria-hidden="true"></span>
 	</div>
 </div>
 <script>
@@ -22,7 +22,7 @@ $('.side-pull-box').click(function () {
 
         
     }
-	$('#sidepull-btn').toggleClass(" fa-angle-double-left fa-angle-double-right");
+	$('#sidepull-btn').toggleClass("fa-angle-double-right fa-angle-double-left");
 });
 
 </script>
