@@ -16,6 +16,9 @@
     @include('layouts.user')
     
 @else
+    @if($currentfocus == 'sidebar_recentchat')
+    
+    @endif
             <div style="margin-left:-15px;height:100%">
                 @include('layouts.visitorlist')
 

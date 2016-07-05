@@ -83,6 +83,14 @@ function joinCh(username){
     html += '<img class="img-circle"  alt="64x64" src="'+path+'" data-holder-rendered="true" style="width: 50px; height: 50px;"></a>';
     html += '<p>'+username+'</p>';
     $('#visitor-list').append('<li id="visitor-'+username+'">'+html+'</li>');
+    $('#viewprofile').on('show.bs.modal', function(e) {
+                      //     // body...
+                        // var $link = $(this).attr('link');
+                        var $invoker = $(e.relatedTarget);
+                        var $link = $invoker.attr('link');
+                        $('#avatar').attr('src',window.location.origin+'/public/default.gif');
+                        getProfile($link);  
+    });  
 }
 function leaveCh(username){
     $('#visitor-'+username).remove();
@@ -322,14 +330,14 @@ function loadingContents(data,history){
             // });
             //$chatRoom.animate({scrollTop: $chatRoom[0].scrollHeight}, 1000);
         });
- $('#viewprofile').on('show.bs.modal', function(e) {
-              //     // body...
-                // var $link = $(this).attr('link');
-                var $invoker = $(e.relatedTarget);
-                var $link = $invoker.attr('link');
-                $('#avatar').attr('src',window.location.origin+'/public/default.gif');
-                getProfile($link);  
-});      
+         $('#viewprofile').on('show.bs.modal', function(e) {
+                      //     // body...
+                        // var $link = $(this).attr('link');
+                        var $invoker = $(e.relatedTarget);
+                        var $link = $invoker.attr('link');
+                        $('#avatar').attr('src',window.location.origin+'/public/default.gif');
+                        getProfile($link);  
+        });      
 
         var old_height = $.cookie("oldheight");
         if(old_height == '0'){//first loading

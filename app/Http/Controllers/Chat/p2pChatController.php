@@ -48,7 +48,7 @@ class p2pChatController extends Controller
      */
     public function show($id)
     {
-        //return view('layouts/chatroom', compact('username','chatroom','currentfocus'));
+        return view('layouts/chatroom', compact('username','chatroom','currentfocus'));
     }
 
     /**
