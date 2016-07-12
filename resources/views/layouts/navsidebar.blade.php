@@ -3,17 +3,17 @@
 		@foreach($chatroom as $myroom)
 		<div id ='btn-pointer' current-btn = '{{$currentfocus}}'></div>
 		<div class="chat_btn" room-id="{{$myroom->id}}">
-			<a class="sidebar_btn sidebar_chat fa fa-comment-o fa-1x" href="/public/chat" > 
+			<a class="sidebar_btn sidebar_chat fa fa-comment-o fa-1x" href="/chat" > 
 			</a>
 			
 		</div>
-		<a class="sidebar_btn sidebar_userdashboard fa fa-user fa-1x" href="/public/user/account" > 
+		<a class="sidebar_btn sidebar_userdashboard fa fa-user fa-1x" href="/user/account" > 
 				
 		</a>
-		<a class="sidebar_btn sidebar_chatrecently fa fa-history fa-1x" href="/public/chatto" > 
+		<a class="sidebar_btn sidebar_chatrecently fa fa-history fa-1x" href="/chatto" > 
 			
 		</a>
-		<a class="sidebar_btn logout_btn fa fa-sign-out fa-1x" href="/public/logout" > 
+		<a class="sidebar_btn logout_btn fa fa-sign-out fa-1x" href="/logout" > 
 			
 		</a>
 		@endforeach
