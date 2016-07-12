@@ -37,7 +37,7 @@ class p2pChatController extends Controller
         }
 
         $user = Session::put('loginInfo.name',$this->user['name']);
-        
+
     }
 
     public function index()
@@ -48,7 +48,6 @@ class p2pChatController extends Controller
         $this->chatroom = $chatroom;
         $currentfocus = 'sidebar_recent';
         $recentContacts =  $this->recentContacts;
-        var_dump($recentContacts);
         return view('layouts/chatroom', compact('username','chatroom','currentfocus','recentContacts'));
     }
 
