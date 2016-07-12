@@ -8,25 +8,8 @@
 			 <input type="text" class="form-control empty" id="iconified" placeholder="&#xF002; &nbsp search"/>
 </div>
 <ul class="userpannel-lists">
-{{$recentContacts}}
-<!-- @foreach ($recentContacts as $user)
-<li>	
-	<a href="#">
-		<div class="media-left"></div>
-		<div class="media-body">
-			<p class="media-heading" aria-hidden="true">
-				<img class="img-circle" alt="64x64" src="{{$user->avatar}}" data-holder-rendered="true" style="width: 50px; height: 50px;">
-				{{$user->name}}
-				<sapn class="pull-right">
-					<span id="noti-cont" class="noti-visible">
-						<span class="cont-badge">0</span>
-					</span>
-				</sapn>
-			</p>
-		</div>
-	</a>
-</li>
-@endforeach	 -->
+
+
 
 	
 </ul>
