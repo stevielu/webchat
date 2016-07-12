@@ -80,9 +80,10 @@ class p2pChatController extends Controller
     public function show($user)
     {
 
-       $this->recentContacts['avatar'] = $this->profilePath.$user;
-       $this->recentContacts['name'] = $user;
-       Session::push('recentContacts',$this->recentContacts);
+       // $this->recentContacts['avatar'] = $this->profilePath.$user;
+       // $this->recentContacts['name'] = $user;
+        Session::push('recentContacts.avatar',$this->profilePath.$user);
+        Session::push('recentContacts.name',$user);
        return redirect('/chatto');
     }
 
