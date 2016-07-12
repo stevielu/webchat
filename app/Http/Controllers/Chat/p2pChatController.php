@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Chat;
 use App\Models\Channels;
 use App\Http\Requests;
+use App\User;
 use App\Http\Controllers\Controller;
 use Session;
+
 
 class p2pChatController extends Controller
 {
