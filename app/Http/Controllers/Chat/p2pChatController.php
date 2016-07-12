@@ -27,7 +27,7 @@ class p2pChatController extends Controller
         $user = Session::get('loginInfo');
         //$username = User::select('name')->where('email',$user['email'])->first();
         $this->user = User::where('email',$user['email'])->first();
-        $this->profilePath = asset('storage/'.config('filepath.user.profile'));
+        $this->profilePath = config('filepath.user.profile');
 
         if (Session::has('recentContacts')) {
             $this->recentContacts = Session::get('recentContacts');
@@ -77,9 +77,10 @@ class p2pChatController extends Controller
      */
     public function show($user)
     {
-
-       $recentContacts['avatar'] = $this->profilePath.$user;
-       $recentContacts['name'] = $user;
+        $filename = $storage_path($this->profilePath.'/'.$user);
+        $extension = File::extension($filename);
+        $recentContacts['avatar'] =  $filename.'.'.$extension;
+        $recentContacts['name'] = $user;
       
             Session::put('recentContacts.'.$user,$recentContacts);
        
