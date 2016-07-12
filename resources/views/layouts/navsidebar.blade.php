@@ -24,7 +24,7 @@
 	@elseif($currentfocus == 'sidebar_chat')
 		@include('layouts.mychannel')
 	@elseif($currentfocus == 'sidebar_recent)
-		@include('layouts.chatrecently')
+		<!-- @include('layouts.chatrecently') -->
 	@endif
 		
 		
