@@ -18,7 +18,7 @@ class p2pChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $recentContacts;
+    private $recentContacts = array();
     private $profilePath;
 
     public function __construct()
@@ -32,14 +32,13 @@ class p2pChatController extends Controller
         if (Session::has('recentContacts')) {
             $this->recentContacts = Session::get('recentContacts');
         }
-
+        
         $user = Session::put('loginInfo.name',$this->user['name']);
 
     }
 
     public function index()
     {
-        Session::forget('recentContacts');
         $username = $this->user['name'];
         //get chat room from database
         $chatroom = Chat::with('SubClass')->get();
@@ -83,7 +82,7 @@ class p2pChatController extends Controller
        $recentContacts['name'] = $user;
        if(!Session::has('recentContacts.'.$user))
        {
-            Session::push('recentContacts.'.$user,$recentContacts);
+            Session::put('recentContacts.'.$user,$recentContacts);
        }
        
        return redirect('/chatto');
