@@ -1,6 +1,6 @@
 <div class="add-channel">
 	 <div class="ch-headding">
-	 	<div class="col-md-6 pull-left" style="height: 100%"><p>My Account</p></div>
+	 	<div class="col-md-6 pull-left" style="height: 100%"><p>Recent Contacts</p></div>
 	 	
 	 </div>
 </div>

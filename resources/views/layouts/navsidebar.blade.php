@@ -21,11 +21,15 @@
 	<div class="col-md-10 navbar-list no-padding">
 	@if($currentfocus == 'sidebar_userdashboard')
     	@include('layouts.usersidebar')
-	@else($currentfocus == 'sidebar_chat')
-		@include('layouts.mychannel')
+	
 	
 	@endif
-		
+	@if($currentfocus == 'sidebar_chat')
+		@include('layouts.mychannel')
+	@endif
+	@if($currentfocus == 'sidebar_recent')
+		@include('layouts.chatrecently')
+	@endif
 		
 
 	</div>
