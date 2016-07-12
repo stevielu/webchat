@@ -32,6 +32,9 @@ class p2pChatController extends Controller
         if (Session::has('recentContacts')) {
             $this->recentContacts = Session::get('recentContacts');
         }
+        else{
+            $this->recentContacts = [];
+        }
 
         $user = Session::put('loginInfo.name',$this->user['name']);
     }
