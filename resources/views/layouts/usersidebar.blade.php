@@ -9,7 +9,7 @@
 </div>
 <ul class="userpannel-lists">	
 	<li >
-		<a href="/public/user/account">
+		<a href="/user/account">
 			<p  aria-hidden="true">
 				<span class="fa fa-angle-double-right" >
 				</span>Account
@@ -17,7 +17,7 @@
 		</a>
 	</li>
 	<li >
-		<a href="/public/user/profile">
+		<a href="/user/profile">
 			<p  aria-hidden="true">
 				<span class="fa fa-angle-double-right" >
 				</span>My Profile

@@ -10,12 +10,12 @@ var chList = [];
 
 var contentsUserlist = [];
 var defaultPage  =    '<div id="animate-loading-history" >'+
-                        '<img class="" src="'+localhref+'/public/hourglass-2.svg">'+
+                        '<img class="" src="'+localhref+'/hourglass-2.svg">'+
                       '</div>';
     defaultPage  +=   '<div class="fa fa-angle-double-up reminderinfo-icon" aria-hidden="true"></div>'+
                       '<div class="reminderinfo-sm"><p>No Messages Today</p></div>';
     defaultPage  +=   '<div id= "content-loading" class="loading col-md-12">';
-    defaultPage  +=   '<img class="img-responsive" src="'+localhref+"/public/balls-1.svg"+'">';
+    defaultPage  +=   '<img class="img-responsive" src="'+localhref+"/balls-1.svg"+'">';
     defaultPage  +=   '</div>';
     defaultPage  +=   '<div id = "login-channel"><h1 style="text-align: center;color: #D0D0D0;padding-top: 100px;">Please Login, This is Private Channel</h1></div>';
     defaultPage  +=   '<div id = "content-box"></div>';
@@ -32,10 +32,10 @@ function imageExists(name){
             async:false
             }).done(function(data) { 
                 if(data['user'].my_avatar!=''){
-                    avatar_url = window.location.origin+'/public/storage/'+data['user'].my_avatar;
+                    avatar_url = window.location.origin+'/storage/'+data['user'].my_avatar;
                 }
                 else{
-                   avatar_url = window.location.origin+'/public/no-thumb.png';
+                   avatar_url = window.location.origin+'/no-thumb.png';
                 }
                 contentsUserlist[name] =avatar_url;
             });
@@ -45,10 +45,10 @@ function imageExists(name){
 function getProfile(link){
     $.get(link,function(data){
         if(data['user'].my_avatar!=''){
-            var path = window.location.origin+'/public/storage/'+data['user'].my_avatar;
+            var path = window.location.origin+'/storage/'+data['user'].my_avatar;
         }
         else{
-            var path = window.location.origin+'/public/no-thumb.png';
+            var path = window.location.origin+'/no-thumb.png';
         }
         $('#avatar').attr('src',path);
         $('#profile-name').html(data['user'].name);
@@ -88,7 +88,7 @@ function joinCh(username){
                         // var $link = $(this).attr('link');
                         var $invoker = $(e.relatedTarget);
                         var $link = $invoker.attr('link');
-                        $('#avatar').attr('src',window.location.origin+'/public/default.gif');
+                        $('#avatar').attr('src',window.location.origin+'/default.gif');
                         getProfile($link);  
     });  
 }
@@ -126,10 +126,10 @@ function bindSocket(ch){
                 //var path = imageExists(userattr['avatar']);
                 //console.log(path);
                 if(userattr['avatar']!=null){
-                   var path =  window.location.origin+'/public/storage/'+userattr['avatar'];
+                   var path =  window.location.origin+'/storage/'+userattr['avatar'];
                 }
                 else{
-                   var path = window.location.origin+'/public/no-thumb.png';
+                   var path = window.location.origin+'/no-thumb.png';
                 }
                  
                  
@@ -185,7 +185,7 @@ function bindSocket(ch){
                     $('.viewprofile').click(function(){
                         // body...
                         var $link = $(this).attr('link');
-                        $('#avatar').attr('src',window.location.origin+'/public/default.gif');
+                        $('#avatar').attr('src',window.location.origin+'/default.gif');
                         getProfile($link);
                     });
 
@@ -286,7 +286,7 @@ function loadingContents(data,history){
             //console.log(data);
             // obj['channels'].forEach(function(name){
                 var str = data;
-                var path = window.location.origin+'/public/no-thumb.png';
+                var path = window.location.origin+'/no-thumb.png';
                 var name = str.substring(str.indexOf('*')+1,str.indexOf(':')); 
 
                 var userattr = str.substring(0,str.indexOf('*'));
@@ -335,7 +335,7 @@ function loadingContents(data,history){
                         // var $link = $(this).attr('link');
                         var $invoker = $(e.relatedTarget);
                         var $link = $invoker.attr('link');
-                        $('#avatar').attr('src',window.location.origin+'/public/default.gif');
+                        $('#avatar').attr('src',window.location.origin+'/default.gif');
                         getProfile($link);  
         });      
 
