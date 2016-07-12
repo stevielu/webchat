@@ -16,7 +16,7 @@
 		<div class="media-body">
 			<p class="media-heading" aria-hidden="true">
 				<img class="img-circle" alt="64x64" src="" data-holder-rendered="true" style="width: 50px; height: 50px;">
-				{{var_dump($user[0]['name'])}}
+				{{$user[0]['name']}}
 				<sapn class="pull-right">
 					<span id="noti-cont" class="noti-visible">
 						<span class="cont-badge">0</span>
