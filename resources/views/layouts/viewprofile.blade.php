@@ -38,18 +38,19 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <a href="/chatto"><button type="button" class="btn btn-danger chat-to" style="float: left;">Send Message</button></a>
+        <a href="#" class="btn btn-danger chat-to" style="float: left;">Send Message</a>
        <!--  <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
-// $('.chat-to').click(function(){
-//   $.get('chatto/'+user,function(data){
+$('.chat-to').click(function(){
+  $(this).attr('href','/chatto'+$('#profile-name').html())
+  // $.get('chatto/'+user,function(data){
               
-//   }
-// });
+  // }
+});
 
   
 </script>

@@ -8,6 +8,7 @@
 			 <input type="text" class="form-control empty" id="iconified" placeholder="&#xF002; &nbsp search"/>
 </div>
 <ul class="userpannel-lists">
+{{$recentContacts}}
 @foreach ($recentContacts as $user)
 <li>	
 	<a href="#">
