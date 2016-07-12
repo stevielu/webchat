@@ -18,15 +18,25 @@ class p2pChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $recentContacts;
+    private $profilePath;
+
     public function __construct()
     {
         // $this->middleware('guest', ['except' => 'getLogout']);
         $user = Session::get('loginInfo');
         //$username = User::select('name')->where('email',$user['email'])->first();
         $this->user = User::where('email',$user['email'])->first();
-        //var_dump($test['my_avatar']);
-        $user = Session::put('loginInfo.name',$this->user['name']);
+        $this->profilePath = config('filepath.user.profile');
 
+        if (Session::has('recentContacts')) {
+            $this->recentContacts = Session::get('recentContacts');
+        }
+        else{
+            $this->recentContacts = [];
+        }
+
+        $user = Session::put('loginInfo.name',$this->user['name']);
     }
 
     public function index()
@@ -36,7 +46,8 @@ class p2pChatController extends Controller
         $chatroom = Chat::with('SubClass')->get();
         $this->chatroom = $chatroom;
         $currentfocus = 'sidebar_recent';
-        return view('layouts/chatroom', compact('username','chatroom','currentfocus'));
+        $recentContacts =  $this->recentContacts;
+        return view('layouts/chatroom', compact('username','chatroom','currentfocus','recentContacts'));
     }
 
     /**
@@ -68,8 +79,11 @@ class p2pChatController extends Controller
      */
     public function show($user)
     {
-       Session::put('chatRecentLists',array_add($users = Session::get('chatRecentLists'),$user,$user));
-       return redirect('/chatto')->with('chat-to',$user);
+
+       $this->recentContacts['avatar'] = $this->profilePath.$user;
+       $this->recentContacts['name'] = $user;
+       Session::push('recentContacts',$this->recentContacts);
+       return redirect('/chatto');
     }
 
     /**

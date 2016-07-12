@@ -13,8 +13,7 @@
 
 
 @if($currentfocus == 'sidebar_userdashboard')
-    @include('layouts.user')
-    
+    @include('layouts.user')    
 @else
             <div style="margin-left:-15px;height:100%">
                 @include('layouts.visitorlist')
