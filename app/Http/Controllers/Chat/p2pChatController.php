@@ -80,10 +80,8 @@ class p2pChatController extends Controller
 
        $recentContacts['avatar'] = $this->profilePath.$user;
        $recentContacts['name'] = $user;
-       if(!Session::has('recentContacts.'.$user))
-       {
+      
             Session::put('recentContacts.'.$user,$recentContacts);
-       }
        
        return redirect('/chatto');
     }
