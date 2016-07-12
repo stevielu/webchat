@@ -37,6 +37,7 @@ class p2pChatController extends Controller
         }
 
         $user = Session::put('loginInfo.name',$this->user['name']);
+        Session::forget('recentContacts');
     }
 
     public function index()
