@@ -47,7 +47,7 @@ class p2pChatController extends Controller
         $this->chatroom = $chatroom;
         $currentfocus = 'sidebar_recent';
         $recentContacts =  $this->recentContacts;
-        echo ($recentContacts );
+        var_dump($recentContacts);
         return view('layouts/chatroom', compact('username','chatroom','currentfocus','recentContacts'));
     }
 
