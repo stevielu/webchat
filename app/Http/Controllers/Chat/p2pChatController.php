@@ -32,9 +32,6 @@ class p2pChatController extends Controller
         if (Session::has('recentContacts')) {
             $this->recentContacts = Session::get('recentContacts');
         }
-        else{
-            $this->recentContacts = [];
-        }
 
         $user = Session::put('loginInfo.name',$this->user['name']);
     }
@@ -80,9 +77,9 @@ class p2pChatController extends Controller
     public function show($user)
     {
 
-       // $this->recentContacts['avatar'] = $this->profilePath.$user;
-       // $this->recentContacts['name'] = $user;
-       //Session::push('recentContacts',$this->recentContacts);
+       $this->recentContacts['avatar'] = $this->profilePath.$user;
+       $this->recentContacts['name'] = $user;
+       Session::push('recentContacts',$this->recentContacts);
        return redirect('/chatto');
     }
 
