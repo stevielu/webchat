@@ -32,9 +32,6 @@ class p2pChatController extends Controller
         if (Session::has('recentContacts')) {
             $this->recentContacts = Session::get('recentContacts');
         }
-        else{
-            $this->recentContacts = [];
-        }
 
         $user = Session::put('loginInfo.name',$this->user['name']);
 
@@ -42,6 +39,7 @@ class p2pChatController extends Controller
 
     public function index()
     {
+        Session::forget('recentContacts');
         $username = $this->user['name'];
         //get chat room from database
         $chatroom = Chat::with('SubClass')->get();
