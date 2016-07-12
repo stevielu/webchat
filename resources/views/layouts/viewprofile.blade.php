@@ -46,9 +46,9 @@
 </div>
 <script type="text/javascript">
 $('.chat-to').click(function(){
-  // $.get('chatto/'+user,function(data){
+  $.get('chatto/'+user,function(data){
               
-  // }
+  }
 });
 
   

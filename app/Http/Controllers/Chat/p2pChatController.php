@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\\Chat;
 
 use Illuminate\Http\Request;
-
+use App\Models\Chat;
+use App\Models\Channels;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
 
 class p2pChatController extends Controller
 {
@@ -14,9 +16,25 @@ class p2pChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        // $this->middleware('guest', ['except' => 'getLogout']);
+        $user = Session::get('loginInfo');
+        //$username = User::select('name')->where('email',$user['email'])->first();
+        $this->user = User::where('email',$user['email'])->first();
+        //var_dump($test['my_avatar']);
+        $user = Session::put('loginInfo.name',$this->user['name']);
+
+    }
+
     public function index()
     {
-        //
+        $username = $this->user['name'];
+        //get chat room from database
+        $chatroom = Chat::with('SubClass')->get();
+        $this->chatroom = $chatroom;
+        $currentfocus = 'sidebar_recent';
+        return view('layouts/chatroom', compact('username','chatroom','currentfocus'));
     }
 
     /**
@@ -26,7 +44,7 @@ class p2pChatController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -46,9 +64,10 @@ class p2pChatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user)
     {
-        return view('layouts/chatroom', compact('username','chatroom','currentfocus'));
+       Session::put('chatRecentLists',array_add($users = Session::get('chatRecentLists'),$user,$user));
+       return redirect('/chatto')->with('chat-to',$user);
     }
 
     /**

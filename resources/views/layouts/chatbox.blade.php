@@ -1,21 +1,4 @@
-@extends('layouts.default',['room'=>$chatroom,'layout'=>'two-columnleft'])
-@section('header')
-<link rel="stylesheet" href="{{asset('css/app.css')}}"/>
-<link rel="stylesheet" href="{{asset('bower_component/bootstrap-toggle/css/bootstrap-toggle.min.css')}}"/>
 
-<script type="text/javascript" src="{{asset('bower_component/bootstrap-toggle/js/bootstrap-toggle.min.js')}}"/></script> 
-<script src="{{ asset("js/jquery.cookie.js") }}"></script>
-<script type="text/javascript">
-    var localhref = window.location.protocol + "//" + window.location.host;
-</script>
-@endsection
-@section('rightboxbody')
-
-
-@if($currentfocus == 'sidebar_userdashboard')
-    @include('layouts.user')
-    
-@else
             <div style="margin-left:-15px;height:100%">
                 @include('layouts.visitorlist')
 
@@ -47,13 +30,6 @@
                 </form>
 <script src="{{ asset("bower_component/socket.io-client/socket.io.js")}}"></script>
 <script src="{{ asset("js/app.js") }}"></script>
-                
-@endif
-                 
-            
-
-
-
 <script src="{{ asset("js/jquery-dateFormat.js") }}"></script>
 <script type="text/javascript">
     
@@ -129,4 +105,4 @@
     
 // });
 </script>
-@endsection
+ 

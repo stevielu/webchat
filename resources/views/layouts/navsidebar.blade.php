@@ -10,6 +10,9 @@
 		<a class="sidebar_btn sidebar_userdashboard fa fa-user fa-1x" href="/public/user/account" > 
 				
 		</a>
+		<a class="sidebar_btn sidebar_chatrecently fa fa-history fa-1x" href="/public/chatto" > 
+			
+		</a>
 		<a class="sidebar_btn logout_btn fa fa-sign-out fa-1x" href="/public/logout" > 
 			
 		</a>
@@ -18,8 +21,10 @@
 	<div class="col-md-10 navbar-list no-padding">
 	@if($currentfocus == 'sidebar_userdashboard')
     	@include('layouts.usersidebar')
-	@else
+	@else if($currentfocus == 'sidebar_chat')
 		@include('layouts.mychannel')
+	@else if($currentfocus == 'sidebar_recent)
+		@include('layouts.chatrecently')
 	@endif
 		
 		
