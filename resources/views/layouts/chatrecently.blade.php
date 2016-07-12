@@ -9,7 +9,7 @@
 </div>
 <ul class="userpannel-lists">
 {{$recentContacts}}
-@foreach ($recentContacts as $user)
+<!-- @foreach ($recentContacts as $user)
 <li>	
 	<a href="#">
 		<div class="media-left"></div>
@@ -26,7 +26,7 @@
 		</div>
 	</a>
 </li>
-@endforeach	
+@endforeach	 -->
 
 	
 </ul>

@@ -46,7 +46,7 @@
 </div>
 <script type="text/javascript">
 $('.chat-to').click(function(){
-  $(this).attr('href','/chatto'+$('#profile-name').html())
+  $(this).attr('href','/chatto/'+$('#profile-name').html())
   // $.get('chatto/'+user,function(data){
               
   // }
