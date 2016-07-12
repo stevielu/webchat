@@ -9,7 +9,7 @@
 </div>
 <ul class="userpannel-lists">	
 	<li >
-		<a href="/user/account">
+		<a href="/public/user/account">
 			<p  aria-hidden="true">
 				<span class="fa fa-angle-double-right" >
 				</span>test
