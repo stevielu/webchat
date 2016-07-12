@@ -83,10 +83,8 @@ class p2pChatController extends Controller
 
        $recentContacts['avatar'] = $this->profilePath.$user;
        $recentContacts['name'] = $user;
-       if(Session::has('recentContacts.'.$user)){
-            Session::put('recentContacts.'.$user,$recentContacts);
-       }
-       else{
+       if(!Session::has('recentContacts.'.$user))
+       {
             Session::push('recentContacts.'.$user,$recentContacts);
        }
        
