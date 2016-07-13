@@ -77,12 +77,12 @@ class p2pChatController extends Controller
      */
     public function show($user)
     {
-        $path = 'storage/'.$this->profilePath;
+        
 
         //$extension = pathinfo($filename, PATHINFO_EXTENSION);
         
         $userInfo = User::where('name',$user)->first();
-        $recentContacts['avatar'] =  asset($path.$userInfo['my_avatar']);
+        $recentContacts['avatar'] =  asset('storage/'.$userInfo['my_avatar']);
         $recentContacts['name'] = $user;
       
             Session::put('recentContacts.'.$user,$recentContacts);
