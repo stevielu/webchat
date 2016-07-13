@@ -80,7 +80,7 @@ class p2pChatController extends Controller
         $filename = $this->profilePath.$user;
 
         //$extension = pathinfo($filename, PATHINFO_EXTENSION);
-        $extension = Storage::mimeType($filename);
+        $extension = Storage::disk('local')->mimeType($filename);
         $recentContacts['avatar'] =  asset($filename.'.'.$extension);
         $recentContacts['name'] = $user;
       
