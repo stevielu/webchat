@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Chat;
-use Illuminate\Filesystem;
+use Illuminate\Filesystem\Filesystem as File;
 use Illuminate\Http\Request;
 use App\Models\Chat;
 use App\Models\Channels;
@@ -80,7 +80,7 @@ class p2pChatController extends Controller
         $filename = $this->profilePath.$user;
 
         //$extension = pathinfo($filename, PATHINFO_EXTENSION);
-        $extension = Filesystem::extension($filename);
+        $extension = File::extension($filename);
         $recentContacts['avatar'] =  asset($filename.'.'.$extension);
         $recentContacts['name'] = $user;
       
