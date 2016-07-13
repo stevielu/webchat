@@ -1,0 +1,11 @@
+.user-lists{
+	padding-left: 0;
+}
+.user-lists li{
+	padding-top: 10px;
+}
+.user-lists p{
+	padding-left: 15px;
+	color: #ffffff;
+	font-family: 'Raleway', sans-serif;
+}
