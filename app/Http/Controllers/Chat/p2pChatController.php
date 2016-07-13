@@ -81,7 +81,7 @@ class p2pChatController extends Controller
 
         //$extension = pathinfo($filename, PATHINFO_EXTENSION);
         $file = new File();
-        $extension = $file->extension($filename);
+        $extension = $file->extension('storage/'.$filename);
         $recentContacts['avatar'] =  asset($filename.'.'.$extension);
         $recentContacts['name'] = $user;
       
