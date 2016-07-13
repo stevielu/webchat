@@ -77,7 +77,7 @@ class p2pChatController extends Controller
      */
     public function show($user)
     {
-        $filename = 'storage/'.$this->profilePath.$user;
+        $filename = $this->profilePath.$user;
 
         //$extension = pathinfo($filename, PATHINFO_EXTENSION);
         $extension = Storage::mimeType($filename);
