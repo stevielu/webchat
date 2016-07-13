@@ -77,11 +77,13 @@ class p2pChatController extends Controller
      */
     public function show($user)
     {
-        $filename = $this->profilePath.$user;
+        $filename = storage_path($this->profilePath.$user);
 
         //$extension = pathinfo($filename, PATHINFO_EXTENSION);
         $file = new File();
-        $extension = $file->extension('storage/'.$filename);
+        $extension = $file->extension($filename);
+        var_dump($filename);
+        var_dump($extension);
         $recentContacts['avatar'] =  asset($filename.'.'.$extension);
         $recentContacts['name'] = $user;
       
