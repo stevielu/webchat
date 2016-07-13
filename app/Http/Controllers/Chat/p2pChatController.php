@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\User;
 use App\Http\Controllers\Controller;
 use Session;
-
+use Storage;
 
 class p2pChatController extends Controller
 {
@@ -77,10 +77,10 @@ class p2pChatController extends Controller
      */
     public function show($user)
     {
-        $filename = storage_path($this->profilePath.$user);
+        $filename = 'storage/'.$this->profilePath.$user);
 
-        $extension = pathinfo($filename, PATHINFO_EXTENSION);
-        //$extension = File::extension($filename);
+        //$extension = pathinfo($filename, PATHINFO_EXTENSION);
+        $extension = Storage::mimeType($filename);
         $recentContacts['avatar'] =  asset($filename.'.'.$extension);
         $recentContacts['name'] = $user;
       
