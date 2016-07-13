@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Chat;
-use Illuminate\Filesystem;
+use Illuminate\Filesystem as File;
 use Illuminate\Http\Request;
 use App\Models\Chat;
 use App\Models\Channels;
